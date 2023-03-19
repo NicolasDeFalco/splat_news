@@ -99,7 +99,11 @@ class SplatoonTrois {
         ),
         child: SingleChildScrollView(
           child: Column(children: [
-            Image.asset('assets/logo/S3.png'),
+            Image.asset(
+              'assets/logo/S3.png',
+              width: 280,
+              height: 150,
+            ),
             Card(
                 elevation: 10,
                 color: Color.fromARGB(255, 23, 200, 26),
@@ -521,6 +525,11 @@ class SplatoonTrois {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            Image.asset(
+              'assets/logo/S3/SalmonRun.png',
+              width: 280,
+              height: 150,
+            ),
             Card(
                 elevation: 10,
                 color: Color.fromARGB(255, 232, 78, 3),
@@ -528,11 +537,6 @@ class SplatoonTrois {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Image.asset(
-                        'assets/logo/S3/SalmonRun.png',
-                        width: 280,
-                        height: 150,
-                      ),
                       Text(
                         "Actual map:",
                         style: TextStyle(

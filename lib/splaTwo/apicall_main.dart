@@ -61,7 +61,11 @@ class SplatoonDeux {
         ),
         child: SingleChildScrollView(
           child: Column(children: [
-            Image.asset('assets/logo/S2.png'),
+            Image.asset(
+              'assets/logo/S2.png',
+              width: 280,
+              height: 150,
+            ),
             Card(
                 elevation: 10,
                 color: Color.fromARGB(255, 14, 197, 24),
@@ -415,6 +419,11 @@ class SplatoonDeux {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              Image.asset(
+                'assets/logo/S2/SalmonRun.png',
+                width: 280,
+                height: 150,
+              ),
               for (var salmon in grizz['details'])
                 Card(
                     elevation: 10,
@@ -426,11 +435,6 @@ class SplatoonDeux {
                           if (position == 0)
                             Column(
                               children: [
-                                Image.asset(
-                                  'assets/logo/S2/SalmonRun.png',
-                                  width: 280,
-                                  height: 150,
-                                ),
                                 Text(
                                   "Coming soon:",
                                   style: TextStyle(
@@ -531,6 +535,11 @@ class SplatoonDeux {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            Image.asset(
+              'assets/logo/S2/SalmonRun.png',
+              width: 280,
+              height: 150,
+            ),
             for (var salmon in grizz['details'])
               Card(
                   elevation: 10,
@@ -542,11 +551,6 @@ class SplatoonDeux {
                         if (position == 0)
                           Column(
                             children: [
-                              Image.asset(
-                                'assets/logo/S2/SalmonRun.png',
-                                width: 280,
-                                height: 150,
-                              ),
                               Text(
                                 "Actual map:",
                                 style: TextStyle(
