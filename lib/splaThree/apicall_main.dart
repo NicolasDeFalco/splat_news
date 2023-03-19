@@ -95,7 +95,7 @@ class SplatoonTrois {
   Container actualRoll(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-          color: Colors.grey.shade900,
+          color: Colors.grey.shade800,
         ),
         child: SingleChildScrollView(
           child: Column(children: [
