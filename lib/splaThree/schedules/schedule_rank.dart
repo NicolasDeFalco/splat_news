@@ -7,14 +7,9 @@ class SchedulesRank extends StatefulWidget {
   int rankType;
 
   SchedulesRank(
-      {super.key,
-      required this.content,
-      required this.mapChange,
-      required this.type,
-      required this.rankType});
+      {super.key, required this.content, required this.mapChange, required this.type, required this.rankType});
   @override
-  State<SchedulesRank> createState() =>
-      SchedulesRankState(type, content, mapChange, rankType);
+  State<SchedulesRank> createState() => SchedulesRankState(type, content, mapChange, rankType);
 }
 
 class SchedulesRankState extends State<SchedulesRank> {
@@ -80,24 +75,19 @@ class SchedulesRankState extends State<SchedulesRank> {
                               Text("         "),
                               if (position == 0)
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Image(
-                                      image:
-                                          AssetImage('assets/logo/Ranked.png'),
+                                      image: AssetImage('assets/logo/Ranked.png'),
                                       width: 50,
                                       height: 50,
                                     ),
                                     Text(
                                       "Actual",
-                                      style: TextStyle(
-                                          color: Colors.grey.shade200,
-                                          fontSize: 30),
+                                      style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
                                     ),
                                     Image(
-                                      image:
-                                          AssetImage('assets/logo/Ranked.png'),
+                                      image: AssetImage('assets/logo/Ranked.png'),
                                       width: 50,
                                       height: 50,
                                     ),
@@ -105,24 +95,19 @@ class SchedulesRankState extends State<SchedulesRank> {
                                 ),
                               if (position == 1)
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Image(
-                                      image:
-                                          AssetImage('assets/logo/Ranked.png'),
+                                      image: AssetImage('assets/logo/Ranked.png'),
                                       width: 50,
                                       height: 50,
                                     ),
                                     Text(
                                       "Next",
-                                      style: TextStyle(
-                                          color: Colors.grey.shade200,
-                                          fontSize: 30),
+                                      style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
                                     ),
                                     Image(
-                                      image:
-                                          AssetImage('assets/logo/Ranked.png'),
+                                      image: AssetImage('assets/logo/Ranked.png'),
                                       width: 50,
                                       height: 50,
                                     ),
@@ -130,26 +115,18 @@ class SchedulesRankState extends State<SchedulesRank> {
                                 ),
                               if (position == 2)
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Image(
-                                      image:
-                                          AssetImage('assets/logo/Ranked.png'),
+                                      image: AssetImage('assets/logo/Ranked.png'),
                                       width: 50,
                                       height: 50,
                                     ),
                                     Text(
                                       'Future',
-                                      style: TextStyle(
-                                          color: Colors.grey.shade200,
-                                          fontSize: 30),
+                                      style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
                                     ),
-                                    Image(
-                                        image: AssetImage(
-                                            'assets/logo/Ranked.png'),
-                                        width: 50,
-                                        height: 50)
+                                    Image(image: AssetImage('assets/logo/Ranked.png'), width: 50, height: 50)
                                   ],
                                 ),
                               Row(
@@ -162,9 +139,7 @@ class SchedulesRankState extends State<SchedulesRank> {
                                   ),
                                   Text(
                                     "(${battle['bankaraMatchSettings'][rankType]['vsRule']['name'].toString()})",
-                                    style: TextStyle(
-                                        color: Colors.grey.shade800,
-                                        fontSize: 20),
+                                    style: TextStyle(color: Colors.grey.shade800, fontSize: 20),
                                   ),
                                   Image.asset(
                                     'assets/logo/S3/${battle['bankaraMatchSettings'][rankType]['vsRule']['rule']}.png',
@@ -173,33 +148,21 @@ class SchedulesRankState extends State<SchedulesRank> {
                                   ),
                                 ],
                               ),
-                              Text(timeConvertLoop(
-                                      mapChange[position][0].substring(11, 13),
-                                      false) +
+                              Text(timeConvertLoop(mapChange[position][0].substring(11, 13), false) +
                                   " to " +
-                                  timeConvertLoop(
-                                      mapChange[position][1].substring(11, 13),
-                                      true)),
-                              Text("Map:",
-                                  style: TextStyle(
-                                      color: Colors.grey.shade800,
-                                      fontSize: 16)),
+                                  timeConvertLoop(mapChange[position][1].substring(11, 13), true)),
+                              Text("Map:", style: TextStyle(color: Colors.grey.shade800, fontSize: 16)),
                               Card(
                                 elevation: 10,
                                 color: Colors.grey.shade800,
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    for (var elements
-                                        in battle['bankaraMatchSettings']
-                                            [rankType]['vsStages'])
+                                    for (var elements in battle['bankaraMatchSettings'][rankType]['vsStages'])
                                       Column(
                                         children: [
                                           Text(elements['name'],
-                                              style: TextStyle(
-                                                  color: Colors.grey.shade200,
-                                                  fontSize: 15)),
+                                              style: TextStyle(color: Colors.grey.shade200, fontSize: 15)),
                                           Image.network(
                                             elements['image']['url'],
                                             width: 180,
@@ -213,6 +176,10 @@ class SchedulesRankState extends State<SchedulesRank> {
                             ],
                           ),
                         )),
+                Text(
+                  "Source: splatoon3.ink",
+                  style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
+                ),
               ],
             ),
           ),

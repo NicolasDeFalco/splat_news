@@ -15,7 +15,7 @@ class SplashScreenState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Container(
         decoration: const BoxDecoration(
-          color: Color(0xff7c94b6),
+          color: Color.fromRGBO(66, 66, 66, 1),
           /*image: DecorationImage(
             image: AssetImage('assets/images/bg-splash.jpg'),
             fit: BoxFit.cover,

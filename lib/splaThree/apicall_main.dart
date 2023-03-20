@@ -30,11 +30,9 @@ class SplatoonTrois {
   int position = 0;
 
   // Timestamp of each map
-  List<List<String>> mapChange =
-      List.generate(12, (i) => List.generate(2, (j) => ''));
+  List<List<String>> mapChange = List.generate(12, (i) => List.generate(2, (j) => ''));
 
-  List<List<String>> grizzChange =
-      List.generate(5, (i) => List.generate(2, (j) => ''));
+  List<List<String>> grizzChange = List.generate(5, (i) => List.generate(2, (j) => ''));
 
   Future<int> test() async {
     String url = "https://splatoon3.ink/data/schedules.json";
@@ -47,42 +45,33 @@ class SplatoonTrois {
 
       // Fill mapChange with all the current timestamp
       for (int x = 0; x < 12; x++) {
-        mapChange[x][0] = DateTime.parse(
-                data['data']['regularSchedules']['nodes'][x]['startTime'])
-            .toLocal()
-            .toString();
-        mapChange[x][1] = DateTime.parse(
-                data['data']['regularSchedules']['nodes'][x]['endTime'])
-            .toLocal()
-            .toString();
+        mapChange[x][0] =
+            DateTime.parse(data['data']['regularSchedules']['nodes'][x]['startTime']).toLocal().toString();
+        mapChange[x][1] = DateTime.parse(data['data']['regularSchedules']['nodes'][x]['endTime']).toLocal().toString();
       }
 
       for (int x = 0; x < 5; x++) {
-        grizzChange[x][0] = DateTime.parse(data['data']['coopGroupingSchedule']
-                ['regularSchedules']['nodes'][x]['startTime'])
-            .toLocal()
-            .toString();
-        grizzChange[x][1] = DateTime.parse(data['data']['coopGroupingSchedule']
-                ['regularSchedules']['nodes'][x]['endTime'])
-            .toLocal()
-            .toString();
+        grizzChange[x][0] =
+            DateTime.parse(data['data']['coopGroupingSchedule']['regularSchedules']['nodes'][x]['startTime'])
+                .toLocal()
+                .toString();
+        grizzChange[x][1] =
+            DateTime.parse(data['data']['coopGroupingSchedule']['regularSchedules']['nodes'][x]['endTime'])
+                .toLocal()
+                .toString();
       }
 
-      turf =
-          data['data']['regularSchedules']['nodes'][0]['regularMatchSetting'];
+      turf = data['data']['regularSchedules']['nodes'][0]['regularMatchSetting'];
       turfMult = data['data']['regularSchedules'];
 
-      series = data['data']['bankaraSchedules']['nodes'][0]
-          ['bankaraMatchSettings'][0];
-      open = data['data']['bankaraSchedules']['nodes'][0]
-          ['bankaraMatchSettings'][1];
+      series = data['data']['bankaraSchedules']['nodes'][0]['bankaraMatchSettings'][0];
+      open = data['data']['bankaraSchedules']['nodes'][0]['bankaraMatchSettings'][1];
       rankMult = data['data']['bankaraSchedules'];
 
       xrank = data['data']['xSchedules']['nodes'][0]['xMatchSetting'];
       xrankMult = data['data']['xSchedules'];
 
-      grizz =
-          data['data']['coopGroupingSchedule']['regularSchedules']['nodes'][0];
+      grizz = data['data']['coopGroupingSchedule']['regularSchedules']['nodes'][0];
       grizzMult = data['data']['coopGroupingSchedule']['regularSchedules'];
 
       return response.statusCode;
@@ -122,13 +111,9 @@ class SplatoonTrois {
                           ),
                           Text(
                             "Regular Battle",
-                            style: TextStyle(
-                                color: Colors.grey.shade200, fontSize: 30),
+                            style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
                           ),
-                          Image(
-                              image: AssetImage('assets/logo/Regular.png'),
-                              width: 50,
-                              height: 50)
+                          Image(image: AssetImage('assets/logo/Regular.png'), width: 50, height: 50)
                         ],
                       ),
                       Row(
@@ -141,8 +126,7 @@ class SplatoonTrois {
                           ),
                           Text(
                             "(${turf['vsRule']['name'].toString()})",
-                            style: TextStyle(
-                                color: Colors.grey.shade800, fontSize: 20),
+                            style: TextStyle(color: Colors.grey.shade800, fontSize: 20),
                           ),
                           Image.asset(
                             'assets/logo/S3/${turf['vsRule']['rule']}.png',
@@ -160,9 +144,7 @@ class SplatoonTrois {
                       Text(timeConvert(mapChange[0][0].substring(11, 13)) +
                           " to " +
                           timeConvert(mapChange[0][1].substring(11, 13))),
-                      Text("Actual rotation:",
-                          style: TextStyle(
-                              color: Colors.grey.shade800, fontSize: 16)),
+                      Text("Actual rotation:", style: TextStyle(color: Colors.grey.shade800, fontSize: 16)),
                       Card(
                         elevation: 10,
                         color: Colors.grey.shade800,
@@ -171,13 +153,9 @@ class SplatoonTrois {
                           children: [
                             for (var elements in turf['vsStages'])
                               Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Text(elements['name'],
-                                      style: TextStyle(
-                                          color: Colors.grey.shade200,
-                                          fontSize: 15)),
+                                  Text(elements['name'], style: TextStyle(color: Colors.grey.shade200, fontSize: 15)),
                                   Image.network(
                                     elements['image']['url'],
                                     width: 180,
@@ -194,8 +172,7 @@ class SplatoonTrois {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Schedules(
-                                        background:
-                                            Color.fromARGB(255, 23, 200, 26),
+                                        background: Color.fromARGB(255, 23, 200, 26),
                                         content: turfMult,
                                         mapChange: mapChange,
                                         type: 'Regular Battle',
@@ -205,9 +182,8 @@ class SplatoonTrois {
                         },
                         child: Card(
                           color: Colors.grey.shade800,
-                          child: Text('  See what\'s next  ',
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 20)),
+                          child:
+                              Text('  See what\'s next  ', style: TextStyle(color: Colors.grey.shade200, fontSize: 20)),
                         ),
                       )
                     ],
@@ -231,13 +207,9 @@ class SplatoonTrois {
                           ),
                           Text(
                             "Anarchy Battle Series",
-                            style: TextStyle(
-                                color: Colors.grey.shade200, fontSize: 30),
+                            style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
                           ),
-                          Image(
-                              image: AssetImage('assets/logo/Ranked.png'),
-                              width: 50,
-                              height: 50)
+                          Image(image: AssetImage('assets/logo/Ranked.png'), width: 50, height: 50)
                         ],
                       ),
                       Row(
@@ -250,8 +222,7 @@ class SplatoonTrois {
                           ),
                           Text(
                             "(${series['vsRule']['name'].toString()})",
-                            style: TextStyle(
-                                color: Colors.grey.shade800, fontSize: 20),
+                            style: TextStyle(color: Colors.grey.shade800, fontSize: 20),
                           ),
                           Image.asset(
                             'assets/logo/S3/${series['vsRule']['rule']}.png',
@@ -263,9 +234,7 @@ class SplatoonTrois {
                       Text(timeConvert(mapChange[0][0].substring(11, 13)) +
                           " to " +
                           timeConvert(mapChange[0][1].substring(11, 13))),
-                      Text("Actual rotation:",
-                          style: TextStyle(
-                              color: Colors.grey.shade800, fontSize: 16)),
+                      Text("Actual rotation:", style: TextStyle(color: Colors.grey.shade800, fontSize: 16)),
                       Card(
                         elevation: 10,
                         color: Colors.grey.shade800,
@@ -275,10 +244,7 @@ class SplatoonTrois {
                             for (var elements in series['vsStages'])
                               Column(
                                 children: [
-                                  Text(elements['name'],
-                                      style: TextStyle(
-                                          color: Colors.grey.shade200,
-                                          fontSize: 15)),
+                                  Text(elements['name'], style: TextStyle(color: Colors.grey.shade200, fontSize: 15)),
                                   Image.network(
                                     elements['image']['url'],
                                     width: 180,
@@ -303,9 +269,8 @@ class SplatoonTrois {
                         },
                         child: Card(
                           color: Colors.grey.shade800,
-                          child: Text('  See what\'s next  ',
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 20)),
+                          child:
+                              Text('  See what\'s next  ', style: TextStyle(color: Colors.grey.shade200, fontSize: 20)),
                         ),
                       )
                     ],
@@ -328,14 +293,10 @@ class SplatoonTrois {
                             height: 50,
                           ),
                           Text(
-                            "Anarchy Battle",
-                            style: TextStyle(
-                                color: Colors.grey.shade200, fontSize: 30),
+                            "Anarchy Battle Open",
+                            style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
                           ),
-                          Image(
-                              image: AssetImage('assets/logo/Ranked.png'),
-                              width: 50,
-                              height: 50)
+                          Image(image: AssetImage('assets/logo/Ranked.png'), width: 50, height: 50)
                         ],
                       ),
                       Row(
@@ -348,8 +309,7 @@ class SplatoonTrois {
                           ),
                           Text(
                             "(${open['vsRule']['name'].toString()})",
-                            style: TextStyle(
-                                color: Colors.grey.shade800, fontSize: 20),
+                            style: TextStyle(color: Colors.grey.shade800, fontSize: 20),
                           ),
                           Image.asset(
                             'assets/logo/S3/${open['vsRule']['rule']}.png',
@@ -358,15 +318,11 @@ class SplatoonTrois {
                           ),
                         ],
                       ),
-                      Text("Actual rotation:",
-                          style: TextStyle(
-                              color: Colors.grey.shade800, fontSize: 16)),
+                      Text("Actual rotation:", style: TextStyle(color: Colors.grey.shade800, fontSize: 16)),
                       Text(timeConvert(mapChange[0][0].substring(11, 13)) +
                           " to " +
                           timeConvert(mapChange[0][1].substring(11, 13))),
-                      Text("Actual rotation:",
-                          style: TextStyle(
-                              color: Colors.grey.shade800, fontSize: 16)),
+                      Text("Actual rotation:", style: TextStyle(color: Colors.grey.shade800, fontSize: 16)),
                       Card(
                         elevation: 10,
                         color: Colors.grey.shade800,
@@ -376,10 +332,7 @@ class SplatoonTrois {
                             for (var elements in open['vsStages'])
                               Column(
                                 children: [
-                                  Text(elements['name'],
-                                      style: TextStyle(
-                                          color: Colors.grey.shade200,
-                                          fontSize: 20)),
+                                  Text(elements['name'], style: TextStyle(color: Colors.grey.shade200, fontSize: 20)),
                                   Image.network(
                                     elements['image']['url'],
                                     width: 180,
@@ -399,14 +352,13 @@ class SplatoonTrois {
                                         content: rankMult,
                                         mapChange: mapChange,
                                         rankType: 1,
-                                        type: 'Anarchy Battle',
+                                        type: 'Anarchy Battle Open',
                                       )));
                         },
                         child: Card(
                           color: Colors.grey.shade800,
-                          child: Text('  See what\'s next  ',
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 20)),
+                          child:
+                              Text('  See what\'s next  ', style: TextStyle(color: Colors.grey.shade200, fontSize: 20)),
                         ),
                       )
                     ],
@@ -430,13 +382,9 @@ class SplatoonTrois {
                           ),
                           Text(
                             "X Battle",
-                            style: TextStyle(
-                                color: Colors.grey.shade200, fontSize: 30),
+                            style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
                           ),
-                          Image(
-                              image: AssetImage('assets/logo/XBattle.png'),
-                              width: 50,
-                              height: 50)
+                          Image(image: AssetImage('assets/logo/XBattle.png'), width: 50, height: 50)
                         ],
                       ),
                       Row(
@@ -449,8 +397,7 @@ class SplatoonTrois {
                           ),
                           Text(
                             "(${xrank['vsRule']['name'].toString()})",
-                            style: TextStyle(
-                                color: Colors.grey.shade800, fontSize: 20),
+                            style: TextStyle(color: Colors.grey.shade800, fontSize: 20),
                           ),
                           Image.asset(
                             'assets/logo/S3/${xrank['vsRule']['rule']}.png',
@@ -462,9 +409,7 @@ class SplatoonTrois {
                       Text(timeConvert(mapChange[0][0].substring(11, 13)) +
                           " to " +
                           timeConvert(mapChange[0][1].substring(11, 13))),
-                      Text("Actual rotation:",
-                          style: TextStyle(
-                              color: Colors.grey.shade800, fontSize: 16)),
+                      Text("Actual rotation:", style: TextStyle(color: Colors.grey.shade800, fontSize: 16)),
                       Card(
                         elevation: 10,
                         color: Colors.grey.shade800,
@@ -474,10 +419,7 @@ class SplatoonTrois {
                             for (var elements in xrank['vsStages'])
                               Column(
                                 children: [
-                                  Text(elements['name'],
-                                      style: TextStyle(
-                                          color: Colors.grey.shade200,
-                                          fontSize: 15)),
+                                  Text(elements['name'], style: TextStyle(color: Colors.grey.shade200, fontSize: 15)),
                                   Image.network(
                                     elements['image']['url'],
                                     width: 180,
@@ -494,8 +436,7 @@ class SplatoonTrois {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Schedules(
-                                        background:
-                                            Color.fromARGB(255, 14, 199, 144),
+                                        background: Color.fromARGB(255, 14, 199, 144),
                                         content: xrankMult,
                                         mapChange: mapChange,
                                         type: 'X Battle',
@@ -505,14 +446,17 @@ class SplatoonTrois {
                         },
                         child: Card(
                           color: Colors.grey.shade800,
-                          child: Text('  See what\'s next  ',
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 20)),
+                          child:
+                              Text('  See what\'s next  ', style: TextStyle(color: Colors.grey.shade200, fontSize: 20)),
                         ),
                       )
                     ],
                   ),
                 )),
+            Text(
+              "Source: splatoon3.ink",
+              style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
+            ),
           ]),
         ));
   }
@@ -539,21 +483,15 @@ class SplatoonTrois {
                     children: [
                       Text(
                         "Actual map:",
-                        style: TextStyle(
-                            color: Colors.grey.shade200, fontSize: 25),
+                        style: TextStyle(color: Colors.grey.shade200, fontSize: 25),
                       ),
                       Text(
                         grizz['setting']['coopStage']['name'],
-                        style: TextStyle(
-                            color: Colors.grey.shade200, fontSize: 22),
+                        style: TextStyle(color: Colors.grey.shade200, fontSize: 22),
                       ),
                       Text(
-                        'From ' +
-                            dateFormat(grizzChange[0][0]) +
-                            ' to ' +
-                            dateFormat(grizzChange[0][1]),
-                        style: TextStyle(
-                            color: Colors.grey.shade200, fontSize: 14),
+                        'From ' + dateFormat(grizzChange[0][0]) + ' to ' + dateFormat(grizzChange[0][1]),
+                        style: TextStyle(color: Colors.grey.shade200, fontSize: 14),
                       ),
                       Image.network(
                         grizz['setting']['coopStage']['image']['url'],
@@ -568,18 +506,14 @@ class SplatoonTrois {
                           children: [
                             Text(
                               "Supplied weapons:",
-                              style: TextStyle(
-                                  color: Colors.grey.shade400, fontSize: 20),
+                              style: TextStyle(color: Colors.grey.shade400, fontSize: 20),
                             ),
                             for (var elements in grizz['setting']['weapons'])
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(" ${elements['name']}",
-                                      style: TextStyle(
-                                          color: Colors.grey.shade200,
-                                          fontSize: 20)),
+                                      style: TextStyle(color: Colors.grey.shade200, fontSize: 20)),
                                   Text("                   "),
                                   Image.network(
                                     elements['image']['url'],
@@ -603,14 +537,17 @@ class SplatoonTrois {
                         },
                         child: Card(
                           color: Colors.grey.shade800,
-                          child: Text('  See what\'s next  ',
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 20)),
+                          child:
+                              Text('  See what\'s next  ', style: TextStyle(color: Colors.grey.shade200, fontSize: 20)),
                         ),
                       )
                     ],
                   ),
                 )),
+            Text(
+              "Source: splatoon3.ink",
+              style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
+            ),
           ],
         ),
       ),

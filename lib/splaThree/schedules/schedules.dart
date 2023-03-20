@@ -17,8 +17,7 @@ class Schedules extends StatefulWidget {
       required this.typeCode});
 
   @override
-  State<Schedules> createState() =>
-      SchedulesState(type, background, content, picLink, mapChange, typeCode);
+  State<Schedules> createState() => SchedulesState(type, background, content, picLink, mapChange, typeCode);
 }
 
 class SchedulesState extends State<Schedules> {
@@ -30,8 +29,7 @@ class SchedulesState extends State<Schedules> {
   List<List<String>> mapChange;
   int position = 0;
 
-  SchedulesState(this.type, this.background, this.content, this.picLink,
-      this.mapChange, this.typeCode);
+  SchedulesState(this.type, this.background, this.content, this.picLink, this.mapChange, this.typeCode);
 
   String timeConvertLoop(String value, bool loop) {
     int time = int.parse(value) % 12;
@@ -87,8 +85,7 @@ class SchedulesState extends State<Schedules> {
                             Text(""),
                             if (position == 0)
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Image(
                                     image: AssetImage(picLink),
@@ -97,20 +94,14 @@ class SchedulesState extends State<Schedules> {
                                   ),
                                   Text(
                                     "Actual",
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 30),
+                                    style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
                                   ),
-                                  Image(
-                                      image: AssetImage(picLink),
-                                      width: 50,
-                                      height: 50)
+                                  Image(image: AssetImage(picLink), width: 50, height: 50)
                                 ],
                               ),
                             if (position == 1)
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Image(
                                     image: AssetImage(picLink),
@@ -119,20 +110,14 @@ class SchedulesState extends State<Schedules> {
                                   ),
                                   Text(
                                     "Next",
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 30),
+                                    style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
                                   ),
-                                  Image(
-                                      image: AssetImage(picLink),
-                                      width: 50,
-                                      height: 50)
+                                  Image(image: AssetImage(picLink), width: 50, height: 50)
                                 ],
                               ),
                             if (position == 2)
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Image(
                                     image: AssetImage(picLink),
@@ -141,14 +126,9 @@ class SchedulesState extends State<Schedules> {
                                   ),
                                   Text(
                                     "Future",
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 30),
+                                    style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
                                   ),
-                                  Image(
-                                      image: AssetImage(picLink),
-                                      width: 50,
-                                      height: 50)
+                                  Image(image: AssetImage(picLink), width: 50, height: 50)
                                 ],
                               ),
                             Row(
@@ -161,9 +141,7 @@ class SchedulesState extends State<Schedules> {
                                 ),
                                 Text(
                                   "(${battle[typeCode]['vsRule']['name'].toString()})",
-                                  style: TextStyle(
-                                      color: Colors.grey.shade800,
-                                      fontSize: 20),
+                                  style: TextStyle(color: Colors.grey.shade800, fontSize: 20),
                                 ),
                                 Image.asset(
                                   'assets/logo/S3/${battle[typeCode]['vsRule']['rule']}.png',
@@ -178,33 +156,22 @@ class SchedulesState extends State<Schedules> {
                             color: Colors.grey.shade800, fontSize: 20),
                       ),*/
 
-                            Text(timeConvertLoop(
-                                    mapChange[position][0].substring(11, 13),
-                                    false) +
+                            Text(timeConvertLoop(mapChange[position][0].substring(11, 13), false) +
                                 " to " +
-                                timeConvertLoop(
-                                    mapChange[position][1].substring(11, 13),
-                                    true)),
-                            Text("Map:",
-                                style: TextStyle(
-                                    color: Colors.grey.shade800, fontSize: 16)),
+                                timeConvertLoop(mapChange[position][1].substring(11, 13), true)),
+                            Text("Map:", style: TextStyle(color: Colors.grey.shade800, fontSize: 16)),
                             Card(
                               elevation: 10,
                               color: Colors.grey.shade800,
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  for (var elements in battle[typeCode]
-                                      ['vsStages'])
+                                  for (var elements in battle[typeCode]['vsStages'])
                                     Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Text(elements['name'],
-                                            style: TextStyle(
-                                                color: Colors.grey.shade200,
-                                                fontSize: 15)),
+                                            style: TextStyle(color: Colors.grey.shade200, fontSize: 15)),
                                         Image.network(
                                           elements['image']['url'],
                                           width: 180,
@@ -218,7 +185,10 @@ class SchedulesState extends State<Schedules> {
                           ],
                         ),
                       )),
-              if (position == 1) Text('Up next'),
+              Text(
+                "Source: splatoon3.ink",
+                style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
+              ),
             ],
           ),
         ),
