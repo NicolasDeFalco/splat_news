@@ -332,7 +332,7 @@ class SplatoonTrois {
                             for (var elements in open['vsStages'])
                               Column(
                                 children: [
-                                  Text(elements['name'], style: TextStyle(color: Colors.grey.shade200, fontSize: 20)),
+                                  Text(elements['name'], style: TextStyle(color: Colors.grey.shade200, fontSize: 15)),
                                   Image.network(
                                     elements['image']['url'],
                                     width: 180,
