@@ -90,6 +90,7 @@ flutter:
     - assets/logo/S3/GOAL.png
     - assets/logo/S3/LOFT.png
     - assets/logo/S3/TURF_WAR.png
+    - assets/logo/S3/Tricolor.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
