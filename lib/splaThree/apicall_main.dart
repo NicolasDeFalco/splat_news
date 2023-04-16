@@ -26,6 +26,7 @@ class SplatoonTrois {
 
   // Dedicated to Salmon Run
   Map<String, dynamic> grizz = new Map();
+  Map<String, dynamic> grizzEggstra = new Map();
   Map<String, dynamic> grizzMult = new Map();
 
   Map<String, dynamic> fest = new Map();
@@ -35,6 +36,7 @@ class SplatoonTrois {
   int position = 0;
 
   bool festCheck = false;
+  bool eggstraCheck = false;
 
   // Timestamp of each map
   List<List<String>> mapChange =
@@ -42,6 +44,9 @@ class SplatoonTrois {
 
   List<List<String>> grizzChange =
       List.generate(5, (i) => List.generate(2, (j) => ''));
+
+  List<List<String>> grizzEggstraChange =
+      List.generate(1, (i) => List.generate(2, (j) => ''));
 
   Future<int> test() async {
     String url = "https://splatoon3.ink/data/schedules.json";
@@ -103,13 +108,30 @@ class SplatoonTrois {
           data['data']['coopGroupingSchedule']['regularSchedules']['nodes'][0];
       grizzMult = data['data']['coopGroupingSchedule']['regularSchedules'];
 
-      for (int x = 0; x < 5; x++) {
+      for (int x = 0; x < 4; x++) {
         grizzChange[x][0] = DateTime.parse(data['data']['coopGroupingSchedule']
                 ['regularSchedules']['nodes'][x]['startTime'])
             .toLocal()
             .toString();
         grizzChange[x][1] = DateTime.parse(data['data']['coopGroupingSchedule']
                 ['regularSchedules']['nodes'][x]['endTime'])
+            .toLocal()
+            .toString();
+      }
+      if (data['data']['coopGroupingSchedule']['teamContestSchedules']
+              ['nodes'] !=
+          null) {
+        grizzEggstra = data['data']['coopGroupingSchedule']
+            ['teamContestSchedules']['nodes'][0];
+        eggstraCheck = true;
+        grizzEggstraChange[0][0] = DateTime.parse(data['data']
+                    ['coopGroupingSchedule']['teamContestSchedules']['nodes'][0]
+                ['startTime'])
+            .toLocal()
+            .toString();
+        grizzEggstraChange[0][1] = DateTime.parse(data['data']
+                    ['coopGroupingSchedule']['teamContestSchedules']['nodes'][0]
+                ['endTime'])
             .toLocal()
             .toString();
       }
@@ -579,42 +601,146 @@ class SplatoonTrois {
               "SPLAT FEST !",
               style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
             ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey.shade800,
-              ),
-              child: Card(
-                elevation: 10,
-                color: Colors.black,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(
-                      dataFest['US']['data']['festRecords']['nodes'][0]
-                          ['title'],
-                      style:
-                          TextStyle(color: Colors.grey.shade200, fontSize: 25),
-                    ),
-                    Container(
-                      child: Image.network(dataFest['US']['data']['festRecords']
-                          ['nodes'][0]['image']['url']),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        for (var team in dataFest['US']['data']['festRecords']
-                            ['nodes'][0]['teams'])
-                          Text(team['teamName'],
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 25))
-                      ],
-                    )
-                  ],
-                ),
+            Card(
+              elevation: 10,
+              color: Colors.black,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    dataFest['US']['data']['festRecords']['nodes'][0]['title'],
+                    style: TextStyle(color: Colors.grey.shade200, fontSize: 25),
+                  ),
+                  Container(
+                    child: Image.network(dataFest['US']['data']['festRecords']
+                        ['nodes'][0]['image']['url']),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      for (var team in dataFest['US']['data']['festRecords']
+                          ['nodes'][0]['teams'])
+                        Text(team['teamName'],
+                            style: TextStyle(
+                                color: Colors.grey.shade200, fontSize: 25))
+                    ],
+                  )
+                ],
               ),
             ),
-            Container(
-              child: Card(
+            Card(
+                elevation: 10,
+                color: Colors.black,
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text("         "),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image(
+                            image: AssetImage('assets/logo/S3/Tricolor.png'),
+                            width: 50,
+                            height: 50,
+                          ),
+                          Text(
+                            "Fest Battle",
+                            style: TextStyle(
+                                color: Colors.grey.shade200, fontSize: 30),
+                          ),
+                          Image(
+                              image: AssetImage('assets/logo/S3/Tricolor.png'),
+                              width: 50,
+                              height: 50)
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/logo/S3/${fest['vsRule']['rule']}.png',
+                            width: 50,
+                            height: 50,
+                          ),
+                          Text(
+                            "(${fest['vsRule']['name'].toString()})",
+                            style: TextStyle(
+                                color: Colors.grey.shade400, fontSize: 20),
+                          ),
+                          Image.asset(
+                            'assets/logo/S3/${fest['vsRule']['rule']}.png',
+                            width: 50,
+                            height: 50,
+                          ),
+                        ],
+                      ),
+                      /*Text(
+                        "(${turf['vsRule']['name'].toString()})",
+                        style: TextStyle(
+                            color: Colors.grey.shade800, fontSize: 20),
+                      ),*/
+
+                      Text(
+                          timeConvert(mapChange[0][0].substring(11, 13)) +
+                              " to " +
+                              timeConvert(mapChange[0][1].substring(11, 13)),
+                          style: TextStyle(color: Colors.grey.shade200)),
+                      Text("Actual rotation:",
+                          style: TextStyle(
+                              color: Colors.grey.shade400, fontSize: 16)),
+                      Card(
+                        elevation: 10,
+                        color: Colors.grey.shade800,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            for (var elements in fest['vsStages'])
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(elements['name'],
+                                      style: TextStyle(
+                                          color: Colors.grey.shade200,
+                                          fontSize: 15)),
+                                  Image.network(
+                                    elements['image']['url'],
+                                    width: 180,
+                                    height: 110,
+                                  ),
+                                ],
+                              )
+                          ],
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Schedules(
+                                        background: Colors.black,
+                                        content: festMult,
+                                        mapChange: mapChange,
+                                        type: 'Fest Battle',
+                                        picLink: 'assets/logo/S3/Tricolor.png',
+                                        typeCode: 'regularMatchSetting',
+                                        fest: true,
+                                      )));
+                        },
+                        child: Card(
+                          color: Colors.grey.shade800,
+                          child: Text('  See what\'s next  ',
+                              style: TextStyle(
+                                  color: Colors.grey.shade200, fontSize: 20)),
+                        ),
+                      )
+                    ],
+                  ),
+                )),
+            if (data['data']['currentFest']['state'] == "SECOND_HALF")
+              Card(
                   elevation: 10,
                   color: Colors.black,
                   child: Container(
@@ -631,7 +757,7 @@ class SplatoonTrois {
                               height: 50,
                             ),
                             Text(
-                              "Fest Battle",
+                              "Tricolor Battle",
                               style: TextStyle(
                                   color: Colors.grey.shade200, fontSize: 30),
                             ),
@@ -646,17 +772,17 @@ class SplatoonTrois {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
-                              'assets/logo/S3/${fest['vsRule']['rule']}.png',
+                              'assets/logo/S3/Tricolor.png',
                               width: 50,
                               height: 50,
                             ),
                             Text(
-                              "(${fest['vsRule']['name'].toString()})",
+                              "Tricolor Turf War",
                               style: TextStyle(
                                   color: Colors.grey.shade400, fontSize: 20),
                             ),
                             Image.asset(
-                              'assets/logo/S3/${fest['vsRule']['rule']}.png',
+                              'assets/logo/S3/Tricolor.png',
                               width: 50,
                               height: 50,
                             ),
@@ -668,157 +794,43 @@ class SplatoonTrois {
                             color: Colors.grey.shade800, fontSize: 20),
                       ),*/
 
-                        Text(
-                            timeConvert(mapChange[0][0].substring(11, 13)) +
-                                " to " +
-                                timeConvert(mapChange[0][1].substring(11, 13)),
-                            style: TextStyle(color: Colors.grey.shade200)),
-                        Text("Actual rotation:",
+                        Text("Tricolor map:",
                             style: TextStyle(
-                                color: Colors.grey.shade400, fontSize: 16)),
+                                color: Colors.grey.shade200, fontSize: 16)),
                         Card(
                           elevation: 10,
                           color: Colors.grey.shade800,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              for (var elements in fest['vsStages'])
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(elements['name'],
-                                        style: TextStyle(
-                                            color: Colors.grey.shade200,
-                                            fontSize: 15)),
-                                    Image.network(
-                                      elements['image']['url'],
-                                      width: 180,
-                                      height: 110,
-                                    ),
-                                  ],
-                                )
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                      data['data']['currentFest']
+                                          ['tricolorStage']['name'],
+                                      style: TextStyle(
+                                          color: Colors.grey.shade200,
+                                          fontSize: 25)),
+                                  Image.network(
+                                    data['data']['currentFest']['tricolorStage']
+                                        ['image']['url'],
+                                    width: 350,
+                                    height: 230,
+                                  ),
+                                ],
+                              )
                             ],
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Schedules(
-                                          background: Colors.black,
-                                          content: festMult,
-                                          mapChange: mapChange,
-                                          type: 'Fest Battle',
-                                          picLink:
-                                              'assets/logo/S3/Tricolor.png',
-                                          typeCode: 'regularMatchSetting',
-                                          fest: true,
-                                        )));
-                          },
-                          child: Card(
-                            color: Colors.grey.shade800,
-                            child: Text('  See what\'s next  ',
-                                style: TextStyle(
-                                    color: Colors.grey.shade200, fontSize: 20)),
-                          ),
-                        )
                       ],
                     ),
                   )),
+            Text(
+              "Source: splatoon3.ink",
+              style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
             ),
-            if (data['data']['currentFest']['state'] == "SECOND_HALF")
-              Container(
-                child: Card(
-                    elevation: 10,
-                    color: Colors.black,
-                    child: Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text("         "),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Image(
-                                image:
-                                    AssetImage('assets/logo/S3/Tricolor.png'),
-                                width: 50,
-                                height: 50,
-                              ),
-                              Text(
-                                "Tricolor Battle",
-                                style: TextStyle(
-                                    color: Colors.grey.shade200, fontSize: 30),
-                              ),
-                              Image(
-                                  image:
-                                      AssetImage('assets/logo/S3/Tricolor.png'),
-                                  width: 50,
-                                  height: 50)
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'assets/logo/S3/Tricolor.png',
-                                width: 50,
-                                height: 50,
-                              ),
-                              Text(
-                                "Tricolor Turf War",
-                                style: TextStyle(
-                                    color: Colors.grey.shade400, fontSize: 20),
-                              ),
-                              Image.asset(
-                                'assets/logo/S3/Tricolor.png',
-                                width: 50,
-                                height: 50,
-                              ),
-                            ],
-                          ),
-                          /*Text(
-                        "(${turf['vsRule']['name'].toString()})",
-                        style: TextStyle(
-                            color: Colors.grey.shade800, fontSize: 20),
-                      ),*/
-
-                          Text("Tricolor map:",
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 16)),
-                          Card(
-                            elevation: 10,
-                            color: Colors.grey.shade800,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                        data['data']['currentFest']
-                                            ['tricolorStage']['name'],
-                                        style: TextStyle(
-                                            color: Colors.grey.shade200,
-                                            fontSize: 25)),
-                                    Image.network(
-                                      data['data']['currentFest']
-                                          ['tricolorStage']['image']['url'],
-                                      width: 350,
-                                      height: 230,
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-              ),
           ]),
         ));
   }
@@ -836,13 +848,122 @@ class SplatoonTrois {
               width: 280,
               height: 150,
             ),
+            if (eggstraCheck)
+              Card(
+                  elevation: 10,
+                  color: Color(0xFFCA9215),
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "",
+                          style: TextStyle(fontSize: 5),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Image(
+                                image:
+                                    AssetImage('assets/logo/EggstraWork.png'),
+                                width: 50,
+                                height: 50),
+                            Text(
+                              "Eggstra Work",
+                              style: TextStyle(
+                                  color: Colors.grey.shade200, fontSize: 35),
+                            ),
+                            Image(
+                                image:
+                                    AssetImage('assets/logo/EggstraWork.png'),
+                                width: 50,
+                                height: 50)
+                          ],
+                        ),
+                        Text(
+                          "Actual map:",
+                          style: TextStyle(
+                              color: Colors.grey.shade200, fontSize: 25),
+                        ),
+                        Text(
+                          grizzEggstra['setting']['coopStage']['name'],
+                          style: TextStyle(
+                              color: Colors.grey.shade200, fontSize: 22),
+                        ),
+                        Text(
+                          'From ' +
+                              dateFormat(grizzEggstraChange[0][0]) +
+                              ' to ' +
+                              dateFormat(grizzEggstraChange[0][1]),
+                          style: TextStyle(
+                              color: Colors.grey.shade200, fontSize: 14),
+                        ),
+                        Image.network(
+                          grizzEggstra['setting']['coopStage']['image']['url'],
+                          width: 360,
+                          height: 210,
+                        ),
+                        Card(
+                          elevation: 10,
+                          color: Colors.grey.shade800,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                "Supplied weapons:",
+                                style: TextStyle(
+                                    color: Colors.grey.shade400, fontSize: 20),
+                              ),
+                              for (var elements in grizzEggstra['setting']
+                                  ['weapons'])
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(" ${elements['name']}",
+                                        style: TextStyle(
+                                            color: Colors.grey.shade200,
+                                            fontSize: 20)),
+                                    Text("                   "),
+                                    Image.network(
+                                      elements['image']['url'],
+                                      width: 90,
+                                      height: 90,
+                                    ),
+                                  ],
+                                )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  )),
             Card(
                 elevation: 10,
-                color: Color.fromARGB(255, 232, 78, 3),
+                color: Color.fromARGB(255, 225, 65, 10),
                 child: Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      Text('', style: TextStyle(fontSize: 5)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Image(
+                              image: AssetImage('assets/logo/SalmonRun.png'),
+                              width: 50,
+                              height: 50),
+                          Text(
+                            "Salmon run",
+                            style: TextStyle(
+                                color: Colors.grey.shade200, fontSize: 35),
+                          ),
+                          Image(
+                              image: AssetImage('assets/logo/SalmonRun.png'),
+                              width: 50,
+                              height: 50)
+                        ],
+                      ),
                       Text(
                         "Actual map:",
                         style: TextStyle(

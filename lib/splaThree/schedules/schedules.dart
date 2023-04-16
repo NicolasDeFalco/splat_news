@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 class Schedules extends StatefulWidget {
   String type;
@@ -61,7 +62,9 @@ class SchedulesState extends State<Schedules> {
   @override
   Widget build(BuildContext context) {
     position = 0;
-    if (fest = false) {
+    debugPrint(fest.toString());
+    //debugPrint(content.toString());
+    if (!fest) {
       return Scaffold(
         appBar: AppBar(
           title: Text("Splatoon 3 - $type"),
@@ -236,13 +239,12 @@ class SchedulesState extends State<Schedules> {
           ),
         ),
       );
-    }
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Splatoon 3 - $type"),
-        backgroundColor: Colors.grey.shade900,
-        /*flexibleSpace: Container(
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("Splatoon 3 - $type"),
+          backgroundColor: Colors.grey.shade900,
+          /*flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topLeft,
@@ -250,169 +252,173 @@ class SchedulesState extends State<Schedules> {
                   colors: <Color>[Color.fromARGB(255, 229, 255, 0), Color.fromARGB(255, 100, 48, 254)]),
             ),
           ),*/
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          color: Colors.grey.shade900,
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              for (var battle in content['nodes'])
-                if (battle['festMatchSetting'] != null)
-                  Card(
-                      elevation: 10,
-                      color: background,
-                      child: Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(""),
-                            if (position == 0)
+        body: Container(
+          decoration: BoxDecoration(
+            color: Colors.grey.shade900,
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                for (var battle in content['nodes'])
+                  if (battle['festMatchSetting'] != null)
+                    Card(
+                        elevation: 10,
+                        color: background,
+                        child: Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text('', style: TextStyle(fontSize: 5)),
+                              if (position == 0)
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Image(
+                                      image: AssetImage(picLink),
+                                      width: 50,
+                                      height: 50,
+                                    ),
+                                    Text(
+                                      "Actual",
+                                      style: TextStyle(
+                                          color: Colors.grey.shade200,
+                                          fontSize: 30),
+                                    ),
+                                    Image(
+                                        image: AssetImage(picLink),
+                                        width: 50,
+                                        height: 50)
+                                  ],
+                                ),
+                              if (position == 1)
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Image(
+                                      image: AssetImage(picLink),
+                                      width: 50,
+                                      height: 50,
+                                    ),
+                                    Text(
+                                      "Next",
+                                      style: TextStyle(
+                                          color: Colors.grey.shade200,
+                                          fontSize: 30),
+                                    ),
+                                    Image(
+                                        image: AssetImage(picLink),
+                                        width: 50,
+                                        height: 50)
+                                  ],
+                                ),
+                              if (position == 2)
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Image(
+                                      image: AssetImage(picLink),
+                                      width: 50,
+                                      height: 50,
+                                    ),
+                                    Text(
+                                      "Future",
+                                      style: TextStyle(
+                                          color: Colors.grey.shade200,
+                                          fontSize: 30),
+                                    ),
+                                    Image(
+                                        image: AssetImage(picLink),
+                                        width: 50,
+                                        height: 50)
+                                  ],
+                                ),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Image(
-                                    image: AssetImage(picLink),
+                                  Image.asset(
+                                    'assets/logo/S3/Tricolor.png',
                                     width: 50,
                                     height: 50,
                                   ),
                                   Text(
-                                    "Actual",
+                                    "Turf War",
                                     style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 30),
+                                        color: Colors.grey.shade400,
+                                        fontSize: 20),
                                   ),
-                                  Image(
-                                      image: AssetImage(picLink),
-                                      width: 50,
-                                      height: 50)
-                                ],
-                              ),
-                            if (position == 1)
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Image(
-                                    image: AssetImage(picLink),
+                                  Image.asset(
+                                    'assets/logo/S3/Tricolor.png',
                                     width: 50,
                                     height: 50,
                                   ),
-                                  Text(
-                                    "Next",
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 30),
-                                  ),
-                                  Image(
-                                      image: AssetImage(picLink),
-                                      width: 50,
-                                      height: 50)
                                 ],
                               ),
-                            if (position == 2)
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Image(
-                                    image: AssetImage(picLink),
-                                    width: 50,
-                                    height: 50,
-                                  ),
-                                  Text(
-                                    "Future",
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 30),
-                                  ),
-                                  Image(
-                                      image: AssetImage(picLink),
-                                      width: 50,
-                                      height: 50)
-                                ],
-                              ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/logo/S3/Tricolor.png',
-                                  width: 50,
-                                  height: 50,
-                                ),
-                                Text(
-                                  "Turf War",
-                                  style: TextStyle(
-                                      color: Colors.grey.shade400,
-                                      fontSize: 20),
-                                ),
-                                Image.asset(
-                                  'assets/logo/S3/Tricolor.png',
-                                  width: 50,
-                                  height: 50,
-                                ),
-                              ],
-                            ),
-                            /*Text(
+                              /*Text(
                         "(${turf['vsRule']['name'].toString()})",
                         style: TextStyle(
                             color: Colors.grey.shade800, fontSize: 20),
                       ),*/
 
-                            Text(
-                                timeConvertLoop(
-                                        mapChange[position][0]
-                                            .substring(11, 13),
-                                        false) +
-                                    " to " +
-                                    timeConvertLoop(
-                                        mapChange[position][1]
-                                            .substring(11, 13),
-                                        true),
-                                style: TextStyle(color: Colors.grey.shade200)),
-                            Text("Map:",
-                                style: TextStyle(
-                                    color: Colors.grey.shade200, fontSize: 16)),
-                            Card(
-                              elevation: 10,
-                              color: Colors.grey.shade800,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  for (var elements
-                                      in battle['festMatchSetting']['vsStages'])
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Text(elements['name'],
-                                            style: TextStyle(
-                                                color: Colors.grey.shade200,
-                                                fontSize: 15)),
-                                        Image.network(
-                                          elements['image']['url'],
-                                          width: 180,
-                                          height: 110,
-                                        ),
-                                      ],
-                                    )
-                                ],
+                              Text(
+                                  timeConvertLoop(
+                                          mapChange[position][0]
+                                              .substring(11, 13),
+                                          false) +
+                                      " to " +
+                                      timeConvertLoop(
+                                          mapChange[position][1]
+                                              .substring(11, 13),
+                                          true),
+                                  style:
+                                      TextStyle(color: Colors.grey.shade200)),
+                              Text("Map:",
+                                  style: TextStyle(
+                                      color: Colors.grey.shade200,
+                                      fontSize: 16)),
+                              Card(
+                                elevation: 10,
+                                color: Colors.grey.shade800,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    for (var elements
+                                        in battle['festMatchSetting']
+                                            ['vsStages'])
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Text(elements['name'],
+                                              style: TextStyle(
+                                                  color: Colors.grey.shade200,
+                                                  fontSize: 15)),
+                                          Image.network(
+                                            elements['image']['url'],
+                                            width: 180,
+                                            height: 110,
+                                          ),
+                                        ],
+                                      )
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      )),
-              Text(
-                "Source: splatoon3.ink",
-                style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
-              ),
-            ],
+                            ],
+                          ),
+                        )),
+                Text(
+                  "Source: splatoon3.ink",
+                  style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
 }

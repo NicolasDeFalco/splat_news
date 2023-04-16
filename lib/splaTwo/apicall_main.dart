@@ -436,6 +436,29 @@ class SplatoonDeux {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+                          Text('', style: TextStyle(fontSize: 5)),
+                          if (position == 0)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Image(
+                                    image:
+                                        AssetImage('assets/logo/SalmonRun.png'),
+                                    width: 50,
+                                    height: 50),
+                                Text(
+                                  "Salmon run",
+                                  style: TextStyle(
+                                      color: Colors.grey.shade200,
+                                      fontSize: 35),
+                                ),
+                                Image(
+                                    image:
+                                        AssetImage('assets/logo/SalmonRun.png'),
+                                    width: 50,
+                                    height: 50)
+                              ],
+                            ),
                           if (position == 0)
                             Column(
                               children: [
@@ -448,7 +471,7 @@ class SplatoonDeux {
                               ],
                             ),
                           if (position == 1)
-                            Column(
+                            Row(
                               children: [
                                 Text(
                                   "Future:",
@@ -551,11 +574,33 @@ class SplatoonDeux {
             for (var salmon in grizz['details'])
               Card(
                   elevation: 10,
-                  color: Color.fromARGB(255, 232, 78, 3),
+                  color: Color.fromARGB(255, 225, 65, 10),
                   child: Container(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        Text('', style: TextStyle(fontSize: 5)),
+                        if (position == 0)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Image(
+                                  image:
+                                      AssetImage('assets/logo/SalmonRun.png'),
+                                  width: 50,
+                                  height: 50),
+                              Text(
+                                "Salmon run",
+                                style: TextStyle(
+                                    color: Colors.grey.shade200, fontSize: 35),
+                              ),
+                              Image(
+                                  image:
+                                      AssetImage('assets/logo/SalmonRun.png'),
+                                  width: 50,
+                                  height: 50)
+                            ],
+                          ),
                         if (position == 0)
                           Column(
                             children: [

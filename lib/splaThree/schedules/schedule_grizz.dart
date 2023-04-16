@@ -66,31 +66,70 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                 if (position <= 5)
                   Card(
                       elevation: 10,
-                      color: Color.fromARGB(255, 232, 78, 3),
+                      color: Color.fromARGB(255, 225, 65, 10),
                       child: Container(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
+                            Text('', style: TextStyle(fontSize: 5)),
                             if (position == 0)
-                              Text(
-                                "Actual",
-                                style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Image(
+                                      image: AssetImage(
+                                          'assets/logo/SalmonRun.png'),
+                                      width: 50,
+                                      height: 50),
+                                  Text(
+                                    "Actual",
+                                    style: TextStyle(
+                                        color: Colors.grey.shade200,
+                                        fontSize: 30),
+                                  ),
+                                  Image(
+                                      image: AssetImage(
+                                          'assets/logo/SalmonRun.png'),
+                                      width: 50,
+                                      height: 50)
+                                ],
                               ),
                             if (position == 1)
-                              Text(
-                                "Future",
-                                style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Image(
+                                      image: AssetImage(
+                                          'assets/logo/SalmonRun.png'),
+                                      width: 50,
+                                      height: 50),
+                                  Text(
+                                    "Future",
+                                    style: TextStyle(
+                                        color: Colors.grey.shade200,
+                                        fontSize: 30),
+                                  ),
+                                  Image(
+                                      image: AssetImage(
+                                          'assets/logo/SalmonRun.png'),
+                                      width: 50,
+                                      height: 50)
+                                ],
                               ),
                             Text(
                               salmon['setting']['coopStage']['name'],
-                              style: TextStyle(color: Colors.grey.shade200, fontSize: 22),
+                              style: TextStyle(
+                                  color: Colors.grey.shade200, fontSize: 22),
                             ),
                             Text(
                               'From ' +
                                   dateFormat(change[position][0], false) +
                                   ' to ' +
                                   dateFormat(change[position][1], true),
-                              style: TextStyle(color: Colors.grey.shade200, fontSize: 14),
+                              style: TextStyle(
+                                  color: Colors.grey.shade200, fontSize: 14),
                             ),
                             Image.network(
                               salmon['setting']['coopStage']['image']['url'],
@@ -101,18 +140,25 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                               elevation: 10,
                               color: Colors.grey.shade800,
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Text(
                                     "Supplied weapons:",
-                                    style: TextStyle(color: Colors.grey.shade400, fontSize: 20),
+                                    style: TextStyle(
+                                        color: Colors.grey.shade400,
+                                        fontSize: 20),
                                   ),
-                                  for (var elements in salmon['setting']['weapons'])
+                                  for (var elements in salmon['setting']
+                                      ['weapons'])
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(" ${elements['name']}",
-                                            style: TextStyle(color: Colors.grey.shade200, fontSize: 20)),
+                                            style: TextStyle(
+                                                color: Colors.grey.shade200,
+                                                fontSize: 20)),
                                         Text("                   "),
                                         Image.network(
                                           elements['image']['url'],
