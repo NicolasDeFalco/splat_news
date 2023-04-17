@@ -29,13 +29,15 @@ class SplatoonTrois {
   Map<String, dynamic> grizzEggstra = new Map();
   Map<String, dynamic> grizzMult = new Map();
 
+  // Dedicated to the splatfest matches
   Map<String, dynamic> fest = new Map();
   Map<String, dynamic> festMult = new Map();
   Map<String, dynamic> festSettings = new Map();
 
-  int position = 0;
-
+  // True if a splatfest is in progress
   bool festCheck = false;
+
+  // True if an eggstra work event is in progress
   bool eggstraCheck = false;
 
   // Timestamp of each map
@@ -52,6 +54,7 @@ class SplatoonTrois {
     String url = "https://splatoon3.ink/data/schedules.json";
     String urlFest = "https://splatoon3.ink/data/festivals.json";
 
+    // We use a try in case there is no internet connectivity
     try {
       var response = await http.get(Uri.parse(url));
       var responseFest = await http.get(Uri.parse(urlFest));
@@ -59,7 +62,7 @@ class SplatoonTrois {
         data = convert.jsonDecode(response.body);
         dataFest = convert.jsonDecode(responseFest.body);
       }
-      //No fest
+      // Check if there is no splatfest
       if (data['data']['currentFest'] == null) {
         for (int x = 0; x < 12; x++) {
           mapChange[x][0] = DateTime.parse(
@@ -75,17 +78,15 @@ class SplatoonTrois {
         turf =
             data['data']['regularSchedules']['nodes'][0]['regularMatchSetting'];
         turfMult = data['data']['regularSchedules'];
-
         series = data['data']['bankaraSchedules']['nodes'][0]
             ['bankaraMatchSettings'][0];
         open = data['data']['bankaraSchedules']['nodes'][0]
             ['bankaraMatchSettings'][1];
         rankMult = data['data']['bankaraSchedules'];
-
         xrank = data['data']['xSchedules']['nodes'][0]['xMatchSetting'];
         xrankMult = data['data']['xSchedules'];
       } else {
-        //FEST !!!!1!1!11!1!1!1
+        //There is a splatfest
         festCheck = true;
         for (int x = 0; x < 12; x++) {
           if (data['data']['festSchedules']['nodes'][x]['festMatchSetting'] !=
@@ -107,20 +108,19 @@ class SplatoonTrois {
       grizz =
           data['data']['coopGroupingSchedule']['regularSchedules']['nodes'][0];
       grizzMult = data['data']['coopGroupingSchedule']['regularSchedules'];
-
-      for (int x = 0; x < 4; x++) {
-        grizzChange[x][0] = DateTime.parse(data['data']['coopGroupingSchedule']
-                ['regularSchedules']['nodes'][x]['startTime'])
-            .toLocal()
-            .toString();
-        grizzChange[x][1] = DateTime.parse(data['data']['coopGroupingSchedule']
-                ['regularSchedules']['nodes'][x]['endTime'])
-            .toLocal()
-            .toString();
+      int x = 0;
+      for (var changes in data['data']['coopGroupingSchedule']
+          ['regularSchedules']['nodes']) {
+        grizzChange[x][0] =
+            DateTime.parse(changes['startTime']).toLocal().toString();
+        grizzChange[x][1] =
+            DateTime.parse(changes['endTime']).toLocal().toString();
+        x++;
       }
-      if (data['data']['coopGroupingSchedule']['teamContestSchedules']
-              ['nodes'] !=
-          null) {
+      // We'll check if a Eggstra work event is in progress
+      if (data['data']['coopGroupingSchedule']['teamContestSchedules']['nodes']
+              .toString() !=
+          '[]') {
         grizzEggstra = data['data']['coopGroupingSchedule']
             ['teamContestSchedules']['nodes'][0];
         eggstraCheck = true;
@@ -143,7 +143,7 @@ class SplatoonTrois {
     }
   }
 
-  String colorResult(double valeur) {
+  /*String colorResult(double valeur) {
     double colorCalc = valeur * 255;
     double color = 0;
     if (colorCalc == 255) {
@@ -153,7 +153,7 @@ class SplatoonTrois {
     }
     debugPrint(color.toString());
     return color.toString();
-  }
+  }*/
 
   Container actualRoll(BuildContext context) {
     if (data['data']['currentFest'] == null) {
