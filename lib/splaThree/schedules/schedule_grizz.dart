@@ -17,7 +17,9 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
 
   String dateFormat(String value, bool loop) {
     String date = value.substring(0, 10).replaceAll(RegExp('-'), '/');
-    return date + ' at ' + timeConvertLoop(value.substring(11, 13), loop);
+    return '${date.substring(8, 10)}/${date.substring(5, 7)}/${date.substring(0, 4)}' +
+        ' at ' +
+        timeConvertLoop(value.substring(11, 13), loop);
   }
 
   String timeConvertLoop(String value, bool loop) {

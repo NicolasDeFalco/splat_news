@@ -1112,6 +1112,8 @@ class SplatoonTrois {
 
   String dateFormat(String value) {
     String date = value.substring(0, 10).replaceAll(RegExp('-'), '/');
-    return date + ' at ' + timeConvert(value.substring(11, 13));
+    return '${date.substring(8, 10)}/${date.substring(5, 7)}/${date.substring(0, 4)}' +
+        ' at ' +
+        timeConvert(value.substring(11, 13));
   }
 }

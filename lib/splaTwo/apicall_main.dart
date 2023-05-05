@@ -718,7 +718,9 @@ class SplatoonDeux {
     if (loop) {
       position++;
     }
-    return date + ' at ' + timeConvert(value.substring(11, 13));
+    return '${date.substring(8, 10)}/${date.substring(5, 7)}/${date.substring(0, 4)}' +
+        ' at ' +
+        timeConvert(value.substring(11, 13));
   }
 
   String timeConvert(String value) {
