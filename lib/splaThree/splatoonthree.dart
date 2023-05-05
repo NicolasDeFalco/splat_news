@@ -16,13 +16,19 @@ class _SplatoonThreeState extends State<SplatoonThree> {
   int code = 0;
   Container page = Container();
   int pageCount = 1;
+  bool received = false;
 
   Future<void> codeRetreive() async {
-    while (true) {
-      code = await test.test();
-      //debugPrint(code.toString());
-      if (code != 21) {
-        break;
+    if (!received) {
+      while (true) {
+        code = await test.test();
+        //debugPrint(code.toString());
+        if (code != 21) {
+          if (code == 200) {
+            received = true;
+          }
+          break;
+        }
       }
     }
   }
@@ -62,48 +68,59 @@ class _SplatoonThreeState extends State<SplatoonThree> {
         ),
         bottomNavigationBar: BottomAppBar(
           color: Colors.grey.shade900,
-          child: Row(mainAxisSize: MainAxisSize.max, mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            Expanded(
-              child: SizedBox(
-                height: 60,
-                child: Material(
-                  type: MaterialType.transparency,
-                  child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        pageCount = 1;
-                      });
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[Text("Match", style: TextStyle(color: Colors.white, fontSize: 15))],
+          child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: 60,
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            pageCount = 1;
+                          });
+                        },
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text("Match",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15))
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
-            Expanded(
-              child: SizedBox(
-                height: 60,
-                child: Material(
-                  type: MaterialType.transparency,
-                  child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        pageCount = 2;
-                      });
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[Text("Salmon Run", style: TextStyle(color: Colors.white, fontSize: 15))],
+                Expanded(
+                  child: SizedBox(
+                    height: 60,
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            pageCount = 2;
+                          });
+                        },
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text("Salmon Run",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15))
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
-          ]),
+              ]),
         ));
   }
 }

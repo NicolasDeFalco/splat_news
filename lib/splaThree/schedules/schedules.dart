@@ -62,7 +62,7 @@ class SchedulesState extends State<Schedules> {
   @override
   Widget build(BuildContext context) {
     position = 0;
-    debugPrint(fest.toString());
+    //debugPrint(fest.toString());
     //debugPrint(content.toString());
     if (!fest) {
       return Scaffold(
@@ -86,7 +86,7 @@ class SchedulesState extends State<Schedules> {
             child: Column(
               children: [
                 for (var battle in content['nodes'])
-                  if (position <= 11)
+                  if (position <= 11 && battle['festMatchSetting'] == null)
                     Card(
                         elevation: 10,
                         color: background,

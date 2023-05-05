@@ -27,24 +27,24 @@ class SplatoonDeux {
       if (responseBattle.statusCode == 200 && responseGrizz.statusCode == 200) {
         data = convert.jsonDecode(responseBattle.body);
         grizz = convert.jsonDecode(responseGrizz.body);
-      }
 
-      for (int x = 0; x < 2; x++) {
-        mapChangeGrizz[x][0] = DateTime.fromMillisecondsSinceEpoch(
-                grizz['details'][x]['start_time'] * 1000)
-            .toString();
-        mapChangeGrizz[x][1] = DateTime.fromMillisecondsSinceEpoch(
-                grizz['details'][x]['end_time'] * 1000)
-            .toString();
-      }
+        for (int x = 0; x < 2; x++) {
+          mapChangeGrizz[x][0] = DateTime.fromMillisecondsSinceEpoch(
+                  grizz['details'][x]['start_time'] * 1000)
+              .toString();
+          mapChangeGrizz[x][1] = DateTime.fromMillisecondsSinceEpoch(
+                  grizz['details'][x]['end_time'] * 1000)
+              .toString();
+        }
 
-      for (int x = 0; x < 12; x++) {
-        mapChange[x][0] = DateTime.fromMillisecondsSinceEpoch(
-                data['regular'][x]['start_time'] * 1000)
-            .toString();
-        mapChange[x][1] = DateTime.fromMillisecondsSinceEpoch(
-                data['regular'][x]['end_time'] * 1000)
-            .toString();
+        for (int x = 0; x < 12; x++) {
+          mapChange[x][0] = DateTime.fromMillisecondsSinceEpoch(
+                  data['regular'][x]['start_time'] * 1000)
+              .toString();
+          mapChange[x][1] = DateTime.fromMillisecondsSinceEpoch(
+                  data['regular'][x]['end_time'] * 1000)
+              .toString();
+        }
       }
 
       return responseGrizz.statusCode;
@@ -472,6 +472,7 @@ class SplatoonDeux {
                             ),
                           if (position == 1)
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
                                   "Future:",

@@ -40,6 +40,9 @@ class SplatoonTrois {
   // True if an eggstra work event is in progress
   bool eggstraCheck = false;
 
+  // True if a fest is scheduled
+  bool festScheduled = false;
+
   // Timestamp of each map
   List<List<String>> mapChange =
       List.generate(12, (i) => List.generate(2, (j) => ''));
@@ -63,7 +66,9 @@ class SplatoonTrois {
         dataFest = convert.jsonDecode(responseFest.body);
       }
       // Check if there is no splatfest
-      if (data['data']['currentFest'] == null) {
+      if (data['data']['currentFest'] == null ||
+          data['data']['currentFest']['state'] == 'SCHEDULED') {
+        //No splatfest
         for (int x = 0; x < 12; x++) {
           mapChange[x][0] = DateTime.parse(
                   data['data']['regularSchedules']['nodes'][x]['startTime'])
@@ -75,6 +80,7 @@ class SplatoonTrois {
               .toString();
         }
 
+        // FIXME: This part need optimizations. We should only use the 'mult'.
         turf =
             data['data']['regularSchedules']['nodes'][0]['regularMatchSetting'];
         turfMult = data['data']['regularSchedules'];
@@ -85,6 +91,11 @@ class SplatoonTrois {
         rankMult = data['data']['bankaraSchedules'];
         xrank = data['data']['xSchedules']['nodes'][0]['xMatchSetting'];
         xrankMult = data['data']['xSchedules'];
+
+        // Is true when a fest is scheduled
+        if (data['data']['currentFest']['state'] == 'SCHEDULED') {
+          festScheduled = true;
+        }
       } else {
         //There is a splatfest
         festCheck = true;
@@ -156,7 +167,8 @@ class SplatoonTrois {
   }*/
 
   Container actualRoll(BuildContext context) {
-    if (data['data']['currentFest'] == null) {
+    if (data['data']['currentFest'] == null ||
+        data['data']['currentFest']['state'] == 'SCHEDULED') {
       return Container(
           decoration: BoxDecoration(
             color: Colors.grey.shade800,
@@ -168,6 +180,41 @@ class SplatoonTrois {
                 width: 280,
                 height: 150,
               ),
+              if (festScheduled)
+                Text(
+                  "Slat fest inkoming!",
+                  style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
+                ),
+              if (festScheduled)
+                Card(
+                  elevation: 10,
+                  color: Colors.black,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        dataFest['US']['data']['festRecords']['nodes'][0]
+                            ['title'],
+                        style: TextStyle(
+                            color: Colors.grey.shade200, fontSize: 25),
+                      ),
+                      Container(
+                        child: Image.network(dataFest['US']['data']
+                            ['festRecords']['nodes'][0]['image']['url']),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          for (var team in dataFest['US']['data']['festRecords']
+                              ['nodes'][0]['teams'])
+                            Text(team['teamName'],
+                                style: TextStyle(
+                                    color: Colors.grey.shade200, fontSize: 25))
+                        ],
+                      )
+                    ],
+                  ),
+                ),
               Card(
                   elevation: 10,
                   color: Color.fromARGB(255, 23, 200, 26),
