@@ -93,8 +93,10 @@ class SplatoonTrois {
         xrankMult = data['data']['xSchedules'];
 
         // Is true when a fest is scheduled
-        if (data['data']['currentFest']['state'] == 'SCHEDULED') {
-          festScheduled = true;
+        if (data['data']['currentFest'] != null) {
+          if (data['data']['currentFest']['state'] == 'SCHEDULED') {
+            festScheduled = true;
+          }
         }
       } else {
         //There is a splatfest
