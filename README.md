@@ -1,16 +1,66 @@
-# splatoon
+# **Splat News🐙**
 
-A new Flutter project.
+**Splat News** is a flutter applications for Android that allows you
+to view the current maps rotations, salmon run map and gear rotation of both Splatoon 2 and Splatoon 3
+using the data from [splatoon2.ink](https://splatoon2.ink "splatoon2.ink") and [splatoon3.ink](splatoon3.ink "splatoon3.ink"). 
 
-## Getting Started
+## **Summary**
+---
+ - [Getting started](#getting-started)
+ - [Progression](#progression)
+ - [Data](#data)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## **Getting Started**
+---
+First, to build and run this app, you'll need to install the **Flutter SDK**.
+To install the Flutter SDK, you can follow [this install guide](https://docs.flutter.dev/get-started/install "Install flutter SDK").
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Once everything is ready, you'll need to do this command in the project:
+\
+`flutter pub get`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+When it's done, you are ready to run the project.
+
+## **Progression**
+---
+### **🐙Splatoon 2**
+
+ - ➖ Battle
+    - ✔ Show Regular battle schedules  
+    - ✔ Show Ranked battle schedules 
+    - ✔ Show League battle schedules
+    - ✖ Show past splatfest results
+
+ - ✔ Salmon run 
+    - ✔ Show current schedules
+
+ - ✖ Gear
+    - ✖ Show current gear on sale
+    
+
+### **🐙Splatoon 3**
+
+- ➖ Battle
+    - ✔ Show Regular battle schedules  
+    - ✔ Show Ranked battle schedules 
+    - ✔ Show League battle schedules
+    - ✔ Show X-Rank battle schedules
+    - ➖ Splatfest
+        - ✔ Show current splatfest 
+        - ✔ Show incoming splatfest
+        - ✖ Show result of past splatfest
+
+- ➖ Salmon Run 
+    - ✔ Show schedules of Salmon Run
+    - ✔ Show schedules of current Eggstra Work event 
+    - ✖ Show schedules of current Big Run event 
+
+- ✖ Gear
+    - ✖ Show current gear on sale
+    - ✖ Show current daily drop
+
+## Data
+---
+
+This project use data provided by the websites [splatoon2.ink](https://splatoon2.ink "splatoon2.ink") and [splatoon3.ink](splatoon3.ink "splatoon3.ink"). 
