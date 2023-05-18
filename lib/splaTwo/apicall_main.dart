@@ -1,6 +1,7 @@
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'dart:ui';
 
 import 'package:splat_news/splaTwo/schedules/schedules.dart';
@@ -22,8 +23,16 @@ class SplatoonDeux {
     String urlGrizz = "https://splatoon2.ink/data/coop-schedules.json";
     //debugPrint(url);
     try {
-      var responseBattle = await http.get(Uri.parse(urlBattle));
-      var responseGrizz = await http.get(Uri.parse(urlGrizz));
+      var responseBattle = await http.get(Uri.parse(urlBattle), headers: {
+        'Content-Type': 'application/json',
+        'Accept-Charset': 'utf-8',
+        'User-Agent': 'SplatNews/dev (nicolasdefalco.9@gmail.com)'
+      });
+      var responseGrizz = await http.get(Uri.parse(urlGrizz), headers: {
+        'Content-Type': 'application/json',
+        'Accept-Charset': 'utf-8',
+        'User-Agent': 'SplatNews/dev (nicolasdefalco.9@gmail.com)'
+      });
       if (responseBattle.statusCode == 200 && responseGrizz.statusCode == 200) {
         data = convert.jsonDecode(responseBattle.body);
         grizz = convert.jsonDecode(responseGrizz.body);
@@ -129,8 +138,9 @@ class SplatoonDeux {
                                     style: TextStyle(
                                         color: Colors.grey.shade200,
                                         fontSize: 15)),
-                                Image.network(
-                                  "https://splatoon2.ink/assets/splatnet/${data['regular'][0]['stage_a']['image']}",
+                                CachedNetworkImage(
+                                  imageUrl:
+                                      "https://splatoon2.ink/assets/splatnet/${data['regular'][0]['stage_a']['image']}",
                                   width: 180,
                                   height: 110,
                                 ),
@@ -142,8 +152,9 @@ class SplatoonDeux {
                                     style: TextStyle(
                                         color: Colors.grey.shade200,
                                         fontSize: 15)),
-                                Image.network(
-                                  "https://splatoon2.ink/assets/splatnet/${data['regular'][0]['stage_b']['image']}",
+                                CachedNetworkImage(
+                                  imageUrl:
+                                      "https://splatoon2.ink/assets/splatnet/${data['regular'][0]['stage_b']['image']}",
                                   width: 180,
                                   height: 110,
                                 ),
@@ -241,8 +252,9 @@ class SplatoonDeux {
                                     style: TextStyle(
                                         color: Colors.grey.shade200,
                                         fontSize: 15)),
-                                Image.network(
-                                  "https://splatoon2.ink/assets/splatnet/${data['gachi'][0]['stage_a']['image']}",
+                                CachedNetworkImage(
+                                  imageUrl:
+                                      "https://splatoon2.ink/assets/splatnet/${data['gachi'][0]['stage_a']['image']}",
                                   width: 180,
                                   height: 110,
                                 ),
@@ -254,8 +266,9 @@ class SplatoonDeux {
                                     style: TextStyle(
                                         color: Colors.grey.shade200,
                                         fontSize: 15)),
-                                Image.network(
-                                  "https://splatoon2.ink/assets/splatnet/${data['gachi'][0]['stage_b']['image']}",
+                                CachedNetworkImage(
+                                  imageUrl:
+                                      "https://splatoon2.ink/assets/splatnet/${data['gachi'][0]['stage_b']['image']}",
                                   width: 180,
                                   height: 110,
                                 ),
@@ -353,8 +366,9 @@ class SplatoonDeux {
                                     style: TextStyle(
                                         color: Colors.grey.shade200,
                                         fontSize: 15)),
-                                Image.network(
-                                  "https://splatoon2.ink/assets/splatnet/${data['league'][0]['stage_a']['image']}",
+                                CachedNetworkImage(
+                                  imageUrl:
+                                      "https://splatoon2.ink/assets/splatnet/${data['league'][0]['stage_a']['image']}",
                                   width: 180,
                                   height: 110,
                                 ),
@@ -366,8 +380,9 @@ class SplatoonDeux {
                                     style: TextStyle(
                                         color: Colors.grey.shade200,
                                         fontSize: 15)),
-                                Image.network(
-                                  "https://splatoon2.ink/assets/splatnet/${data['league'][0]['stage_b']['image']}",
+                                CachedNetworkImage(
+                                  imageUrl:
+                                      "https://splatoon2.ink/assets/splatnet/${data['league'][0]['stage_b']['image']}",
                                   width: 180,
                                   height: 110,
                                 ),
@@ -496,8 +511,9 @@ class SplatoonDeux {
                                       mapChangeGrizz[position][1], true),
                               style: TextStyle(
                                   color: Colors.grey.shade200, fontSize: 14)),
-                          Image.network(
-                            "https://splatoon2.ink/assets/splatnet${salmon['stage']['image']}",
+                          CachedNetworkImage(
+                            imageUrl:
+                                "https://splatoon2.ink/assets/splatnet${salmon['stage']['image']}",
                             width: 360,
                             height: 210,
                           ),
@@ -531,14 +547,16 @@ class SplatoonDeux {
                                                 fontSize: 20)),
                                       Text("                          "),
                                       if (elements['id'] != '-1')
-                                        Image.network(
-                                          "https://splatoon2.ink/assets/splatnet${elements['weapon']['image']}",
+                                        CachedNetworkImage(
+                                          imageUrl:
+                                              "https://splatoon2.ink/assets/splatnet${elements['weapon']['image']}",
                                           width: 90,
                                           height: 90,
                                         ),
                                       if (elements['id'] == '-1')
-                                        Image.network(
-                                          "https://splatoon2.ink/assets/splatnet${elements['coop_special_weapon']['image']}",
+                                        CachedNetworkImage(
+                                          imageUrl:
+                                              "https://splatoon2.ink/assets/splatnet${elements['coop_special_weapon']['image']}",
                                           width: 90,
                                           height: 90,
                                         ),
@@ -636,8 +654,9 @@ class SplatoonDeux {
                                     mapChangeGrizz[position][1], true),
                             style: TextStyle(
                                 color: Colors.grey.shade200, fontSize: 14)),
-                        Image.network(
-                          "https://splatoon2.ink/assets/splatnet${salmon['stage']['image']}",
+                        CachedNetworkImage(
+                          imageUrl:
+                              "https://splatoon2.ink/assets/splatnet${salmon['stage']['image']}",
                           width: 360,
                           height: 210,
                         ),
@@ -678,20 +697,23 @@ class SplatoonDeux {
                                     Text("                          "),
                                     if (elements['id'] != '-1')
                                       if (elements['id'] == '-2')
-                                        Image.network(
-                                          "https://splatoon2.ink/assets/splatnet${elements['coop_special_weapon']['image']}",
+                                        CachedNetworkImage(
+                                          imageUrl:
+                                              "https://splatoon2.ink/assets/splatnet${elements['coop_special_weapon']['image']}",
                                           width: 90,
                                           height: 90,
                                         )
                                       else
-                                        Image.network(
-                                          "https://splatoon2.ink/assets/splatnet${elements['weapon']['image']}",
+                                        CachedNetworkImage(
+                                          imageUrl:
+                                              "https://splatoon2.ink/assets/splatnet${elements['weapon']['image']}",
                                           width: 90,
                                           height: 90,
                                         ),
                                     if (elements['id'] == '-1')
-                                      Image.network(
-                                        "https://splatoon2.ink/assets/splatnet${elements['coop_special_weapon']['image']}",
+                                      CachedNetworkImage(
+                                        imageUrl:
+                                            "https://splatoon2.ink/assets/splatnet${elements['coop_special_weapon']['image']}",
                                         width: 90,
                                         height: 90,
                                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class SchedulesTwo extends StatefulWidget {
   Color background;
@@ -17,7 +18,8 @@ class SchedulesTwo extends StatefulWidget {
       required this.type,
       required this.typeLink});
   @override
-  State<SchedulesTwo> createState() => SchedulesStateTwo(background, data, mapChange, picLink, type, typeLink);
+  State<SchedulesTwo> createState() =>
+      SchedulesStateTwo(background, data, mapChange, picLink, type, typeLink);
 }
 
 class SchedulesStateTwo extends State<SchedulesTwo> {
@@ -30,7 +32,8 @@ class SchedulesStateTwo extends State<SchedulesTwo> {
 
   int position = 0;
 
-  SchedulesStateTwo(this.background, this.data, this.mapChange, this.picLink, this.type, this.typeLink);
+  SchedulesStateTwo(this.background, this.data, this.mapChange, this.picLink,
+      this.type, this.typeLink);
 
   String timeConvertLoop(String value, bool loop) {
     int time = int.parse(value) % 12;
@@ -78,123 +81,142 @@ class SchedulesStateTwo extends State<SchedulesTwo> {
                     color: background,
                     elevation: 10,
                     child: Container(
-                        child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                      Text("         "),
-                      if (position == 0)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Image(
-                              image: AssetImage(picLink),
-                              width: 50,
-                              height: 50,
-                            ),
-                            Text(
-                              "Actual",
-                              style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
-                            ),
-                            Image(
-                              image: AssetImage(picLink),
-                              width: 50,
-                              height: 50,
-                            ),
-                          ],
-                        ),
-                      if (position == 1)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Image(
-                              image: AssetImage(picLink),
-                              width: 50,
-                              height: 50,
-                            ),
-                            Text(
-                              "Next",
-                              style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
-                            ),
-                            Image(
-                              image: AssetImage(picLink),
-                              width: 50,
-                              height: 50,
-                            ),
-                          ],
-                        ),
-                      if (position == 2)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Image(
-                              image: AssetImage(picLink),
-                              width: 50,
-                              height: 50,
-                            ),
-                            Text(
-                              "Future",
-                              style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
-                            ),
-                            Image(
-                              image: AssetImage(picLink),
-                              width: 50,
-                              height: 50,
-                            ),
-                          ],
-                        ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/logo/S2/${battle['rule']['key']}.png',
-                            width: 50,
-                            height: 50,
-                          ),
-                          Text(
-                            "(${battle['rule']['name'].toString()})",
-                            style: TextStyle(color: Colors.grey.shade800, fontSize: 20),
-                          ),
-                          Image.asset(
-                            'assets/logo/S2/${battle['rule']['key']}.png',
-                            width: 50,
-                            height: 50,
-                          ),
-                        ],
-                      ),
-                      Text(timeConvertLoop(mapChange[position][0].substring(11, 13), false) +
-                          " to " +
-                          timeConvertLoop(mapChange[position][1].substring(11, 13), true)),
-                      Text("Actual rotation:"),
-                      Card(
-                        elevation: 10,
-                        color: Colors.grey.shade800,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Column(
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                          Text("         "),
+                          if (position == 0)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Text(battle['stage_a']['name'],
-                                    style: TextStyle(color: Colors.grey.shade200, fontSize: 15)),
-                                Image.network(
-                                  "https://splatoon2.ink/assets/splatnet/${battle['stage_a']['image']}",
-                                  width: 180,
-                                  height: 110,
+                                Image(
+                                  image: AssetImage(picLink),
+                                  width: 50,
+                                  height: 50,
+                                ),
+                                Text(
+                                  "Actual",
+                                  style: TextStyle(
+                                      color: Colors.grey.shade200,
+                                      fontSize: 30),
+                                ),
+                                Image(
+                                  image: AssetImage(picLink),
+                                  width: 50,
+                                  height: 50,
                                 ),
                               ],
                             ),
-                            Column(
+                          if (position == 1)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Text(battle['stage_b']['name'],
-                                    style: TextStyle(color: Colors.grey.shade200, fontSize: 15)),
-                                Image.network(
-                                  "https://splatoon2.ink/assets/splatnet/${battle['stage_b']['image']}",
-                                  width: 180,
-                                  height: 110,
+                                Image(
+                                  image: AssetImage(picLink),
+                                  width: 50,
+                                  height: 50,
+                                ),
+                                Text(
+                                  "Next",
+                                  style: TextStyle(
+                                      color: Colors.grey.shade200,
+                                      fontSize: 30),
+                                ),
+                                Image(
+                                  image: AssetImage(picLink),
+                                  width: 50,
+                                  height: 50,
                                 ),
                               ],
-                            )
-                          ],
-                        ),
-                      )
-                    ]))),
+                            ),
+                          if (position == 2)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image(
+                                  image: AssetImage(picLink),
+                                  width: 50,
+                                  height: 50,
+                                ),
+                                Text(
+                                  "Future",
+                                  style: TextStyle(
+                                      color: Colors.grey.shade200,
+                                      fontSize: 30),
+                                ),
+                                Image(
+                                  image: AssetImage(picLink),
+                                  width: 50,
+                                  height: 50,
+                                ),
+                              ],
+                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/logo/S2/${battle['rule']['key']}.png',
+                                width: 50,
+                                height: 50,
+                              ),
+                              Text(
+                                "(${battle['rule']['name'].toString()})",
+                                style: TextStyle(
+                                    color: Colors.grey.shade800, fontSize: 20),
+                              ),
+                              Image.asset(
+                                'assets/logo/S2/${battle['rule']['key']}.png',
+                                width: 50,
+                                height: 50,
+                              ),
+                            ],
+                          ),
+                          Text(timeConvertLoop(
+                                  mapChange[position][0].substring(11, 13),
+                                  false) +
+                              " to " +
+                              timeConvertLoop(
+                                  mapChange[position][1].substring(11, 13),
+                                  true)),
+                          Text("Actual rotation:"),
+                          Card(
+                            elevation: 10,
+                            color: Colors.grey.shade800,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Column(
+                                  children: [
+                                    Text(battle['stage_a']['name'],
+                                        style: TextStyle(
+                                            color: Colors.grey.shade200,
+                                            fontSize: 15)),
+                                    CachedNetworkImage(
+                                      imageUrl:
+                                          "https://splatoon2.ink/assets/splatnet/${battle['stage_a']['image']}",
+                                      width: 180,
+                                      height: 110,
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Text(battle['stage_b']['name'],
+                                        style: TextStyle(
+                                            color: Colors.grey.shade200,
+                                            fontSize: 15)),
+                                    CachedNetworkImage(
+                                      imageUrl:
+                                          "https://splatoon2.ink/assets/splatnet/${battle['stage_b']['image']}",
+                                      width: 180,
+                                      height: 110,
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          )
+                        ]))),
               Text(
                 "Source: splatoon2.ink",
                 style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
