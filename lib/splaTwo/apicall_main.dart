@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'dart:ui';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:splat_news/splaTwo/schedules/schedules.dart';
 
@@ -19,47 +20,80 @@ class SplatoonDeux {
   int position = 0;
 
   Future<int> test() async {
-    String urlBattle = "https://splatoon2.ink/data/schedules.json";
-    String urlGrizz = "https://splatoon2.ink/data/coop-schedules.json";
-    //debugPrint(url);
-    try {
-      var responseBattle = await http.get(Uri.parse(urlBattle), headers: {
-        'Content-Type': 'application/json',
-        'Accept-Charset': 'utf-8',
-        'User-Agent': 'SplatNews/dev (nicolasdefalco.9@gmail.com)'
-      });
-      var responseGrizz = await http.get(Uri.parse(urlGrizz), headers: {
-        'Content-Type': 'application/json',
-        'Accept-Charset': 'utf-8',
-        'User-Agent': 'SplatNews/dev (nicolasdefalco.9@gmail.com)'
-      });
-      if (responseBattle.statusCode == 200 && responseGrizz.statusCode == 200) {
-        data = convert.jsonDecode(responseBattle.body);
-        grizz = convert.jsonDecode(responseGrizz.body);
+    final prefs = await SharedPreferences.getInstance();
+    final nextUpdate = prefs.getInt('nextUpdate') ?? 0;
+    final double actualTime = DateTime.now().millisecondsSinceEpoch / 1000;
+    if (actualTime > nextUpdate) {
+      const String urlBattle = "https://splatoon2.ink/data/schedules.json";
+      const String urlGrizz = "https://splatoon2.ink/data/coop-schedules.json";
+      try {
+        final responseBattle = await http.get(Uri.parse(urlBattle), headers: {
+          'Content-Type': 'application/json',
+          'Accept-Charset': 'utf-8',
+          'User-Agent': 'SplatNews/dev (nicolasdefalco.9@gmail.com)'
+        });
+        final responseGrizz = await http.get(Uri.parse(urlGrizz), headers: {
+          'Content-Type': 'application/json',
+          'Accept-Charset': 'utf-8',
+          'User-Agent': 'SplatNews/dev (nicolasdefalco.9@gmail.com)'
+        });
+        if (responseBattle.statusCode == 200 &&
+            responseGrizz.statusCode == 200) {
+          data = convert.jsonDecode(responseBattle.body);
+          grizz = convert.jsonDecode(responseGrizz.body);
 
-        for (int x = 0; x < 2; x++) {
-          mapChangeGrizz[x][0] = DateTime.fromMillisecondsSinceEpoch(
-                  grizz['details'][x]['start_time'] * 1000)
-              .toString();
-          mapChangeGrizz[x][1] = DateTime.fromMillisecondsSinceEpoch(
-                  grizz['details'][x]['end_time'] * 1000)
-              .toString();
+          for (int x = 0; x < 2; x++) {
+            mapChangeGrizz[x][0] = DateTime.fromMillisecondsSinceEpoch(
+                    grizz['details'][x]['start_time'] * 1000)
+                .toString();
+            mapChangeGrizz[x][1] = DateTime.fromMillisecondsSinceEpoch(
+                    grizz['details'][x]['end_time'] * 1000)
+                .toString();
+          }
+
+          for (int x = 0; x < 12; x++) {
+            mapChange[x][0] = DateTime.fromMillisecondsSinceEpoch(
+                    data['regular'][x]['start_time'] * 1000)
+                .toString();
+            mapChange[x][1] = DateTime.fromMillisecondsSinceEpoch(
+                    data['regular'][x]['end_time'] * 1000)
+                .toString();
+          }
         }
 
-        for (int x = 0; x < 12; x++) {
-          mapChange[x][0] = DateTime.fromMillisecondsSinceEpoch(
-                  data['regular'][x]['start_time'] * 1000)
-              .toString();
-          mapChange[x][1] = DateTime.fromMillisecondsSinceEpoch(
-                  data['regular'][x]['end_time'] * 1000)
-              .toString();
-        }
+        await prefs.setInt('nextUpdate', data['regular'][0]['end_time']);
+        await prefs.setString('data', convert.jsonEncode(data));
+        await prefs.setString('grizz', convert.jsonEncode(grizz));
+        return responseGrizz.statusCode;
+      } catch (e) {
+        debugPrint(e.toString());
+        return 2000;
+      }
+    } else {
+      var dataReco = prefs.getString('data');
+      var grizzReco = prefs.getString('grizz');
+
+      data = convert.jsonDecode(dataReco.toString()) as Map<String, dynamic>;
+      grizz = convert.jsonDecode(grizzReco.toString()) as Map<String, dynamic>;
+
+      for (int x = 0; x < 2; x++) {
+        mapChangeGrizz[x][0] = DateTime.fromMillisecondsSinceEpoch(
+                grizz['details'][x]['start_time'] * 1000)
+            .toString();
+        mapChangeGrizz[x][1] = DateTime.fromMillisecondsSinceEpoch(
+                grizz['details'][x]['end_time'] * 1000)
+            .toString();
       }
 
-      return responseGrizz.statusCode;
-    } catch (e) {
-      debugPrint(e.toString());
-      return 2000;
+      for (int x = 0; x < 12; x++) {
+        mapChange[x][0] = DateTime.fromMillisecondsSinceEpoch(
+                data['regular'][x]['start_time'] * 1000)
+            .toString();
+        mapChange[x][1] = DateTime.fromMillisecondsSinceEpoch(
+                data['regular'][x]['end_time'] * 1000)
+            .toString();
+      }
+      return 200;
     }
   }
 
