@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class SchedulesGrizz extends StatefulWidget {
   Map<String, dynamic> content;
@@ -133,8 +134,9 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                               style: TextStyle(
                                   color: Colors.grey.shade200, fontSize: 14),
                             ),
-                            Image.network(
-                              salmon['setting']['coopStage']['image']['url'],
+                            CachedNetworkImage(
+                              imageUrl: salmon['setting']['coopStage']['image']
+                                  ['url'],
                               width: 360,
                               height: 210,
                             ),
@@ -162,8 +164,8 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                                                 color: Colors.grey.shade200,
                                                 fontSize: 20)),
                                         Text("                   "),
-                                        Image.network(
-                                          elements['image']['url'],
+                                        CachedNetworkImage(
+                                          imageUrl: elements['image']['url'],
                                           width: 90,
                                           height: 90,
                                         ),

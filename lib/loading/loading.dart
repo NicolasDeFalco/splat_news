@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 Container loading() {
   return Container(
@@ -42,8 +43,8 @@ Container error(int code) {
                   message,
                   style: const TextStyle(color: Colors.white, fontSize: 15),
                 ),
-                Image.network(
-                  'https://http.cat/$code.jpg',
+                CachedNetworkImage(
+                  imageUrl: 'https://http.cat/$code.jpg',
                   width: 380,
                   height: 490,
                 )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class SchedulesRank extends StatefulWidget {
   String type;
@@ -200,8 +201,8 @@ class SchedulesRankState extends State<SchedulesRank> {
                                               style: TextStyle(
                                                   color: Colors.grey.shade200,
                                                   fontSize: 15)),
-                                          Image.network(
-                                            elements['image']['url'],
+                                          CachedNetworkImage(
+                                            imageUrl: elements['image']['url'],
                                             width: 180,
                                             height: 110,
                                           ),

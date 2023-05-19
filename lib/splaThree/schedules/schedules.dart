@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class Schedules extends StatefulWidget {
   String type;
@@ -217,8 +218,8 @@ class SchedulesState extends State<Schedules> {
                                               style: TextStyle(
                                                   color: Colors.grey.shade200,
                                                   fontSize: 15)),
-                                          Image.network(
-                                            elements['image']['url'],
+                                          CachedNetworkImage(
+                                            imageUrl: elements['image']['url'],
                                             width: 180,
                                             height: 110,
                                           ),
@@ -397,8 +398,8 @@ class SchedulesState extends State<Schedules> {
                                               style: TextStyle(
                                                   color: Colors.grey.shade200,
                                                   fontSize: 15)),
-                                          Image.network(
-                                            elements['image']['url'],
+                                          CachedNetworkImage(
+                                            imageUrl: elements['image']['url'],
                                             width: 180,
                                             height: 110,
                                           ),

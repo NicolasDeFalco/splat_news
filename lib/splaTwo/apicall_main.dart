@@ -21,7 +21,7 @@ class SplatoonDeux {
 
   Future<int> test() async {
     final prefs = await SharedPreferences.getInstance();
-    final nextUpdate = prefs.getInt('nextUpdate') ?? 0;
+    final nextUpdate = prefs.getInt('nextUpdateS2') ?? 0;
     final double actualTime = DateTime.now().millisecondsSinceEpoch / 1000;
     if (actualTime > nextUpdate) {
       const String urlBattle = "https://splatoon2.ink/data/schedules.json";
@@ -61,17 +61,17 @@ class SplatoonDeux {
           }
         }
 
-        await prefs.setInt('nextUpdate', data['regular'][0]['end_time']);
-        await prefs.setString('data', convert.jsonEncode(data));
-        await prefs.setString('grizz', convert.jsonEncode(grizz));
+        await prefs.setInt('nextUpdateS2', data['regular'][0]['end_time']);
+        await prefs.setString('dataS2', convert.jsonEncode(data));
+        await prefs.setString('grizzS2', convert.jsonEncode(grizz));
         return responseGrizz.statusCode;
       } catch (e) {
         debugPrint(e.toString());
         return 2000;
       }
     } else {
-      var dataReco = prefs.getString('data');
-      var grizzReco = prefs.getString('grizz');
+      var dataReco = prefs.getString('dataS2');
+      var grizzReco = prefs.getString('grizzS2');
 
       data = convert.jsonDecode(dataReco.toString()) as Map<String, dynamic>;
       grizz = convert.jsonDecode(grizzReco.toString()) as Map<String, dynamic>;

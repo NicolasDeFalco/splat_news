@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:splat_news/splaThree/schedules/schedule_grizz.dart';
 import 'package:splat_news/splaThree/schedules/schedule_rank.dart';
 import 'package:splat_news/splaThree/schedules/schedules.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplatoonTrois {
   // The data we receive from the API
@@ -54,108 +56,144 @@ class SplatoonTrois {
       List.generate(1, (i) => List.generate(2, (j) => ''));
 
   Future<int> test() async {
-    String url = "https://splatoon3.ink/data/schedules.json";
-    String urlFest = "https://splatoon3.ink/data/festivals.json";
+    final prefs = await SharedPreferences.getInstance();
+    final nextUpdate = prefs.getInt('nextUpdateS3') ?? 0;
+    final double actualTime = DateTime.now().millisecondsSinceEpoch / 1000;
+    if (actualTime > nextUpdate) {
+      String url = "https://splatoon3.ink/data/schedules.json";
+      String urlFest = "https://splatoon3.ink/data/festivals.json";
 
-    // We use a try in case there is no internet connectivity
-    try {
-      var response = await http.get(Uri.parse(url));
-      var responseFest = await http.get(Uri.parse(urlFest));
-      if (response.statusCode == 200) {
-        data = convert.jsonDecode(response.body);
-        dataFest = convert.jsonDecode(responseFest.body);
+      // We use a try in case there is no internet connectivity
+      try {
+        var response = await http.get(Uri.parse(url), headers: {
+          'Content-Type': 'application/json',
+          'Accept-Charset': 'utf-8',
+          'User-Agent': 'SplatNews/dev (nicolasdefalco.9@gmail.com)'
+        });
+        var responseFest = await http.get(Uri.parse(urlFest), headers: {
+          'Content-Type': 'application/json',
+          'Accept-Charset': 'utf-8',
+          'User-Agent': 'SplatNews/dev (nicolasdefalco.9@gmail.com)'
+        });
+        if (response.statusCode == 200) {
+          data = convert.jsonDecode(response.body);
+          dataFest = convert.jsonDecode(responseFest.body);
+          dataSet();
+          await prefs.setInt(
+              'nextUpdateS3',
+              DateTime.parse(
+                      data['data']['festSchedules']['nodes'][0]['endTime'])
+                  .millisecondsSinceEpoch);
+          await prefs.setString('dataS3', convert.jsonEncode(data));
+          await prefs.setString('dataFestS3', convert.jsonEncode(dataFest));
+          return response.statusCode;
+        }
+      } catch (e) {
+        debugPrint(e.toString());
+        return 2000;
       }
-      // Check if there is no splatfest
-      if (data['data']['currentFest'] == null ||
-          data['data']['currentFest']['state'] == 'SCHEDULED') {
-        //No splatfest
-        for (int x = 0; x < 12; x++) {
+    } else {
+      var dataReco = prefs.getString('dataS3');
+      var festReco = prefs.getString('dataFestS3');
+
+      data = convert.jsonDecode(dataReco.toString()) as Map<String, dynamic>;
+      dataFest =
+          convert.jsonDecode(festReco.toString()) as Map<String, dynamic>;
+
+      dataSet();
+    }
+    return 200;
+  }
+
+  void dataSet() {
+    // Check if there is no splatfest
+    if (data['data']['currentFest'] == null ||
+        data['data']['currentFest']['state'] == 'SCHEDULED') {
+      //No splatfest
+      for (int x = 0; x < 12; x++) {
+        mapChange[x][0] = DateTime.parse(
+                data['data']['regularSchedules']['nodes'][x]['startTime'])
+            .toLocal()
+            .toString();
+        mapChange[x][1] = DateTime.parse(
+                data['data']['regularSchedules']['nodes'][x]['endTime'])
+            .toLocal()
+            .toString();
+      }
+
+      // FIXME: This part need optimizations. We should only use the 'mult'.
+      turf =
+          data['data']['regularSchedules']['nodes'][0]['regularMatchSetting'];
+      turfMult = data['data']['regularSchedules'];
+      series = data['data']['bankaraSchedules']['nodes'][0]
+          ['bankaraMatchSettings'][0];
+      open = data['data']['bankaraSchedules']['nodes'][0]
+          ['bankaraMatchSettings'][1];
+      rankMult = data['data']['bankaraSchedules'];
+      xrank = data['data']['xSchedules']['nodes'][0]['xMatchSetting'];
+      xrankMult = data['data']['xSchedules'];
+
+      // Is true when a fest is scheduled
+      if (data['data']['currentFest'] != null) {
+        if (data['data']['currentFest']['state'] == 'SCHEDULED') {
+          festScheduled = true;
+        }
+      }
+    } else {
+      //There is a splatfest
+      festCheck = true;
+      for (int x = 0; x < 12; x++) {
+        if (data['data']['festSchedules']['nodes'][x]['festMatchSetting'] !=
+            null) {
           mapChange[x][0] = DateTime.parse(
-                  data['data']['regularSchedules']['nodes'][x]['startTime'])
+                  data['data']['festSchedules']['nodes'][x]['startTime'])
               .toLocal()
               .toString();
           mapChange[x][1] = DateTime.parse(
-                  data['data']['regularSchedules']['nodes'][x]['endTime'])
+                  data['data']['festSchedules']['nodes'][x]['endTime'])
               .toLocal()
               .toString();
         }
-
-        // FIXME: This part need optimizations. We should only use the 'mult'.
-        turf =
-            data['data']['regularSchedules']['nodes'][0]['regularMatchSetting'];
-        turfMult = data['data']['regularSchedules'];
-        series = data['data']['bankaraSchedules']['nodes'][0]
-            ['bankaraMatchSettings'][0];
-        open = data['data']['bankaraSchedules']['nodes'][0]
-            ['bankaraMatchSettings'][1];
-        rankMult = data['data']['bankaraSchedules'];
-        xrank = data['data']['xSchedules']['nodes'][0]['xMatchSetting'];
-        xrankMult = data['data']['xSchedules'];
-
-        // Is true when a fest is scheduled
-        if (data['data']['currentFest'] != null) {
-          if (data['data']['currentFest']['state'] == 'SCHEDULED') {
-            festScheduled = true;
-          }
-        }
-      } else {
-        //There is a splatfest
-        festCheck = true;
-        for (int x = 0; x < 12; x++) {
-          if (data['data']['festSchedules']['nodes'][x]['festMatchSetting'] !=
-              null) {
-            mapChange[x][0] = DateTime.parse(
-                    data['data']['festSchedules']['nodes'][x]['startTime'])
-                .toLocal()
-                .toString();
-            mapChange[x][1] = DateTime.parse(
-                    data['data']['festSchedules']['nodes'][x]['endTime'])
-                .toLocal()
-                .toString();
-          }
-        }
-
-        fest = data['data']['festSchedules']['nodes'][0]['festMatchSetting'];
-        festMult = data['data']['festSchedules'];
-      }
-      grizz =
-          data['data']['coopGroupingSchedule']['regularSchedules']['nodes'][0];
-      grizzMult = data['data']['coopGroupingSchedule']['regularSchedules'];
-      int x = 0;
-      for (var changes in data['data']['coopGroupingSchedule']
-          ['regularSchedules']['nodes']) {
-        grizzChange[x][0] =
-            DateTime.parse(changes['startTime']).toLocal().toString();
-        grizzChange[x][1] =
-            DateTime.parse(changes['endTime']).toLocal().toString();
-        x++;
-      }
-      // We'll check if a Eggstra work event is in progress
-      if (data['data']['coopGroupingSchedule']['teamContestSchedules']['nodes']
-              .toString() !=
-          '[]') {
-        grizzEggstra = data['data']['coopGroupingSchedule']
-            ['teamContestSchedules']['nodes'][0];
-        eggstraCheck = true;
-        grizzEggstraChange[0][0] = DateTime.parse(data['data']
-                    ['coopGroupingSchedule']['teamContestSchedules']['nodes'][0]
-                ['startTime'])
-            .toLocal()
-            .toString();
-        grizzEggstraChange[0][1] = DateTime.parse(data['data']
-                    ['coopGroupingSchedule']['teamContestSchedules']['nodes'][0]
-                ['endTime'])
-            .toLocal()
-            .toString();
       }
 
-      return response.statusCode;
-    } catch (e) {
-      debugPrint(e.toString());
-      return 2000;
+      fest = data['data']['festSchedules']['nodes'][0]['festMatchSetting'];
+      festMult = data['data']['festSchedules'];
     }
+    grizz =
+        data['data']['coopGroupingSchedule']['regularSchedules']['nodes'][0];
+    grizzMult = data['data']['coopGroupingSchedule']['regularSchedules'];
+    int x = 0;
+    for (var changes in data['data']['coopGroupingSchedule']['regularSchedules']
+        ['nodes']) {
+      grizzChange[x][0] =
+          DateTime.parse(changes['startTime']).toLocal().toString();
+      grizzChange[x][1] =
+          DateTime.parse(changes['endTime']).toLocal().toString();
+      x++;
+    }
+    // We'll check if a Eggstra work event is in progress
+    if (data['data']['coopGroupingSchedule']['teamContestSchedules']['nodes']
+            .toString() !=
+        '[]') {
+      grizzEggstra = data['data']['coopGroupingSchedule']
+          ['teamContestSchedules']['nodes'][0];
+      eggstraCheck = true;
+      grizzEggstraChange[0][0] = DateTime.parse(data['data']
+                  ['coopGroupingSchedule']['teamContestSchedules']['nodes'][0]
+              ['startTime'])
+          .toLocal()
+          .toString();
+      grizzEggstraChange[0][1] = DateTime.parse(data['data']
+                  ['coopGroupingSchedule']['teamContestSchedules']['nodes'][0]
+              ['endTime'])
+          .toLocal()
+          .toString();
+    }
+    debugPrint(
+        DateTime.parse(data['data']['festSchedules']['nodes'][x]['endTime'])
+            .millisecondsSinceEpoch
+            .toString());
   }
-
   /*String colorResult(double valeur) {
     double colorCalc = valeur * 255;
     double color = 0;
@@ -201,8 +239,10 @@ class SplatoonTrois {
                             color: Colors.grey.shade200, fontSize: 25),
                       ),
                       Container(
-                        child: Image.network(dataFest['US']['data']
-                            ['festRecords']['nodes'][0]['image']['url']),
+                        child: CachedNetworkImage(
+                          imageUrl: dataFest['US']['data']['festRecords']
+                              ['nodes'][0]['image']['url'],
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -291,8 +331,8 @@ class SplatoonTrois {
                                         style: TextStyle(
                                             color: Colors.grey.shade200,
                                             fontSize: 15)),
-                                    Image.network(
-                                      elements['image']['url'],
+                                    CachedNetworkImage(
+                                      imageUrl: elements['image']['url'],
                                       width: 180,
                                       height: 110,
                                     ),
@@ -393,8 +433,8 @@ class SplatoonTrois {
                                         style: TextStyle(
                                             color: Colors.grey.shade200,
                                             fontSize: 15)),
-                                    Image.network(
-                                      elements['image']['url'],
+                                    CachedNetworkImage(
+                                      imageUrl: elements['image']['url'],
                                       width: 180,
                                       height: 110,
                                     ),
@@ -494,8 +534,8 @@ class SplatoonTrois {
                                         style: TextStyle(
                                             color: Colors.grey.shade200,
                                             fontSize: 15)),
-                                    Image.network(
-                                      elements['image']['url'],
+                                    CachedNetworkImage(
+                                      imageUrl: elements['image']['url'],
                                       width: 180,
                                       height: 110,
                                     ),
@@ -592,8 +632,8 @@ class SplatoonTrois {
                                         style: TextStyle(
                                             color: Colors.grey.shade200,
                                             fontSize: 15)),
-                                    Image.network(
-                                      elements['image']['url'],
+                                    CachedNetworkImage(
+                                      imageUrl: elements['image']['url'],
                                       width: 180,
                                       height: 110,
                                     ),
@@ -661,8 +701,10 @@ class SplatoonTrois {
                     style: TextStyle(color: Colors.grey.shade200, fontSize: 25),
                   ),
                   Container(
-                    child: Image.network(dataFest['US']['data']['festRecords']
-                        ['nodes'][0]['image']['url']),
+                    child: CachedNetworkImage(
+                      imageUrl: dataFest['US']['data']['festRecords']['nodes']
+                          [0]['image']['url'],
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -753,8 +795,8 @@ class SplatoonTrois {
                                       style: TextStyle(
                                           color: Colors.grey.shade200,
                                           fontSize: 15)),
-                                  Image.network(
-                                    elements['image']['url'],
+                                  CachedNetworkImage(
+                                    imageUrl: elements['image']['url'],
                                     width: 180,
                                     height: 110,
                                   ),
@@ -862,9 +904,9 @@ class SplatoonTrois {
                                       style: TextStyle(
                                           color: Colors.grey.shade200,
                                           fontSize: 25)),
-                                  Image.network(
-                                    data['data']['currentFest']['tricolorStage']
-                                        ['image']['url'],
+                                  CachedNetworkImage(
+                                    imageUrl: data['data']['currentFest']
+                                        ['tricolorStage']['image']['url'],
                                     width: 350,
                                     height: 230,
                                   ),
@@ -947,8 +989,9 @@ class SplatoonTrois {
                           style: TextStyle(
                               color: Colors.grey.shade200, fontSize: 14),
                         ),
-                        Image.network(
-                          grizzEggstra['setting']['coopStage']['image']['url'],
+                        CachedNetworkImage(
+                          imageUrl: grizzEggstra['setting']['coopStage']
+                              ['image']['url'],
                           width: 360,
                           height: 210,
                         ),
@@ -974,8 +1017,8 @@ class SplatoonTrois {
                                             color: Colors.grey.shade200,
                                             fontSize: 20)),
                                     Text("                   "),
-                                    Image.network(
-                                      elements['image']['url'],
+                                    CachedNetworkImage(
+                                      imageUrl: elements['image']['url'],
                                       width: 90,
                                       height: 90,
                                     ),
@@ -1031,8 +1074,8 @@ class SplatoonTrois {
                         style: TextStyle(
                             color: Colors.grey.shade200, fontSize: 14),
                       ),
-                      Image.network(
-                        grizz['setting']['coopStage']['image']['url'],
+                      CachedNetworkImage(
+                        imageUrl: grizz['setting']['coopStage']['image']['url'],
                         width: 360,
                         height: 210,
                       ),
@@ -1057,8 +1100,8 @@ class SplatoonTrois {
                                           color: Colors.grey.shade200,
                                           fontSize: 20)),
                                   Text("                   "),
-                                  Image.network(
-                                    elements['image']['url'],
+                                  CachedNetworkImage(
+                                    imageUrl: elements['image']['url'],
                                     width: 90,
                                     height: 90,
                                   ),
