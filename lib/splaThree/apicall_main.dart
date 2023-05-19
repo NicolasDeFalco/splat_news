@@ -58,7 +58,7 @@ class SplatoonTrois {
   Future<int> test() async {
     final prefs = await SharedPreferences.getInstance();
     final nextUpdate = prefs.getInt('nextUpdateS3') ?? 0;
-    final double actualTime = DateTime.now().millisecondsSinceEpoch / 1000;
+    final actualTime = DateTime.now().millisecondsSinceEpoch;
     if (actualTime > nextUpdate) {
       String url = "https://splatoon3.ink/data/schedules.json";
       String urlFest = "https://splatoon3.ink/data/festivals.json";
