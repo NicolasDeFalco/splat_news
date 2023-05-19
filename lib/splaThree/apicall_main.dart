@@ -512,9 +512,6 @@ class SplatoonTrois {
                             ),
                           ],
                         ),
-                        Text("Actual rotation:",
-                            style: TextStyle(
-                                color: Colors.grey.shade800, fontSize: 16)),
                         Text(timeConvert(mapChange[0][0].substring(11, 13)) +
                             " to " +
                             timeConvert(mapChange[0][1].substring(11, 13))),
