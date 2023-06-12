@@ -24,11 +24,14 @@ class SplatoonTrois {
   // Dedicated to the X match
   Map<String, dynamic> xrank = new Map();
   Map<String, dynamic> xrankMult = new Map();
-  //Map<String, dynamic> nextXrank = new Map();
+
+  // Dedicated to Challenges
+  Map<String, dynamic> challenges = new Map();
 
   // Dedicated to Salmon Run
   Map<String, dynamic> grizz = new Map();
   Map<String, dynamic> grizzEggstra = new Map();
+  Map<String, dynamic> grizzBig = new Map();
   Map<String, dynamic> grizzMult = new Map();
 
   // Dedicated to the splatfest matches
@@ -42,8 +45,16 @@ class SplatoonTrois {
   // True if an eggstra work event is in progress
   bool eggstraCheck = false;
 
+  // True if a Big Run event is in progress
+  bool bigCheck = false;
+  bool bigSoon = false;
+  bool bigNow = false;
+
   // True if a fest is scheduled
   bool festScheduled = false;
+
+  // True if there is a challenge
+  bool challengeCheck = false;
 
   // Timestamp of each map
   List<List<String>> mapChange =
@@ -53,6 +64,9 @@ class SplatoonTrois {
       List.generate(5, (i) => List.generate(2, (j) => ''));
 
   List<List<String>> grizzEggstraChange =
+      List.generate(1, (i) => List.generate(2, (j) => ''));
+
+  List<List<String>> grizzBigChange =
       List.generate(1, (i) => List.generate(2, (j) => ''));
 
   Future<int> test() async {
@@ -184,15 +198,41 @@ class SplatoonTrois {
           .toLocal()
           .toString();
       grizzEggstraChange[0][1] = DateTime.parse(data['data']
-                  ['coopGroupingSchedule']['teamContestSchedules']['nodes'][0]
+                  ['coopGroupingSchedule']['BigRunSchedules']['nodes'][0]
               ['endTime'])
           .toLocal()
           .toString();
     }
-    debugPrint(
-        DateTime.parse(data['data']['festSchedules']['nodes'][x]['endTime'])
-            .millisecondsSinceEpoch
-            .toString());
+    if (data['data']['coopGroupingSchedule']['bigRunSchedules']['nodes']
+            .toString() !=
+        '[]') {
+      grizzBig =
+          data['data']['coopGroupingSchedule']['bigRunSchedules']['nodes'][0];
+      bigCheck = true;
+      grizzBigChange[0][0] = DateTime.parse(data['data']['coopGroupingSchedule']
+              ['bigRunSchedules']['nodes'][0]['startTime'])
+          .toLocal()
+          .toString();
+      grizzBigChange[0][1] = DateTime.parse(data['data']['coopGroupingSchedule']
+              ['bigRunSchedules']['nodes'][0]['endTime'])
+          .toLocal()
+          .toString();
+      if (DateTime.now().millisecondsSinceEpoch <
+          DateTime.parse(grizzBig['startTime']).millisecondsSinceEpoch) {
+        bigSoon = true;
+      }
+      if (DateTime.now().millisecondsSinceEpoch >
+              DateTime.parse(grizzBig['startTime']).millisecondsSinceEpoch &&
+          DateTime.now().millisecondsSinceEpoch <
+              DateTime.parse(grizzBig['endTime']).millisecondsSinceEpoch) {
+        bigNow = true;
+      }
+    }
+
+    if (data['data']['eventSchedules'] != null) {
+      challenges = data['data']['eventSchedules'];
+      challengeCheck = true;
+    }
   }
   /*String colorResult(double valeur) {
     double colorCalc = valeur * 255;
@@ -1027,6 +1067,102 @@ class SplatoonTrois {
                       ],
                     ),
                   )),
+            if (bigCheck)
+              Card(
+                  elevation: 10,
+                  color: Color.fromARGB(255, 165, 53, 128),
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "",
+                          style: TextStyle(fontSize: 5),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Image(
+                                image: AssetImage('assets/logo/S3/BigRun.png'),
+                                width: 50,
+                                height: 50),
+                            if (bigSoon)
+                              Text(
+                                "Big Run Inkoming!",
+                                style: TextStyle(
+                                    color: Colors.grey.shade200, fontSize: 35),
+                              )
+                            else
+                              Text(
+                                "Big Run!",
+                                style: TextStyle(
+                                    color: Colors.grey.shade200, fontSize: 35),
+                              ),
+                            Image(
+                                image: AssetImage('assets/logo/S3/BigRun.png'),
+                                width: 50,
+                                height: 50)
+                          ],
+                        ),
+                        Text(
+                          "Big Run map:",
+                          style: TextStyle(
+                              color: Colors.grey.shade200, fontSize: 25),
+                        ),
+                        Text(
+                          grizzBig['setting']['coopStage']['name'],
+                          style: TextStyle(
+                              color: Colors.grey.shade200, fontSize: 22),
+                        ),
+                        Text(
+                          'From ' +
+                              dateFormat(grizzBigChange[0][0]) +
+                              ' to ' +
+                              dateFormat(grizzBigChange[0][1]),
+                          style: TextStyle(
+                              color: Colors.grey.shade200, fontSize: 14),
+                        ),
+                        CachedNetworkImage(
+                          imageUrl: grizzBig['setting']['coopStage']['image']
+                              ['url'],
+                          width: 360,
+                          height: 210,
+                        ),
+                        Card(
+                          elevation: 10,
+                          color: Colors.grey.shade800,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                "Supplied weapons:",
+                                style: TextStyle(
+                                    color: Colors.grey.shade400, fontSize: 20),
+                              ),
+                              for (var elements in grizzBig['setting']
+                                  ['weapons'])
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(" ${elements['name']}",
+                                        style: TextStyle(
+                                            color: Colors.grey.shade200,
+                                            fontSize: 20)),
+                                    Text("                   "),
+                                    CachedNetworkImage(
+                                      imageUrl: elements['image']['url'],
+                                      width: 90,
+                                      height: 90,
+                                    ),
+                                  ],
+                                )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  )),
             Card(
                 elevation: 10,
                 color: Color.fromARGB(255, 225, 65, 10),
@@ -1053,11 +1189,18 @@ class SplatoonTrois {
                               height: 50)
                         ],
                       ),
-                      Text(
-                        "Actual map:",
-                        style: TextStyle(
-                            color: Colors.grey.shade200, fontSize: 25),
-                      ),
+                      if (bigNow)
+                        Text(
+                          "Coming soon:",
+                          style: TextStyle(
+                              color: Colors.grey.shade200, fontSize: 25),
+                        )
+                      else
+                        Text(
+                          "Actual map:",
+                          style: TextStyle(
+                              color: Colors.grey.shade200, fontSize: 25),
+                        ),
                       Text(
                         grizz['setting']['coopStage']['name'],
                         style: TextStyle(
@@ -1115,6 +1258,7 @@ class SplatoonTrois {
                                   builder: (context) => SchedulesGrizz(
                                         content: grizzMult,
                                         change: grizzChange,
+                                        bigrun: bigNow,
                                       )));
                         },
                         child: Card(
@@ -1135,6 +1279,211 @@ class SplatoonTrois {
         ),
       ),
     );
+  }
+
+  Container challengesRoll(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(
+          color: Colors.grey.shade800,
+        ),
+        child: SingleChildScrollView(
+            child: Column(children: [
+          Image.asset(
+            'assets/logo/S3.png',
+            width: 280,
+            height: 150,
+          ),
+          for (var elements in challenges['nodes'])
+            Card(
+              elevation: 10,
+              color: Color.fromARGB(255, 221, 41, 118),
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text("         "),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Image(
+                            image: AssetImage('assets/logo/S3/Challenge.png'),
+                            width: 60,
+                            height: 60),
+                        Text(
+                          "Challenge",
+                          style: TextStyle(
+                              color: Colors.grey.shade200, fontSize: 30),
+                        ),
+                        Image(
+                            image: AssetImage('assets/logo/S3/Challenge.png'),
+                            width: 60,
+                            height: 60)
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/logo/S3/${elements['leagueMatchSetting']['vsRule']['rule']}.png',
+                          width: 50,
+                          height: 50,
+                        ),
+                        Text(
+                          "(${elements['leagueMatchSetting']['vsRule']['name'].toString()})",
+                          style: TextStyle(
+                              color: Colors.grey.shade800, fontSize: 20),
+                        ),
+                        Image.asset(
+                          'assets/logo/S3/${elements['leagueMatchSetting']['vsRule']['rule']}.png',
+                          width: 50,
+                          height: 50,
+                        ),
+                      ],
+                    ),
+                    Card(
+                      elevation: 10,
+                      color: Colors.grey.shade800,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                elements['leagueMatchSetting']
+                                    ['leagueMatchEvent']['name'],
+                                style: TextStyle(
+                                    color: Colors.grey.shade200, fontSize: 22),
+                              ),
+                              Text(
+                                elements['leagueMatchSetting']
+                                    ['leagueMatchEvent']['desc'],
+                                style: TextStyle(
+                                    color: Colors.grey.shade200, fontSize: 20),
+                              ),
+                              ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Colors.grey.shade700),
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                              backgroundColor:
+                                                  Colors.grey.shade800,
+                                              title: Text(
+                                                elements['leagueMatchSetting']
+                                                        ['leagueMatchEvent']
+                                                    ['name'],
+                                                style: TextStyle(
+                                                    color: Colors.grey.shade200,
+                                                    fontSize: 25),
+                                              ),
+                                              content: Text(
+                                                elements['leagueMatchSetting']
+                                                            ['leagueMatchEvent']
+                                                        ['regulation']
+                                                    .replaceAll(
+                                                        RegExp(
+                                                            '<br />ã|<br />'),
+                                                        '\n')
+                                                    .replaceAll(
+                                                        RegExp('»'), '-'),
+                                                style: TextStyle(
+                                                    color: Colors.grey.shade200,
+                                                    fontSize: 15),
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(context),
+                                                    child: Text("Ok",
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .grey.shade400,
+                                                            fontSize: 15)))
+                                              ],
+                                            ));
+                                  },
+                                  child: Text(
+                                    "     Challenge Rules     ",
+                                    style: TextStyle(
+                                        color: Colors.grey.shade200,
+                                        fontSize: 20),
+                                  )),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    Text(
+                      "Schedules:",
+                      style:
+                          TextStyle(color: Colors.grey.shade200, fontSize: 25),
+                    ),
+                    Card(
+                      elevation: 10,
+                      color: Colors.grey.shade800,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            children: [
+                              for (var date in elements['timePeriods'])
+                                Text(
+                                    dateFormat(DateTime.parse(date['startTime'])
+                                            .toLocal()
+                                            .toString()) +
+                                        " to " +
+                                        dateFormat(
+                                            DateTime.parse(date['endTime'])
+                                                .toLocal()
+                                                .toString()),
+                                    style: TextStyle(
+                                        color: Colors.grey.shade200,
+                                        fontSize: 15)),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    Text(
+                      "Challenge's maps:",
+                      style:
+                          TextStyle(color: Colors.grey.shade200, fontSize: 25),
+                    ),
+                    Card(
+                      elevation: 10,
+                      color: Colors.grey.shade800,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          for (var map in elements['leagueMatchSetting']
+                              ['vsStages'])
+                            Column(
+                              children: [
+                                Text(map['name'],
+                                    style: TextStyle(
+                                        color: Colors.grey.shade200,
+                                        fontSize: 15)),
+                                CachedNetworkImage(
+                                  imageUrl: map['image']['url'],
+                                  width: 180,
+                                  height: 110,
+                                ),
+                              ],
+                            )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          Text(
+            "Source: splatoon3.ink",
+            style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
+          ),
+        ])));
   }
 
   String timeConvert(String value) {

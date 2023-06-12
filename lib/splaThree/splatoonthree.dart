@@ -54,6 +54,8 @@ class _SplatoonThreeState extends State<SplatoonThree> {
             if (code == 200) {
               if (pageCount == 1) {
                 page = test.actualRoll(context);
+              } else if (pageCount == 2) {
+                page = test.challengesRoll(context);
               } else {
                 page = test.grizzRoll(context);
               }
@@ -105,6 +107,30 @@ class _SplatoonThreeState extends State<SplatoonThree> {
                         onTap: () {
                           setState(() {
                             pageCount = 2;
+                          });
+                        },
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text("Challenges",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15))
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: SizedBox(
+                    height: 60,
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            pageCount = 0;
                           });
                         },
                         child: Column(

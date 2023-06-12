@@ -4,17 +4,24 @@ import 'package:cached_network_image/cached_network_image.dart';
 class SchedulesGrizz extends StatefulWidget {
   Map<String, dynamic> content;
   List<List<String>> change;
+  bool bigrun;
 
-  SchedulesGrizz({super.key, required this.content, required this.change});
-  State<SchedulesGrizz> createState() => SchedulesGrizzState(content, change);
+  SchedulesGrizz(
+      {super.key,
+      required this.content,
+      required this.change,
+      required this.bigrun});
+  State<SchedulesGrizz> createState() =>
+      SchedulesGrizzState(content, change, bigrun);
 }
 
 class SchedulesGrizzState extends State<SchedulesGrizz> {
   Map<String, dynamic> content;
   List<List<String>> change;
+  bool bigrun;
   int position = 0;
 
-  SchedulesGrizzState(this.content, this.change);
+  SchedulesGrizzState(this.content, this.change, this.bigrun);
 
   String dateFormat(String value, bool loop) {
     String date = value.substring(0, 10).replaceAll(RegExp('-'), '/');
@@ -85,12 +92,20 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                                           'assets/logo/SalmonRun.png'),
                                       width: 50,
                                       height: 50),
-                                  Text(
-                                    "Actual",
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 30),
-                                  ),
+                                  if (bigrun)
+                                    Text(
+                                      "Coming soon",
+                                      style: TextStyle(
+                                          color: Colors.grey.shade200,
+                                          fontSize: 30),
+                                    )
+                                  else
+                                    Text(
+                                      "Actual",
+                                      style: TextStyle(
+                                          color: Colors.grey.shade200,
+                                          fontSize: 30),
+                                    ),
                                   Image(
                                       image: AssetImage(
                                           'assets/logo/SalmonRun.png'),
