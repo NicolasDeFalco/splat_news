@@ -44,6 +44,7 @@ class SplatoonTrois {
 
   // True if an eggstra work event is in progress
   bool eggstraCheck = false;
+  bool eggstraSoon = false;
 
   // True if a Big Run event is in progress
   bool bigCheck = false;
@@ -198,10 +199,14 @@ class SplatoonTrois {
           .toLocal()
           .toString();
       grizzEggstraChange[0][1] = DateTime.parse(data['data']
-                  ['coopGroupingSchedule']['BigRunSchedules']['nodes'][0]
+                  ['coopGroupingSchedule']['teamContestSchedules']['nodes'][0]
               ['endTime'])
           .toLocal()
           .toString();
+      if (DateTime.now().millisecondsSinceEpoch <
+          DateTime.parse(grizzEggstra['startTime']).millisecondsSinceEpoch) {
+        eggstraSoon = true;
+      }
     }
     if (data['data']['coopGroupingSchedule']['bigRunSchedules']['nodes']
             .toString() !=
@@ -996,11 +1001,18 @@ class SplatoonTrois {
                                     AssetImage('assets/logo/EggstraWork.png'),
                                 width: 50,
                                 height: 50),
-                            Text(
-                              "Eggstra Work",
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 35),
-                            ),
+                            if (eggstraSoon)
+                              Text(
+                                "Eggstra Work Inkoming",
+                                style: TextStyle(
+                                    color: Colors.grey.shade200, fontSize: 30),
+                              )
+                            else
+                              Text(
+                                "Eggstra Work",
+                                style: TextStyle(
+                                    color: Colors.grey.shade200, fontSize: 35),
+                              ),
                             Image(
                                 image:
                                     AssetImage('assets/logo/EggstraWork.png'),
