@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class Schedules extends StatefulWidget {
-  String type;
-  Color background;
-  Map<String, dynamic> content;
-  String picLink;
-  List<List<String>> mapChange;
-  String typeCode;
-  bool fest;
-  Schedules(
+  final String type;
+  final Color background;
+  final Map<String, dynamic> content;
+  final String picLink;
+  final List<List<String>> mapChange;
+  final String typeCode;
+  final bool fest;
+
+  const Schedules(
       {super.key,
       required this.type,
       required this.background,

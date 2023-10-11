@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class SchedulesGrizz extends StatefulWidget {
-  Map<String, dynamic> content;
-  List<List<String>> change;
-  bool bigrun;
+  final Map<String, dynamic> content;
+  final List<List<String>> change;
+  final bool bigrun;
 
-  SchedulesGrizz(
+  const SchedulesGrizz(
       {super.key,
       required this.content,
       required this.change,

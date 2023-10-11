@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class SchedulesTwo extends StatefulWidget {
-  Color background;
-  Map<String, dynamic> data;
-  List<List<String>> mapChange;
-  String picLink;
-  String type;
-  String typeLink;
+  final Color background;
+  final Map<String, dynamic> data;
+  final List<List<String>> mapChange;
+  final String picLink;
+  final String type;
+  final String typeLink;
 
-  SchedulesTwo(
+  const SchedulesTwo(
       {super.key,
       required this.background,
       required this.data,

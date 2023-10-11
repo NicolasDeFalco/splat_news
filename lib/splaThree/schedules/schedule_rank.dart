@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class SchedulesRank extends StatefulWidget {
-  String type;
-  Map<String, dynamic> content;
-  List<List<String>> mapChange;
-  int rankType;
+  final String type;
+  final Map<String, dynamic> content;
+  final List<List<String>> mapChange;
+  final int rankType;
 
-  SchedulesRank(
+  const SchedulesRank(
       {super.key,
       required this.content,
       required this.mapChange,

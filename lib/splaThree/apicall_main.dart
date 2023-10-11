@@ -1368,7 +1368,8 @@ class SplatoonTrois {
                               ),
                               Text(
                                 elements['leagueMatchSetting']
-                                    ['leagueMatchEvent']['desc'],
+                                        ['leagueMatchEvent']['desc']
+                                    .replaceAll(RegExp('<br />ã|<br />'), '\n'),
                                 style: TextStyle(
                                     color: Colors.grey.shade200, fontSize: 20),
                               ),
