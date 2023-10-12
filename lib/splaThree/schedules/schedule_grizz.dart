@@ -46,7 +46,7 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
       position++;
     }
 
-    return time.toString() + ' ' + tz;
+    return '$time $tz';
   }
 
   @override
@@ -54,7 +54,7 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
     position = 0;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Splatoon 3 - Salmon Run"),
+        title: const Text("Splatoon 3 - Salmon Run"),
         backgroundColor: Colors.grey.shade900,
         /*flexibleSpace: Container(
             decoration: const BoxDecoration(
@@ -76,18 +76,18 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                 if (position <= 5)
                   Card(
                       elevation: 10,
-                      color: Color.fromARGB(255, 225, 65, 10),
+                      color: const Color.fromARGB(255, 225, 65, 10),
                       child: Container(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text('', style: TextStyle(fontSize: 5)),
+                            const Text('', style: TextStyle(fontSize: 5)),
                             if (position == 0)
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  Image(
+                                  const Image(
                                       image: AssetImage(
                                           'assets/logo/SalmonRun.png'),
                                       width: 50,
@@ -106,7 +106,7 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                                           color: Colors.grey.shade200,
                                           fontSize: 30),
                                     ),
-                                  Image(
+                                  const Image(
                                       image: AssetImage(
                                           'assets/logo/SalmonRun.png'),
                                       width: 50,
@@ -118,7 +118,7 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  Image(
+                                  const Image(
                                       image: AssetImage(
                                           'assets/logo/SalmonRun.png'),
                                       width: 50,
@@ -129,7 +129,7 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                                         color: Colors.grey.shade200,
                                         fontSize: 30),
                                   ),
-                                  Image(
+                                  const Image(
                                       image: AssetImage(
                                           'assets/logo/SalmonRun.png'),
                                       width: 50,
@@ -142,10 +142,7 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                                   color: Colors.grey.shade200, fontSize: 22),
                             ),
                             Text(
-                              'From ' +
-                                  dateFormat(change[position][0], false) +
-                                  ' to ' +
-                                  dateFormat(change[position][1], true),
+                              'From ${dateFormat(change[position][0], false)} to ${dateFormat(change[position][1], true)}',
                               style: TextStyle(
                                   color: Colors.grey.shade200, fontSize: 14),
                             ),
@@ -178,7 +175,7 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                                             style: TextStyle(
                                                 color: Colors.grey.shade200,
                                                 fontSize: 20)),
-                                        Text("                   "),
+                                        const Text("                   "),
                                         CachedNetworkImage(
                                           imageUrl: elements['image']['url'],
                                           width: 90,

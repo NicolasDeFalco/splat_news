@@ -43,7 +43,7 @@ class SchedulesRankState extends State<SchedulesRank> {
       position++;
     }
 
-    return time.toString() + ' ' + tz;
+    return '$time $tz';
   }
 
   @override
@@ -73,18 +73,18 @@ class SchedulesRankState extends State<SchedulesRank> {
                   if (position <= 11 && battle['festMatchSetting'] == null)
                     Card(
                         elevation: 10,
-                        color: Color.fromARGB(255, 224, 67, 18),
+                        color: const Color.fromARGB(255, 224, 67, 18),
                         child: Container(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text("         "),
+                              const Text("         "),
                               if (position == 0)
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Image(
+                                    const Image(
                                       image:
                                           AssetImage('assets/logo/Ranked.png'),
                                       width: 50,
@@ -96,7 +96,7 @@ class SchedulesRankState extends State<SchedulesRank> {
                                           color: Colors.grey.shade200,
                                           fontSize: 30),
                                     ),
-                                    Image(
+                                    const Image(
                                       image:
                                           AssetImage('assets/logo/Ranked.png'),
                                       width: 50,
@@ -109,7 +109,7 @@ class SchedulesRankState extends State<SchedulesRank> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Image(
+                                    const Image(
                                       image:
                                           AssetImage('assets/logo/Ranked.png'),
                                       width: 50,
@@ -121,7 +121,7 @@ class SchedulesRankState extends State<SchedulesRank> {
                                           color: Colors.grey.shade200,
                                           fontSize: 30),
                                     ),
-                                    Image(
+                                    const Image(
                                       image:
                                           AssetImage('assets/logo/Ranked.png'),
                                       width: 50,
@@ -134,7 +134,7 @@ class SchedulesRankState extends State<SchedulesRank> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Image(
+                                    const Image(
                                       image:
                                           AssetImage('assets/logo/Ranked.png'),
                                       width: 50,
@@ -146,7 +146,7 @@ class SchedulesRankState extends State<SchedulesRank> {
                                           color: Colors.grey.shade200,
                                           fontSize: 30),
                                     ),
-                                    Image(
+                                    const Image(
                                         image: AssetImage(
                                             'assets/logo/Ranked.png'),
                                         width: 50,
@@ -174,13 +174,11 @@ class SchedulesRankState extends State<SchedulesRank> {
                                   ),
                                 ],
                               ),
-                              Text(timeConvertLoop(
+                              Text("${timeConvertLoop(
                                       mapChange[position][0].substring(11, 13),
-                                      false) +
-                                  " to " +
-                                  timeConvertLoop(
+                                      false)} to ${timeConvertLoop(
                                       mapChange[position][1].substring(11, 13),
-                                      true)),
+                                      true)}"),
                               Text("Map:",
                                   style: TextStyle(
                                       color: Colors.grey.shade800,

@@ -83,7 +83,7 @@ class _SplatoonTwoState extends State<SplatoonTwo> {
                             pageCount = 1;
                           });
                         },
-                        child: Column(
+                        child: const Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -107,7 +107,7 @@ class _SplatoonTwoState extends State<SplatoonTwo> {
                             pageCount = 2;
                           });
                         },
-                        child: Column(
+                        child: const Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[

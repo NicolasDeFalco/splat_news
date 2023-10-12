@@ -59,7 +59,7 @@ class MyHomePageState extends State<HomePage> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
@@ -75,9 +75,9 @@ class MyHomePageState extends State<HomePage> {
                                         title: "Splat News",
                                       )));
                         }),
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const <Widget>[
+                          children: <Widget>[
                             Text("Splatoon 3"), // <-- Icon
                           ],
                         ),
@@ -106,9 +106,9 @@ class MyHomePageState extends State<HomePage> {
                                         title: 'Splat news',
                                       )));
                         }),
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const <Widget>[
+                          children: <Widget>[
                             Text("Splatoon 2"),
                           ],
                         ),

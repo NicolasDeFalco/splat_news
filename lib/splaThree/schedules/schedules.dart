@@ -57,7 +57,7 @@ class SchedulesState extends State<Schedules> {
       position++;
     }
 
-    return time.toString() + ' ' + tz;
+    return '$time $tz';
   }
 
   @override
@@ -87,7 +87,7 @@ class SchedulesState extends State<Schedules> {
             child: Column(
               children: [
                 for (var battle in content['nodes'])
-                  if (position <= 11 && battle['festMatchSetting'] == null)
+                  if (position <= 11 && battle['festMatchSettings'] == null)
                     Card(
                         elevation: 10,
                         color: background,
@@ -95,7 +95,7 @@ class SchedulesState extends State<Schedules> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text(""),
+                              const Text(""),
                               if (position == 0)
                                 Row(
                                   mainAxisAlignment:
@@ -189,14 +189,12 @@ class SchedulesState extends State<Schedules> {
                             color: Colors.grey.shade800, fontSize: 20),
                       ),*/
 
-                              Text(timeConvertLoop(
+                              Text("${timeConvertLoop(
                                     mapChange[position][0].substring(11, 13),
                                     false,
-                                  ) +
-                                  " to " +
-                                  timeConvertLoop(
+                                  )} to ${timeConvertLoop(
                                       mapChange[position][1].substring(11, 13),
-                                      true)),
+                                      true)}"),
                               Text("Map:",
                                   style: TextStyle(
                                       color: Colors.grey.shade800,
@@ -262,7 +260,7 @@ class SchedulesState extends State<Schedules> {
             child: Column(
               children: [
                 for (var battle in content['nodes'])
-                  if (battle['festMatchSetting'] != null)
+                  if (battle['festMatchSettings'] != null)
                     Card(
                         elevation: 10,
                         color: background,
@@ -270,7 +268,7 @@ class SchedulesState extends State<Schedules> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text('', style: TextStyle(fontSize: 5)),
+                              const Text('', style: TextStyle(fontSize: 5)),
                               if (position == 0)
                                 Row(
                                   mainAxisAlignment:
@@ -365,15 +363,13 @@ class SchedulesState extends State<Schedules> {
                       ),*/
 
                               Text(
-                                  timeConvertLoop(
+                                  "${timeConvertLoop(
                                           mapChange[position][0]
                                               .substring(11, 13),
-                                          false) +
-                                      " to " +
-                                      timeConvertLoop(
+                                          false)} to ${timeConvertLoop(
                                           mapChange[position][1]
                                               .substring(11, 13),
-                                          true),
+                                          true)}",
                                   style:
                                       TextStyle(color: Colors.grey.shade200)),
                               Text("Map:",

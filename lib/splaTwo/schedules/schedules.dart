@@ -51,7 +51,7 @@ class SchedulesStateTwo extends State<SchedulesTwo> {
       position++;
     }
 
-    return time.toString() + ' ' + tz;
+    return '$time $tz';
   }
 
   @override
@@ -84,7 +84,7 @@ class SchedulesStateTwo extends State<SchedulesTwo> {
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                          Text("         "),
+                          const Text("         "),
                           if (position == 0)
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -171,14 +171,12 @@ class SchedulesStateTwo extends State<SchedulesTwo> {
                               ),
                             ],
                           ),
-                          Text(timeConvertLoop(
+                          Text("${timeConvertLoop(
                                   mapChange[position][0].substring(11, 13),
-                                  false) +
-                              " to " +
-                              timeConvertLoop(
+                                  false)} to ${timeConvertLoop(
                                   mapChange[position][1].substring(11, 13),
-                                  true)),
-                          Text("Actual rotation:"),
+                                  true)}"),
+                          const Text("Actual rotation:"),
                           Card(
                             elevation: 10,
                             color: Colors.grey.shade800,

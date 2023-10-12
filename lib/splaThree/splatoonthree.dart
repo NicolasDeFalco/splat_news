@@ -85,7 +85,7 @@ class _SplatoonThreeState extends State<SplatoonThree> {
                             pageCount = 1;
                           });
                         },
-                        child: Column(
+                        child: const Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -109,7 +109,7 @@ class _SplatoonThreeState extends State<SplatoonThree> {
                             pageCount = 2;
                           });
                         },
-                        child: Column(
+                        child: const Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -133,7 +133,7 @@ class _SplatoonThreeState extends State<SplatoonThree> {
                             pageCount = 0;
                           });
                         },
-                        child: Column(
+                        child: const Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[

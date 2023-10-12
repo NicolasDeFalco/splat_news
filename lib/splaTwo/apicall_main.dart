@@ -2,7 +2,6 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'dart:ui';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:splat_news/splaTwo/schedules/schedules.dart';
@@ -111,16 +110,16 @@ class SplatoonDeux {
             ),
             Card(
                 elevation: 10,
-                color: Color.fromARGB(255, 14, 197, 24),
+                color: const Color.fromARGB(255, 14, 197, 24),
                 child: Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text("         "),
+                      const Text("         "),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Image(
+                          const Image(
                             image: AssetImage('assets/logo/Regular.png'),
                             width: 50,
                             height: 50,
@@ -130,7 +129,7 @@ class SplatoonDeux {
                             style: TextStyle(
                                 color: Colors.grey.shade200, fontSize: 30),
                           ),
-                          Image(
+                          const Image(
                               image: AssetImage('assets/logo/Regular.png'),
                               width: 50,
                               height: 50)
@@ -156,10 +155,8 @@ class SplatoonDeux {
                           ),
                         ],
                       ),
-                      Text(timeConvert(mapChange[0][0].substring(11, 13)) +
-                          " to " +
-                          timeConvert(mapChange[0][1].substring(11, 13))),
-                      Text("Actual rotation:"),
+                      Text("${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
+                      const Text("Actual rotation:"),
                       Card(
                         elevation: 10,
                         color: Colors.grey.shade800,
@@ -204,7 +201,7 @@ class SplatoonDeux {
                               MaterialPageRoute(
                                   builder: (context) => SchedulesTwo(
                                         background:
-                                            Color.fromARGB(255, 23, 200, 26),
+                                            const Color.fromARGB(255, 23, 200, 26),
                                         data: data,
                                         mapChange: mapChange,
                                         type: 'Regular Battle',
@@ -224,16 +221,16 @@ class SplatoonDeux {
                 )),
             Card(
                 elevation: 10,
-                color: Color.fromARGB(255, 226, 69, 17),
+                color: const Color.fromARGB(255, 226, 69, 17),
                 child: Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text("         "),
+                      const Text("         "),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Image(
+                          const Image(
                             image: AssetImage('assets/logo/Ranked.png'),
                             width: 50,
                             height: 50,
@@ -243,7 +240,7 @@ class SplatoonDeux {
                             style: TextStyle(
                                 color: Colors.grey.shade200, fontSize: 30),
                           ),
-                          Image(
+                          const Image(
                             image: AssetImage('assets/logo/Ranked.png'),
                             width: 50,
                             height: 50,
@@ -270,10 +267,8 @@ class SplatoonDeux {
                           ),
                         ],
                       ),
-                      Text(timeConvert(mapChange[0][0].substring(11, 13)) +
-                          " to " +
-                          timeConvert(mapChange[0][1].substring(11, 13))),
-                      Text("Actual rotation:"),
+                      Text("${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
+                      const Text("Actual rotation:"),
                       Card(
                         elevation: 10,
                         color: Colors.grey.shade800,
@@ -318,7 +313,7 @@ class SplatoonDeux {
                               MaterialPageRoute(
                                   builder: (context) => SchedulesTwo(
                                         background:
-                                            Color.fromARGB(255, 226, 69, 17),
+                                            const Color.fromARGB(255, 226, 69, 17),
                                         data: data,
                                         mapChange: mapChange,
                                         type: 'Ranked Battle',
@@ -337,17 +332,17 @@ class SplatoonDeux {
                   ),
                 )),
             Card(
-                color: Color.fromARGB(255, 220, 43, 116),
+                color: const Color.fromARGB(255, 220, 43, 116),
                 elevation: 10,
                 child: Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text("         "),
+                      const Text("         "),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Image(
+                          const Image(
                             image: AssetImage('assets/logo/League.png'),
                             width: 50,
                             height: 50,
@@ -357,7 +352,7 @@ class SplatoonDeux {
                             style: TextStyle(
                                 color: Colors.grey.shade200, fontSize: 30),
                           ),
-                          Image(
+                          const Image(
                             image: AssetImage('assets/logo/League.png'),
                             width: 50,
                             height: 50,
@@ -384,10 +379,8 @@ class SplatoonDeux {
                           ),
                         ],
                       ),
-                      Text(timeConvert(mapChange[0][0].substring(11, 13)) +
-                          " to " +
-                          timeConvert(mapChange[0][1].substring(11, 13))),
-                      Text("Actual rotation:"),
+                      Text("${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
+                      const Text("Actual rotation:"),
                       Card(
                         elevation: 10,
                         color: Colors.grey.shade800,
@@ -432,7 +425,7 @@ class SplatoonDeux {
                               MaterialPageRoute(
                                   builder: (context) => SchedulesTwo(
                                         background:
-                                            Color.fromARGB(255, 220, 43, 116),
+                                            const Color.fromARGB(255, 220, 43, 116),
                                         data: data,
                                         mapChange: mapChange,
                                         type: 'League Battle',
@@ -480,17 +473,17 @@ class SplatoonDeux {
               for (var salmon in grizz['details'])
                 Card(
                     elevation: 10,
-                    color: Color.fromARGB(255, 232, 78, 3),
+                    color: const Color.fromARGB(255, 232, 78, 3),
                     child: Container(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text('', style: TextStyle(fontSize: 5)),
+                          const Text('', style: TextStyle(fontSize: 5)),
                           if (position == 0)
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Image(
+                                const Image(
                                     image:
                                         AssetImage('assets/logo/SalmonRun.png'),
                                     width: 50,
@@ -501,7 +494,7 @@ class SplatoonDeux {
                                       color: Colors.grey.shade200,
                                       fontSize: 35),
                                 ),
-                                Image(
+                                const Image(
                                     image:
                                         AssetImage('assets/logo/SalmonRun.png'),
                                     width: 50,
@@ -537,12 +530,9 @@ class SplatoonDeux {
                                 color: Colors.grey.shade200, fontSize: 20),
                           ),
                           Text(
-                              'From ' +
-                                  dateFormatLoop(
-                                      mapChangeGrizz[position][0], false) +
-                                  ' to ' +
-                                  dateFormatLoop(
-                                      mapChangeGrizz[position][1], true),
+                              'From ${dateFormatLoop(
+                                      mapChangeGrizz[position][0], false)} to ${dateFormatLoop(
+                                      mapChangeGrizz[position][1], true)}',
                               style: TextStyle(
                                   color: Colors.grey.shade200, fontSize: 14)),
                           CachedNetworkImage(
@@ -579,7 +569,7 @@ class SplatoonDeux {
                                             style: TextStyle(
                                                 color: Colors.grey.shade400,
                                                 fontSize: 20)),
-                                      Text("                          "),
+                                      const Text("                          "),
                                       if (elements['id'] != '-1')
                                         CachedNetworkImage(
                                           imageUrl:
@@ -627,17 +617,17 @@ class SplatoonDeux {
             for (var salmon in grizz['details'])
               Card(
                   elevation: 10,
-                  color: Color.fromARGB(255, 225, 65, 10),
+                  color: const Color.fromARGB(255, 225, 65, 10),
                   child: Container(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text('', style: TextStyle(fontSize: 5)),
+                        const Text('', style: TextStyle(fontSize: 5)),
                         if (position == 0)
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Image(
+                              const Image(
                                   image:
                                       AssetImage('assets/logo/SalmonRun.png'),
                                   width: 50,
@@ -647,7 +637,7 @@ class SplatoonDeux {
                                 style: TextStyle(
                                     color: Colors.grey.shade200, fontSize: 35),
                               ),
-                              Image(
+                              const Image(
                                   image:
                                       AssetImage('assets/logo/SalmonRun.png'),
                                   width: 50,
@@ -680,12 +670,9 @@ class SplatoonDeux {
                               color: Colors.grey.shade200, fontSize: 20),
                         ),
                         Text(
-                            'From ' +
-                                dateFormatLoop(
-                                    mapChangeGrizz[position][0], false) +
-                                ' to ' +
-                                dateFormatLoop(
-                                    mapChangeGrizz[position][1], true),
+                            'From ${dateFormatLoop(
+                                    mapChangeGrizz[position][0], false)} to ${dateFormatLoop(
+                                    mapChangeGrizz[position][1], true)}',
                             style: TextStyle(
                                 color: Colors.grey.shade200, fontSize: 14)),
                         CachedNetworkImage(
@@ -728,7 +715,7 @@ class SplatoonDeux {
                                           style: TextStyle(
                                               color: Colors.grey.shade400,
                                               fontSize: 20)),
-                                    Text("                          "),
+                                    const Text("                          "),
                                     if (elements['id'] != '-1')
                                       if (elements['id'] == '-2')
                                         CachedNetworkImage(
@@ -791,6 +778,6 @@ class SplatoonDeux {
       tz = 'PM';
     }
 
-    return time.toString() + ' ' + tz;
+    return '$time $tz';
   }
 }
