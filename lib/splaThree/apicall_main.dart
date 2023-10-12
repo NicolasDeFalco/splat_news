@@ -132,7 +132,6 @@ class SplatoonTrois {
             .toString();
       }
 
-      // FIXME: This part need optimizations. We should only use the 'mult'.
       turfMult = data['data']['regularSchedules'];
       rankMult = data['data']['bankaraSchedules'];
       xrankMult = data['data']['xSchedules'];
@@ -345,7 +344,8 @@ class SplatoonTrois {
                             color: Colors.grey.shade800, fontSize: 20),
                       ),*/
 
-                        Text("${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
+                        Text(
+                            "${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
                         Text("Actual rotation:",
                             style: TextStyle(
                                 color: Colors.grey.shade800, fontSize: 16)),
@@ -381,8 +381,8 @@ class SplatoonTrois {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => Schedules(
-                                          background:
-                                              const Color.fromARGB(255, 23, 200, 26),
+                                          background: const Color.fromARGB(
+                                              255, 23, 200, 26),
                                           content: turfMult,
                                           mapChange: mapChange,
                                           type: 'Regular Battle',
@@ -448,7 +448,8 @@ class SplatoonTrois {
                             ),
                           ],
                         ),
-                        Text("${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
+                        Text(
+                            "${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
                         Text("Actual rotation:",
                             style: TextStyle(
                                 color: Colors.grey.shade800, fontSize: 16)),
@@ -545,7 +546,8 @@ class SplatoonTrois {
                             ),
                           ],
                         ),
-                        Text("${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
+                        Text(
+                            "${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
                         Text("Actual rotation:",
                             style: TextStyle(
                                 color: Colors.grey.shade800, fontSize: 16)),
@@ -642,7 +644,8 @@ class SplatoonTrois {
                             ),
                           ],
                         ),
-                        Text("${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
+                        Text(
+                            "${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
                         Text("Actual rotation:",
                             style: TextStyle(
                                 color: Colors.grey.shade800, fontSize: 16)),
@@ -676,8 +679,8 @@ class SplatoonTrois {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => Schedules(
-                                          background:
-                                              const Color.fromARGB(255, 14, 199, 144),
+                                          background: const Color.fromARGB(
+                                              255, 14, 199, 144),
                                           content: xrankMult,
                                           mapChange: mapChange,
                                           type: 'X Battle',
@@ -1419,12 +1422,7 @@ class SplatoonTrois {
                             children: [
                               for (var date in elements['timePeriods'])
                                 Text(
-                                    "${dateFormat(DateTime.parse(date['startTime'])
-                                            .toLocal()
-                                            .toString())} to ${dateFormat(
-                                            DateTime.parse(date['endTime'])
-                                                .toLocal()
-                                                .toString())}",
+                                    "${dateFormat(DateTime.parse(date['startTime']).toLocal().toString())} to ${dateFormat(DateTime.parse(date['endTime']).toLocal().toString())}",
                                     style: TextStyle(
                                         color: Colors.grey.shade200,
                                         fontSize: 15)),
