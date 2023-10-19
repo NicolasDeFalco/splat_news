@@ -1,11 +1,12 @@
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:splat_news/splaThree/draw_functions/actual.dart';
+import 'package:splat_news/splaThree/draw_functions/actual_rank.dart';
 import 'package:splat_news/splaThree/schedules/schedule_grizz.dart';
-import 'package:splat_news/splaThree/schedules/schedule_rank.dart';
-import 'package:splat_news/splaThree/schedules/schedules.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:splat_news/splaThree/functions/functions.dart';
 
 class SplatoonTrois {
   // The data we receive from the API
@@ -239,7 +240,6 @@ class SplatoonTrois {
     return color.toString();
   }*/
 
-  //FIXME: This function is absudely huge, and it's surely possible to optimize it(720 line is huge).
   Container actualRoll(BuildContext context) {
     if (data['data']['currentFest'] == null ||
         data['data']['currentFest']['state'] == 'SCHEDULED') {
@@ -259,446 +259,25 @@ class SplatoonTrois {
                   "Splat fest inkoming!",
                   style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
                 ),
-              if (festScheduled)
-                Card(
-                  elevation: 10,
-                  color: Colors.black,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        dataFest['US']['data']['festRecords']['nodes'][0]
-                            ['title'],
-                        style: TextStyle(
-                            color: Colors.grey.shade200, fontSize: 25),
-                      ),
-                      Container(
-                        child: CachedNetworkImage(
-                          imageUrl: dataFest['US']['data']['festRecords']
-                              ['nodes'][0]['image']['url'],
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          for (var team in dataFest['US']['data']['festRecords']
-                              ['nodes'][0]['teams'])
-                            Text(team['teamName'],
-                                style: TextStyle(
-                                    color: Colors.grey.shade200, fontSize: 25))
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              Card(
-                  elevation: 10,
-                  color: const Color.fromARGB(255, 23, 200, 26),
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const Text("         "),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/logo/Regular.png'),
-                              width: 50,
-                              height: 50,
-                            ),
-                            Text(
-                              "Regular Battle",
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 30),
-                            ),
-                            const Image(
-                                image: AssetImage('assets/logo/Regular.png'),
-                                width: 50,
-                                height: 50)
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/logo/S3/${turfMult['nodes'][0]['regularMatchSetting']['vsRule']['rule']}.png',
-                              width: 50,
-                              height: 50,
-                            ),
-                            Text(
-                              "(${turfMult['nodes'][0]['regularMatchSetting']['vsRule']['name'].toString()})",
-                              style: TextStyle(
-                                  color: Colors.grey.shade800, fontSize: 20),
-                            ),
-                            Image.asset(
-                              'assets/logo/S3/${turfMult['nodes'][0]['regularMatchSetting']['vsRule']['rule']}.png',
-                              width: 50,
-                              height: 50,
-                            ),
-                          ],
-                        ),
-                        /*Text(
-                        "(${turf['vsRule']['name'].toString()})",
-                        style: TextStyle(
-                            color: Colors.grey.shade800, fontSize: 20),
-                      ),*/
-
-                        Text(
-                            "${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
-                        Text("Actual rotation:",
-                            style: TextStyle(
-                                color: Colors.grey.shade800, fontSize: 16)),
-                        Card(
-                          elevation: 10,
-                          color: Colors.grey.shade800,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              for (var elements in turfMult['nodes'][0]
-                                  ['regularMatchSetting']['vsStages'])
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(elements['name'],
-                                        style: TextStyle(
-                                            color: Colors.grey.shade200,
-                                            fontSize: 15)),
-                                    CachedNetworkImage(
-                                      imageUrl: elements['image']['url'],
-                                      width: 180,
-                                      height: 110,
-                                    ),
-                                  ],
-                                )
-                            ],
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Schedules(
-                                          background: const Color.fromARGB(
-                                              255, 23, 200, 26),
-                                          content: turfMult,
-                                          mapChange: mapChange,
-                                          type: 'Regular Battle',
-                                          picLink: 'assets/logo/Regular.png',
-                                          typeCode: 'regularMatchSetting',
-                                          fest: false,
-                                        )));
-                          },
-                          child: Card(
-                            color: Colors.grey.shade800,
-                            child: Text('  See what\'s next  ',
-                                style: TextStyle(
-                                    color: Colors.grey.shade200, fontSize: 20)),
-                          ),
-                        )
-                      ],
-                    ),
-                  )),
-              Card(
-                  elevation: 10,
-                  color: const Color.fromARGB(255, 224, 67, 18),
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const Text("         "),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/logo/Ranked.png'),
-                              width: 50,
-                              height: 50,
-                            ),
-                            Text(
-                              "Anarchy Battle Series",
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 30),
-                            ),
-                            const Image(
-                                image: AssetImage('assets/logo/Ranked.png'),
-                                width: 50,
-                                height: 50)
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/logo/S3/${rankMult['nodes'][0]['bankaraMatchSettings'][0]['vsRule']['rule']}.png',
-                              width: 50,
-                              height: 50,
-                            ),
-                            Text(
-                              "(${rankMult['nodes'][0]['bankaraMatchSettings'][0]['vsRule']['name'].toString()})",
-                              style: TextStyle(
-                                  color: Colors.grey.shade800, fontSize: 20),
-                            ),
-                            Image.asset(
-                              'assets/logo/S3/${rankMult['nodes'][0]['bankaraMatchSettings'][0]['vsRule']['rule']}.png',
-                              width: 50,
-                              height: 50,
-                            ),
-                          ],
-                        ),
-                        Text(
-                            "${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
-                        Text("Actual rotation:",
-                            style: TextStyle(
-                                color: Colors.grey.shade800, fontSize: 16)),
-                        Card(
-                          elevation: 10,
-                          color: Colors.grey.shade800,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              for (var elements in rankMult['nodes'][0]
-                                  ['bankaraMatchSettings'][0]['vsStages'])
-                                Column(
-                                  children: [
-                                    Text(elements['name'],
-                                        style: TextStyle(
-                                            color: Colors.grey.shade200,
-                                            fontSize: 15)),
-                                    CachedNetworkImage(
-                                      imageUrl: elements['image']['url'],
-                                      width: 180,
-                                      height: 110,
-                                    ),
-                                  ],
-                                )
-                            ],
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SchedulesRank(
-                                          content: rankMult,
-                                          mapChange: mapChange,
-                                          rankType: 0,
-                                          type: 'Anarchy Battle Series',
-                                        )));
-                          },
-                          child: Card(
-                            color: Colors.grey.shade800,
-                            child: Text('  See what\'s next  ',
-                                style: TextStyle(
-                                    color: Colors.grey.shade200, fontSize: 20)),
-                          ),
-                        )
-                      ],
-                    ),
-                  )),
-              Card(
-                  color: const Color.fromARGB(255, 224, 67, 18),
-                  elevation: 10,
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const Text("         "),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/logo/Ranked.png'),
-                              width: 50,
-                              height: 50,
-                            ),
-                            Text(
-                              "Anarchy Battle Open",
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 30),
-                            ),
-                            const Image(
-                                image: AssetImage('assets/logo/Ranked.png'),
-                                width: 50,
-                                height: 50)
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/logo/S3/${rankMult['nodes'][0]['bankaraMatchSettings'][1]['vsRule']['rule']}.png',
-                              width: 50,
-                              height: 50,
-                            ),
-                            Text(
-                              "(${rankMult['nodes'][0]['bankaraMatchSettings'][1]['vsRule']['name'].toString()})",
-                              style: TextStyle(
-                                  color: Colors.grey.shade800, fontSize: 20),
-                            ),
-                            Image.asset(
-                              'assets/logo/S3/${rankMult['nodes'][0]['bankaraMatchSettings'][1]['vsRule']['rule']}.png',
-                              width: 50,
-                              height: 50,
-                            ),
-                          ],
-                        ),
-                        Text(
-                            "${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
-                        Text("Actual rotation:",
-                            style: TextStyle(
-                                color: Colors.grey.shade800, fontSize: 16)),
-                        Card(
-                          elevation: 10,
-                          color: Colors.grey.shade800,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              for (var elements in rankMult['nodes'][0]
-                                  ['bankaraMatchSettings'][1]['vsStages'])
-                                Column(
-                                  children: [
-                                    Text(elements['name'],
-                                        style: TextStyle(
-                                            color: Colors.grey.shade200,
-                                            fontSize: 15)),
-                                    CachedNetworkImage(
-                                      imageUrl: elements['image']['url'],
-                                      width: 180,
-                                      height: 110,
-                                    ),
-                                  ],
-                                )
-                            ],
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SchedulesRank(
-                                          content: rankMult,
-                                          mapChange: mapChange,
-                                          rankType: 1,
-                                          type: 'Anarchy Battle Open',
-                                        )));
-                          },
-                          child: Card(
-                            color: Colors.grey.shade800,
-                            child: Text('  See what\'s next  ',
-                                style: TextStyle(
-                                    color: Colors.grey.shade200, fontSize: 20)),
-                          ),
-                        )
-                      ],
-                    ),
-                  )),
-              Card(
-                  elevation: 10,
-                  color: const Color.fromARGB(255, 14, 199, 144),
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        const Text("         "),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/logo/XBattle.png'),
-                              width: 50,
-                              height: 50,
-                            ),
-                            Text(
-                              "X Battle",
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 30),
-                            ),
-                            const Image(
-                                image: AssetImage('assets/logo/XBattle.png'),
-                                width: 50,
-                                height: 50)
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/logo/S3/${xrankMult['nodes'][0]['xMatchSetting']['vsRule']['rule']}.png',
-                              width: 50,
-                              height: 50,
-                            ),
-                            Text(
-                              "(${xrankMult['nodes'][0]['xMatchSetting']['vsRule']['name'].toString()})",
-                              style: TextStyle(
-                                  color: Colors.grey.shade800, fontSize: 20),
-                            ),
-                            Image.asset(
-                              'assets/logo/S3/${xrankMult['nodes'][0]['xMatchSetting']['vsRule']['rule']}.png',
-                              width: 50,
-                              height: 50,
-                            ),
-                          ],
-                        ),
-                        Text(
-                            "${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
-                        Text("Actual rotation:",
-                            style: TextStyle(
-                                color: Colors.grey.shade800, fontSize: 16)),
-                        Card(
-                          elevation: 10,
-                          color: Colors.grey.shade800,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              for (var elements in xrankMult['nodes'][0]
-                                  ['xMatchSetting']['vsStages'])
-                                Column(
-                                  children: [
-                                    Text(elements['name'],
-                                        style: TextStyle(
-                                            color: Colors.grey.shade200,
-                                            fontSize: 15)),
-                                    CachedNetworkImage(
-                                      imageUrl: elements['image']['url'],
-                                      width: 180,
-                                      height: 110,
-                                    ),
-                                  ],
-                                )
-                            ],
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Schedules(
-                                          background: const Color.fromARGB(
-                                              255, 14, 199, 144),
-                                          content: xrankMult,
-                                          mapChange: mapChange,
-                                          type: 'X Battle',
-                                          picLink: 'assets/logo/XBattle.png',
-                                          typeCode: 'xMatchSetting',
-                                          fest: false,
-                                        )));
-                          },
-                          child: Card(
-                            color: Colors.grey.shade800,
-                            child: Text('  See what\'s next  ',
-                                style: TextStyle(
-                                    color: Colors.grey.shade200, fontSize: 20)),
-                          ),
-                        )
-                      ],
-                    ),
-                  )),
+              if (festScheduled) festBanner(),
+              actual(
+                  context,
+                  turfMult,
+                  'regularMatchSetting',
+                  mapChange,
+                  false,
+                  const Color.fromARGB(255, 23, 200, 26),
+                  'assets/logo/Regular.png'),
+              actualRank(context, rankMult, 0, mapChange),
+              actualRank(context, rankMult, 1, mapChange),
+              actual(
+                  context,
+                  xrankMult,
+                  'xMatchSetting',
+                  mapChange,
+                  false,
+                  const Color.fromARGB(255, 14, 199, 144),
+                  'assets/logo/XBattle.png'),
               Text(
                 "Source: splatoon3.ink",
                 style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
@@ -721,144 +300,9 @@ class SplatoonTrois {
               "SPLAT FEST !",
               style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
             ),
-            Card(
-              elevation: 10,
-              color: Colors.black,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    dataFest['US']['data']['festRecords']['nodes'][0]['title'],
-                    style: TextStyle(color: Colors.grey.shade200, fontSize: 25),
-                  ),
-                  Container(
-                    child: CachedNetworkImage(
-                      imageUrl: dataFest['US']['data']['festRecords']['nodes']
-                          [0]['image']['url'],
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      for (var team in dataFest['US']['data']['festRecords']
-                          ['nodes'][0]['teams'])
-                        Text(team['teamName'],
-                            style: TextStyle(
-                                color: Colors.grey.shade200, fontSize: 25))
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Card(
-                elevation: 10,
-                color: Colors.black,
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const Text("         "),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Image(
-                            image: AssetImage('assets/logo/S3/Tricolor.png'),
-                            width: 50,
-                            height: 50,
-                          ),
-                          Text(
-                            "Fest Battle",
-                            style: TextStyle(
-                                color: Colors.grey.shade200, fontSize: 30),
-                          ),
-                          const Image(
-                              image: AssetImage('assets/logo/S3/Tricolor.png'),
-                              width: 50,
-                              height: 50)
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/logo/S3/${fest['vsRule']['rule']}.png',
-                            width: 50,
-                            height: 50,
-                          ),
-                          Text(
-                            "(${fest['vsRule']['name'].toString()})",
-                            style: TextStyle(
-                                color: Colors.grey.shade400, fontSize: 20),
-                          ),
-                          Image.asset(
-                            'assets/logo/S3/${fest['vsRule']['rule']}.png',
-                            width: 50,
-                            height: 50,
-                          ),
-                        ],
-                      ),
-                      /*Text(
-                        "(${turf['vsRule']['name'].toString()})",
-                        style: TextStyle(
-                            color: Colors.grey.shade800, fontSize: 20),
-                      ),*/
-
-                      Text(
-                          "${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}",
-                          style: TextStyle(color: Colors.grey.shade200)),
-                      Text("Actual rotation:",
-                          style: TextStyle(
-                              color: Colors.grey.shade400, fontSize: 16)),
-                      Card(
-                        elevation: 10,
-                        color: Colors.grey.shade800,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            for (var elements in fest['vsStages'])
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(elements['name'],
-                                      style: TextStyle(
-                                          color: Colors.grey.shade200,
-                                          fontSize: 15)),
-                                  CachedNetworkImage(
-                                    imageUrl: elements['image']['url'],
-                                    width: 180,
-                                    height: 110,
-                                  ),
-                                ],
-                              )
-                          ],
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Schedules(
-                                        background: Colors.black,
-                                        content: festMult,
-                                        mapChange: mapChange,
-                                        type: 'Fest Battle',
-                                        picLink: 'assets/logo/S3/Tricolor.png',
-                                        typeCode: 'regularMatchSetting',
-                                        fest: true,
-                                      )));
-                        },
-                        child: Card(
-                          color: Colors.grey.shade800,
-                          child: Text('  See what\'s next  ',
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 20)),
-                        ),
-                      )
-                    ],
-                  ),
-                )),
+            festBanner(),
+            actual(context, festMult, 'festMatchSetting', mapChange, true,
+                Colors.grey.shade800, 'assets/logo/S3/Tricolor.png'),
             if (data['data']['currentFest']['state'] == "SECOND_HALF")
               Card(
                   elevation: 10,
@@ -953,6 +397,37 @@ class SplatoonTrois {
             ),
           ]),
         ));
+  }
+
+  Widget festBanner() {
+    return Card(
+      elevation: 10,
+      color: Colors.black,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(
+            dataFest['US']['data']['festRecords']['nodes'][0]['title'],
+            style: TextStyle(color: Colors.grey.shade200, fontSize: 25),
+          ),
+          Container(
+            child: CachedNetworkImage(
+              imageUrl: dataFest['US']['data']['festRecords']['nodes'][0]
+                  ['image']['url'],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              for (var team in dataFest['US']['data']['festRecords']['nodes'][0]
+                  ['teams'])
+                Text(team['teamName'],
+                    style: TextStyle(color: Colors.grey.shade200, fontSize: 25))
+            ],
+          )
+        ],
+      ),
+    );
   }
 
   //FIXME: This needs to be more compact.
@@ -1469,27 +944,5 @@ class SplatoonTrois {
             style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
           ),
         ])));
-  }
-
-  String timeConvert(String value) {
-    int time = int.parse(value) % 12;
-    String tz = 'AM';
-
-    if (time == 0) {
-      time = 12;
-    }
-
-    if (int.parse(value) >= 12) {
-      tz = 'PM';
-    }
-
-    return '$time $tz';
-  }
-
-  String dateFormat(String value) {
-    String date = value.substring(0, 10).replaceAll(RegExp('-'), '/');
-    return '${date.substring(8, 10)}/${date.substring(5, 7)}/${date.substring(0, 4)}' +
-        ' at ' +
-        timeConvert(value.substring(11, 13));
   }
 }
