@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:splat_news/splaThree/schedules/schedule_grizz.dart';
-import 'package:splat_news/splaThree/functions/functions.dart';
+import 'package:splat_news/functions/functions.dart';
 
 Widget actualGrizz(BuildContext context, Map<String, dynamic> data, int type,
     Color bg, bool soon, List<List<String>> changes, String iconLink) {

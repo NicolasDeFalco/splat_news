@@ -1,12 +1,12 @@
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:splat_news/splaThree/draw_functions/actual.dart';
-import 'package:splat_news/splaThree/draw_functions/actual_coop.dart';
-import 'package:splat_news/splaThree/draw_functions/actual_rank.dart';
+import 'package:splat_news/splaThree/draw_functions/actual_three.dart';
+import 'package:splat_news/splaThree/draw_functions/actual_coop_three.dart';
+import 'package:splat_news/splaThree/draw_functions/actual_rank_three.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:splat_news/splaThree/functions/functions.dart';
+import 'package:splat_news/functions/functions.dart';
 
 class SplatoonTrois {
   // The data we receive from the API
@@ -466,7 +466,7 @@ class SplatoonTrois {
               actualGrizz(
                   context,
                   data['data']['coopGroupingSchedule']['bigRunSchedules'],
-                  1,
+                  2,
                   const Color.fromARGB(255, 165, 53, 128),
                   bigSoon,
                   grizzBigChange,

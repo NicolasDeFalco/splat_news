@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:splat_news/splaThree/functions/functions.dart';
+import 'package:splat_news/functions/functions.dart';
 
 class SchedulesGrizz extends StatefulWidget {
   final Map<String, dynamic> content;

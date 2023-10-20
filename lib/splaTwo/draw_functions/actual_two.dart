@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:splat_news/functions/functions.dart';
+import '../schedules/schedules.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:splat_news/splaThree/schedules/schedules.dart';
-import 'package:splat_news/splaThree/functions/functions.dart';
 
-Widget actual(BuildContext context, Map<String, dynamic> data, String name,
-    List<List<String>> mapChange, bool fest, Color bgColor, String iconLink) {
+Widget actual(BuildContext context, Map<String, dynamic> data, Color bgColor,
+    String type, List<List<String>> mapChange, String iconLink) {
   return Card(
       elevation: 10,
       color: bgColor,
@@ -22,7 +22,7 @@ Widget actual(BuildContext context, Map<String, dynamic> data, String name,
                   height: 50,
                 ),
                 Text(
-                  typeName(name),
+                  battleType(type),
                   style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
                 ),
                 Image(image: AssetImage(iconLink), width: 50, height: 50)
@@ -32,51 +32,56 @@ Widget actual(BuildContext context, Map<String, dynamic> data, String name,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/logo/S3/${data['nodes'][0][name]['vsRule']['rule']}.png',
+                  'assets/logo/S2/${data[type][0]['rule']['key']}.png',
                   width: 50,
                   height: 50,
                 ),
                 Text(
-                  "${data['nodes'][0][name]['vsRule']['name']}",
-                  style: TextStyle(color: Colors.grey.shade800, fontSize: 22),
+                  data[type][0]['rule']['name'].toString(),
+                  style: TextStyle(color: Colors.grey.shade800, fontSize: 20),
                 ),
                 Image.asset(
-                  'assets/logo/S3/${data['nodes'][0][name]['vsRule']['rule']}.png',
+                  'assets/logo/S2/${data[type][0]['rule']['key']}.png',
                   width: 50,
                   height: 50,
                 ),
               ],
             ),
-            /*Text(
-                        "(${turf['vsRule']['name'].toString()})",
-                        style: TextStyle(
-                            color: Colors.grey.shade800, fontSize: 20),
-                      ),*/
-
             Text(
                 "${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
-            Text("Actual rotation:",
-                style: TextStyle(color: Colors.grey.shade800, fontSize: 16)),
+            const Text("Actual rotation:", style: TextStyle(fontSize: 20)),
             Card(
               elevation: 10,
               color: Colors.grey.shade800,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  for (var elements in data['nodes'][0][name]['vsStages'])
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(elements['name'],
-                            style: TextStyle(
-                                color: Colors.grey.shade200, fontSize: 15)),
-                        CachedNetworkImage(
-                          imageUrl: elements['image']['url'],
-                          width: 180,
-                          height: 110,
-                        ),
-                      ],
-                    )
+                  Column(
+                    children: [
+                      Text(data[type][0]['stage_a']['name'],
+                          style: TextStyle(
+                              color: Colors.grey.shade200, fontSize: 15)),
+                      CachedNetworkImage(
+                        imageUrl:
+                            "https://splatoon2.ink/assets/splatnet/${data[type][0]['stage_a']['image']}",
+                        width: 180,
+                        height: 110,
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text(data[type][0]['stage_b']['name'],
+                          style: TextStyle(
+                              color: Colors.grey.shade200, fontSize: 15)),
+                      CachedNetworkImage(
+                        imageUrl:
+                            "https://splatoon2.ink/assets/splatnet/${data[type][0]['stage_b']['image']}",
+                        width: 180,
+                        height: 110,
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -85,14 +90,13 @@ Widget actual(BuildContext context, Map<String, dynamic> data, String name,
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Schedules(
+                        builder: (context) => SchedulesTwo(
                               background: bgColor,
-                              content: data,
+                              data: data,
                               mapChange: mapChange,
-                              type: typeName(name),
+                              type: battleType(type),
                               picLink: iconLink,
-                              typeCode: name,
-                              fest: fest,
+                              typeLink: type,
                             )));
               },
               child: Card(
@@ -107,13 +111,13 @@ Widget actual(BuildContext context, Map<String, dynamic> data, String name,
       ));
 }
 
-String typeName(String type) {
+String battleType(String type) {
   switch (type) {
-    case 'regularMatchSetting':
+    case 'regular':
       return 'Regular Battle';
-    case 'xMatchSetting':
-      return 'X Battle';
+    case 'gachi':
+      return 'Ranked Battle';
     default:
-      return 'Fest Battle';
+      return 'League Battle';
   }
 }

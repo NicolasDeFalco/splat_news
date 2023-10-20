@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:splat_news/splaThree/schedules/schedule_rank.dart';
-import 'package:splat_news/splaThree/functions/functions.dart';
+import 'package:splat_news/functions/functions.dart';
 
 Widget actualRank(BuildContext context, Map<String, dynamic> data, int position,
     List<List<String>> mapChange) {

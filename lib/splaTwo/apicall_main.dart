@@ -3,8 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:splat_news/splaTwo/schedules/schedules.dart';
+import 'package:splat_news/splaTwo/draw_functions/actual_two.dart';
 
 class SplatoonDeux {
   Map<String, dynamic> data = new Map();
@@ -108,341 +107,12 @@ class SplatoonDeux {
               width: 280,
               height: 150,
             ),
-            Card(
-                elevation: 10,
-                color: const Color.fromARGB(255, 14, 197, 24),
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const Text("         "),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Image(
-                            image: AssetImage('assets/logo/Regular.png'),
-                            width: 50,
-                            height: 50,
-                          ),
-                          Text(
-                            "Regular Battle",
-                            style: TextStyle(
-                                color: Colors.grey.shade200, fontSize: 30),
-                          ),
-                          const Image(
-                              image: AssetImage('assets/logo/Regular.png'),
-                              width: 50,
-                              height: 50)
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/logo/S2/${data['regular'][0]['rule']['key']}.png',
-                            width: 50,
-                            height: 50,
-                          ),
-                          Text(
-                            "(${data['regular'][0]['rule']['name'].toString()})",
-                            style: TextStyle(
-                                color: Colors.grey.shade800, fontSize: 20),
-                          ),
-                          Image.asset(
-                            'assets/logo/S2/${data['regular'][0]['rule']['key']}.png',
-                            width: 50,
-                            height: 50,
-                          ),
-                        ],
-                      ),
-                      Text("${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
-                      const Text("Actual rotation:"),
-                      Card(
-                        elevation: 10,
-                        color: Colors.grey.shade800,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Column(
-                              children: [
-                                Text(data['regular'][0]['stage_a']['name'],
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 15)),
-                                CachedNetworkImage(
-                                  imageUrl:
-                                      "https://splatoon2.ink/assets/splatnet/${data['regular'][0]['stage_a']['image']}",
-                                  width: 180,
-                                  height: 110,
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text(data['regular'][0]['stage_b']['name'],
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 15)),
-                                CachedNetworkImage(
-                                  imageUrl:
-                                      "https://splatoon2.ink/assets/splatnet/${data['regular'][0]['stage_b']['image']}",
-                                  width: 180,
-                                  height: 110,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SchedulesTwo(
-                                        background:
-                                            const Color.fromARGB(255, 23, 200, 26),
-                                        data: data,
-                                        mapChange: mapChange,
-                                        type: 'Regular Battle',
-                                        picLink: 'assets/logo/Regular.png',
-                                        typeLink: 'regular',
-                                      )));
-                        },
-                        child: Card(
-                          color: Colors.grey.shade800,
-                          child: Text('  See what\'s next  ',
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 20)),
-                        ),
-                      )
-                    ],
-                  ),
-                )),
-            Card(
-                elevation: 10,
-                color: const Color.fromARGB(255, 226, 69, 17),
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const Text("         "),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Image(
-                            image: AssetImage('assets/logo/Ranked.png'),
-                            width: 50,
-                            height: 50,
-                          ),
-                          Text(
-                            "Ranked Battle",
-                            style: TextStyle(
-                                color: Colors.grey.shade200, fontSize: 30),
-                          ),
-                          const Image(
-                            image: AssetImage('assets/logo/Ranked.png'),
-                            width: 50,
-                            height: 50,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/logo/S2/${data['gachi'][0]['rule']['key']}.png',
-                            width: 50,
-                            height: 50,
-                          ),
-                          Text(
-                            "(${data['gachi'][0]['rule']['name'].toString()})",
-                            style: TextStyle(
-                                color: Colors.grey.shade800, fontSize: 20),
-                          ),
-                          Image.asset(
-                            'assets/logo/S2/${data['gachi'][0]['rule']['key']}.png',
-                            width: 50,
-                            height: 50,
-                          ),
-                        ],
-                      ),
-                      Text("${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
-                      const Text("Actual rotation:"),
-                      Card(
-                        elevation: 10,
-                        color: Colors.grey.shade800,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Column(
-                              children: [
-                                Text(data['gachi'][0]['stage_a']['name'],
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 15)),
-                                CachedNetworkImage(
-                                  imageUrl:
-                                      "https://splatoon2.ink/assets/splatnet/${data['gachi'][0]['stage_a']['image']}",
-                                  width: 180,
-                                  height: 110,
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text(data['gachi'][0]['stage_b']['name'],
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 15)),
-                                CachedNetworkImage(
-                                  imageUrl:
-                                      "https://splatoon2.ink/assets/splatnet/${data['gachi'][0]['stage_b']['image']}",
-                                  width: 180,
-                                  height: 110,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SchedulesTwo(
-                                        background:
-                                            const Color.fromARGB(255, 226, 69, 17),
-                                        data: data,
-                                        mapChange: mapChange,
-                                        type: 'Ranked Battle',
-                                        picLink: 'assets/logo/Ranked.png',
-                                        typeLink: 'gachi',
-                                      )));
-                        },
-                        child: Card(
-                          color: Colors.grey.shade800,
-                          child: Text('  See what\'s next  ',
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 20)),
-                        ),
-                      )
-                    ],
-                  ),
-                )),
-            Card(
-                color: const Color.fromARGB(255, 220, 43, 116),
-                elevation: 10,
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const Text("         "),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Image(
-                            image: AssetImage('assets/logo/League.png'),
-                            width: 50,
-                            height: 50,
-                          ),
-                          Text(
-                            "League Battle",
-                            style: TextStyle(
-                                color: Colors.grey.shade200, fontSize: 30),
-                          ),
-                          const Image(
-                            image: AssetImage('assets/logo/League.png'),
-                            width: 50,
-                            height: 50,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/logo/S2/${data['league'][0]['rule']['key']}.png',
-                            width: 50,
-                            height: 50,
-                          ),
-                          Text(
-                            "(${data['league'][0]['rule']['name'].toString()})",
-                            style: TextStyle(
-                                color: Colors.grey.shade800, fontSize: 20),
-                          ),
-                          Image.asset(
-                            'assets/logo/S2/${data['league'][0]['rule']['key']}.png',
-                            width: 50,
-                            height: 50,
-                          ),
-                        ],
-                      ),
-                      Text("${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
-                      const Text("Actual rotation:"),
-                      Card(
-                        elevation: 10,
-                        color: Colors.grey.shade800,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Column(
-                              children: [
-                                Text(data['league'][0]['stage_a']['name'],
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 15)),
-                                CachedNetworkImage(
-                                  imageUrl:
-                                      "https://splatoon2.ink/assets/splatnet/${data['league'][0]['stage_a']['image']}",
-                                  width: 180,
-                                  height: 110,
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text(data['league'][0]['stage_b']['name'],
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 15)),
-                                CachedNetworkImage(
-                                  imageUrl:
-                                      "https://splatoon2.ink/assets/splatnet/${data['league'][0]['stage_b']['image']}",
-                                  width: 180,
-                                  height: 110,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SchedulesTwo(
-                                        background:
-                                            const Color.fromARGB(255, 220, 43, 116),
-                                        data: data,
-                                        mapChange: mapChange,
-                                        type: 'League Battle',
-                                        picLink: 'assets/logo/League.png',
-                                        typeLink: 'league',
-                                      )));
-                        },
-                        child: Card(
-                          color: Colors.grey.shade800,
-                          child: Text('  See what\'s next  ',
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 20)),
-                        ),
-                      )
-                    ],
-                  ),
-                )),
+            actual(context, data, const Color.fromARGB(255, 14, 197, 24),
+                'regular', mapChange, 'assets/logo/Regular.png'),
+            actual(context, data, const Color.fromARGB(255, 226, 69, 17),
+                'gachi', mapChange, 'assets/logo/Ranked.png'),
+            actual(context, data, const Color.fromARGB(255, 220, 43, 116),
+                'league', mapChange, 'assets/logo/League.png'),
             Text(
               "Source: splatoon2.ink",
               style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
@@ -453,155 +123,6 @@ class SplatoonDeux {
 
   Container grizzRoll(BuildContext context) {
     position = 0;
-    String time =
-        DateTime.now().millisecondsSinceEpoch.toString().substring(0, 10);
-    //String time = "1678923800";
-    if (int.parse(time) < grizz['details'][0]['start_time'] ||
-        int.parse(time) > grizz['details'][0]['end_time']) {
-      return Container(
-        decoration: BoxDecoration(
-          color: Colors.grey.shade800,
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Image.asset(
-                'assets/logo/S2/SalmonRun.png',
-                width: 280,
-                height: 150,
-              ),
-              for (var salmon in grizz['details'])
-                Card(
-                    elevation: 10,
-                    color: const Color.fromARGB(255, 232, 78, 3),
-                    child: Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Text('', style: TextStyle(fontSize: 5)),
-                          if (position == 0)
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                const Image(
-                                    image:
-                                        AssetImage('assets/logo/SalmonRun.png'),
-                                    width: 50,
-                                    height: 50),
-                                Text(
-                                  "Salmon run",
-                                  style: TextStyle(
-                                      color: Colors.grey.shade200,
-                                      fontSize: 35),
-                                ),
-                                const Image(
-                                    image:
-                                        AssetImage('assets/logo/SalmonRun.png'),
-                                    width: 50,
-                                    height: 50)
-                              ],
-                            ),
-                          if (position == 0)
-                            Column(
-                              children: [
-                                Text(
-                                  "Coming soon:",
-                                  style: TextStyle(
-                                      color: Colors.grey.shade200,
-                                      fontSize: 25),
-                                ),
-                              ],
-                            ),
-                          if (position == 1)
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Future:",
-                                  style: TextStyle(
-                                      color: Colors.grey.shade200,
-                                      fontSize: 25),
-                                ),
-                              ],
-                            ),
-                          Text(
-                            salmon['stage']['name'],
-                            style: TextStyle(
-                                color: Colors.grey.shade200, fontSize: 20),
-                          ),
-                          Text(
-                              'From ${dateFormatLoop(
-                                      mapChangeGrizz[position][0], false)} to ${dateFormatLoop(
-                                      mapChangeGrizz[position][1], true)}',
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 14)),
-                          CachedNetworkImage(
-                            imageUrl:
-                                "https://splatoon2.ink/assets/splatnet${salmon['stage']['image']}",
-                            width: 360,
-                            height: 210,
-                          ),
-                          Card(
-                            elevation: 10,
-                            color: Colors.grey.shade800,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(
-                                  "Supplied weapons:",
-                                  style: TextStyle(
-                                      color: Colors.grey.shade200,
-                                      fontSize: 20),
-                                ),
-                                for (var elements in salmon['weapons'])
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      if (elements['id'] != '-1')
-                                        Text(" ${elements['weapon']['name']}",
-                                            style: TextStyle(
-                                                color: Colors.grey.shade400,
-                                                fontSize: 20)),
-                                      if (elements['id'] == '-1')
-                                        Text(
-                                            " ${elements['coop_special_weapon']['name']}",
-                                            style: TextStyle(
-                                                color: Colors.grey.shade400,
-                                                fontSize: 20)),
-                                      const Text("                          "),
-                                      if (elements['id'] != '-1')
-                                        CachedNetworkImage(
-                                          imageUrl:
-                                              "https://splatoon2.ink/assets/splatnet${elements['weapon']['image']}",
-                                          width: 90,
-                                          height: 90,
-                                        ),
-                                      if (elements['id'] == '-1')
-                                        CachedNetworkImage(
-                                          imageUrl:
-                                              "https://splatoon2.ink/assets/splatnet${elements['coop_special_weapon']['image']}",
-                                          width: 90,
-                                          height: 90,
-                                        ),
-                                    ],
-                                  ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-              Text(
-                "Source: splatoon2.ink",
-                style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
     return Container(
       decoration: BoxDecoration(
         color: Colors.grey.shade800,
@@ -617,7 +138,7 @@ class SplatoonDeux {
             for (var salmon in grizz['details'])
               Card(
                   elevation: 10,
-                  color: const Color.fromARGB(255, 225, 65, 10),
+                  color: const Color.fromARGB(255, 232, 78, 3),
                   child: Container(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -644,43 +165,33 @@ class SplatoonDeux {
                                   height: 50)
                             ],
                           ),
-                        if (position == 0)
-                          Column(
-                            children: [
-                              Text(
-                                "Actual map:",
-                                style: TextStyle(
-                                    color: Colors.grey.shade200, fontSize: 25),
-                              ),
-                            ],
-                          ),
-                        if (position == 1)
-                          Column(
-                            children: [
-                              Text(
-                                "Next map:",
-                                style: TextStyle(
-                                    color: Colors.grey.shade200, fontSize: 25),
-                              ),
-                            ],
-                          ),
                         Text(
-                          salmon['stage']['name'],
+                          '${occurence(position)}:',
                           style: TextStyle(
-                              color: Colors.grey.shade200, fontSize: 20),
+                              color: Colors.grey.shade200, fontSize: 24),
                         ),
                         Text(
-                            'From ${dateFormatLoop(
-                                    mapChangeGrizz[position][0], false)} to ${dateFormatLoop(
-                                    mapChangeGrizz[position][1], true)}',
+                            'From ${dateFormatLoop(mapChangeGrizz[position][0], false)} to ${dateFormatLoop(mapChangeGrizz[position][1], true)}',
                             style: TextStyle(
                                 color: Colors.grey.shade200, fontSize: 14)),
-                        CachedNetworkImage(
-                          imageUrl:
-                              "https://splatoon2.ink/assets/splatnet${salmon['stage']['image']}",
-                          width: 360,
-                          height: 210,
-                        ),
+                        Card(
+                            elevation: 10,
+                            color: Colors.grey.shade800,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  salmon['stage']['name'],
+                                  style: TextStyle(
+                                      color: Colors.grey.shade200,
+                                      fontSize: 21),
+                                ),
+                                CachedNetworkImage(
+                                  imageUrl:
+                                      "https://splatoon2.ink/assets/splatnet${salmon['stage']['image']}",
+                                ),
+                              ],
+                            )),
                         Card(
                           elevation: 10,
                           color: Colors.grey.shade800,
@@ -698,17 +209,10 @@ class SplatoonDeux {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     if (elements['id'] != '-1')
-                                      if (elements['id'] == '-2')
-                                        Text(
-                                            " ${elements['coop_special_weapon']['name']}",
-                                            style: TextStyle(
-                                                color: Colors.grey.shade400,
-                                                fontSize: 20))
-                                      else
-                                        Text(" ${elements['weapon']['name']}",
-                                            style: TextStyle(
-                                                color: Colors.grey.shade400,
-                                                fontSize: 20)),
+                                      Text(" ${elements['weapon']['name']}",
+                                          style: TextStyle(
+                                              color: Colors.grey.shade400,
+                                              fontSize: 20)),
                                     if (elements['id'] == '-1')
                                       Text(
                                           " ${elements['coop_special_weapon']['name']}",
@@ -717,20 +221,12 @@ class SplatoonDeux {
                                               fontSize: 20)),
                                     const Text("                          "),
                                     if (elements['id'] != '-1')
-                                      if (elements['id'] == '-2')
-                                        CachedNetworkImage(
-                                          imageUrl:
-                                              "https://splatoon2.ink/assets/splatnet${elements['coop_special_weapon']['image']}",
-                                          width: 90,
-                                          height: 90,
-                                        )
-                                      else
-                                        CachedNetworkImage(
-                                          imageUrl:
-                                              "https://splatoon2.ink/assets/splatnet${elements['weapon']['image']}",
-                                          width: 90,
-                                          height: 90,
-                                        ),
+                                      CachedNetworkImage(
+                                        imageUrl:
+                                            "https://splatoon2.ink/assets/splatnet${elements['weapon']['image']}",
+                                        width: 90,
+                                        height: 90,
+                                      ),
                                     if (elements['id'] == '-1')
                                       CachedNetworkImage(
                                         imageUrl:
@@ -756,14 +252,28 @@ class SplatoonDeux {
     );
   }
 
+  String occurence(int position) {
+    String time =
+        DateTime.now().millisecondsSinceEpoch.toString().substring(0, 10);
+    bool timeCheck = false;
+    if (int.parse(time) < grizz['details'][0]['start_time'] ||
+        int.parse(time) > grizz['details'][0]['end_time']) timeCheck = true;
+    switch (position - 1) {
+      case 0:
+        if (timeCheck) return 'Coming soon...';
+        return 'Actual map';
+      default:
+        if (timeCheck) return 'Future map';
+        return 'Next map';
+    }
+  }
+
   String dateFormatLoop(String value, bool loop) {
     String date = value.substring(0, 10).replaceAll(RegExp('-'), '/');
     if (loop) {
       position++;
     }
-    return '${date.substring(8, 10)}/${date.substring(5, 7)}/${date.substring(0, 4)}' +
-        ' at ' +
-        timeConvert(value.substring(11, 13));
+    return '${date.substring(8, 10)}/${date.substring(5, 7)}/${date.substring(0, 4)} at ${timeConvert(value.substring(11, 13))}';
   }
 
   String timeConvert(String value) {
