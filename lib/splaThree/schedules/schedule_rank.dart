@@ -92,7 +92,7 @@ class SchedulesRankState extends State<SchedulesRank> {
                                       height: 50,
                                     ),
                                     Text(
-                                      occurence(position),
+                                      occurence(position, false),
                                       style: TextStyle(
                                           color: Colors.grey.shade200,
                                           fontSize: 30),

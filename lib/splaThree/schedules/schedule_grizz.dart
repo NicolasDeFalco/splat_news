@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:splat_news/splaThree/functions/functions.dart';
 
 class SchedulesGrizz extends StatefulWidget {
   final Map<String, dynamic> content;
@@ -56,14 +57,6 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
       appBar: AppBar(
         title: const Text("Splatoon 3 - Salmon Run"),
         backgroundColor: Colors.grey.shade900,
-        /*flexibleSpace: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: <Color>[Color.fromARGB(255, 229, 255, 0), Color.fromARGB(255, 100, 48, 254)]),
-            ),
-          ),*/
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -82,7 +75,7 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             const Text('', style: TextStyle(fontSize: 5)),
-                            if (position == 0)
+                            if (position < 2)
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
@@ -92,7 +85,7 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                                           'assets/logo/SalmonRun.png'),
                                       width: 50,
                                       height: 50),
-                                  if (bigrun)
+                                  if (bigrun && position == 0)
                                     Text(
                                       "Coming soon",
                                       style: TextStyle(
@@ -101,34 +94,11 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                                     )
                                   else
                                     Text(
-                                      "Actual",
+                                      occurence(position, true),
                                       style: TextStyle(
                                           color: Colors.grey.shade200,
                                           fontSize: 30),
                                     ),
-                                  const Image(
-                                      image: AssetImage(
-                                          'assets/logo/SalmonRun.png'),
-                                      width: 50,
-                                      height: 50)
-                                ],
-                              ),
-                            if (position == 1)
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  const Image(
-                                      image: AssetImage(
-                                          'assets/logo/SalmonRun.png'),
-                                      width: 50,
-                                      height: 50),
-                                  Text(
-                                    "Future",
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 30),
-                                  ),
                                   const Image(
                                       image: AssetImage(
                                           'assets/logo/SalmonRun.png'),

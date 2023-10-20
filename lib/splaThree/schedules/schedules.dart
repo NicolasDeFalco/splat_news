@@ -61,6 +61,7 @@ class SchedulesState extends State<Schedules> {
     return '$time $tz';
   }
 
+  // FIXME: It's definitely possible to reduce the size of this function. We could just seperate the normal and the fest part
   @override
   Widget build(BuildContext context) {
     position = 0;
@@ -108,7 +109,7 @@ class SchedulesState extends State<Schedules> {
                                       height: 50,
                                     ),
                                     Text(
-                                      occurence(position),
+                                      occurence(position, false),
                                       style: TextStyle(
                                           color: Colors.grey.shade200,
                                           fontSize: 30),
@@ -235,7 +236,7 @@ class SchedulesState extends State<Schedules> {
                                       height: 50,
                                     ),
                                     Text(
-                                      occurence(position),
+                                      occurence(position, false),
                                       style: TextStyle(
                                           color: Colors.grey.shade200,
                                           fontSize: 30),

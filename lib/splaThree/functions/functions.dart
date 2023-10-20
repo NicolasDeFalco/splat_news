@@ -20,12 +20,13 @@ String dateFormat(String value) {
       timeConvert(value.substring(11, 13));
 }
 
-String occurence(int index) {
+String occurence(int index, bool grizz) {
   switch (index) {
     case 0:
       return 'Actual';
     case 1:
-      return 'Next';
+      if (!grizz) return 'Next';
+      return 'Future';
     default:
       return 'Future';
   }
