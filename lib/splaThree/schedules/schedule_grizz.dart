@@ -107,21 +107,29 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                                 ],
                               ),
                             Text(
-                              salmon['setting']['coopStage']['name'],
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 22),
-                            ),
-                            Text(
                               'From ${dateFormat(change[position][0], false)} to ${dateFormat(change[position][1], true)}',
                               style: TextStyle(
                                   color: Colors.grey.shade200, fontSize: 14),
                             ),
-                            CachedNetworkImage(
-                              imageUrl: salmon['setting']['coopStage']['image']
-                                  ['url'],
-                              width: 360,
-                              height: 210,
-                            ),
+                            Card(
+                                elevation: 10,
+                                color: Colors.grey.shade800,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      salmon['setting']['coopStage']['name'],
+                                      style: TextStyle(
+                                          color: Colors.grey.shade200,
+                                          fontSize: 22),
+                                    ),
+                                    CachedNetworkImage(
+                                      imageUrl: salmon['setting']['coopStage']
+                                          ['image']['url'],
+                                    ),
+                                  ],
+                                )),
                             Card(
                               elevation: 10,
                               color: Colors.grey.shade800,
