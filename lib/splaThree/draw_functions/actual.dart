@@ -16,8 +16,8 @@ Widget actual(BuildContext context, Map<String, dynamic> data, String name,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const Image(
-                  image: AssetImage('assets/logo/Regular.png'),
+                Image(
+                  image: AssetImage(iconLink),
                   width: 50,
                   height: 50,
                 ),
@@ -25,10 +25,7 @@ Widget actual(BuildContext context, Map<String, dynamic> data, String name,
                   typeName(name),
                   style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
                 ),
-                const Image(
-                    image: AssetImage('assets/logo/Regular.png'),
-                    width: 50,
-                    height: 50)
+                Image(image: AssetImage(iconLink), width: 50, height: 50)
               ],
             ),
             Row(
@@ -40,8 +37,8 @@ Widget actual(BuildContext context, Map<String, dynamic> data, String name,
                   height: 50,
                 ),
                 Text(
-                  "(${data['nodes'][0][name]['vsRule']['name'].toString()})",
-                  style: TextStyle(color: Colors.grey.shade800, fontSize: 20),
+                  "${data['nodes'][0][name]['vsRule']['name']}",
+                  style: TextStyle(color: Colors.grey.shade800, fontSize: 22),
                 ),
                 Image.asset(
                   'assets/logo/S3/${data['nodes'][0][name]['vsRule']['rule']}.png',
@@ -114,7 +111,9 @@ String typeName(String type) {
   switch (type) {
     case 'regularMatchSetting':
       return 'Regular Battle';
-    default:
+    case 'xMatchSetting':
       return 'X Battle';
+    default:
+      return 'Fest Battle';
   }
 }

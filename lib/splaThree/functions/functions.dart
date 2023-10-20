@@ -19,3 +19,14 @@ String dateFormat(String value) {
       ' at ' +
       timeConvert(value.substring(11, 13));
 }
+
+String occurence(int index) {
+  switch (index) {
+    case 0:
+      return 'Actual';
+    case 1:
+      return 'Next';
+    default:
+      return 'Future';
+  }
+}

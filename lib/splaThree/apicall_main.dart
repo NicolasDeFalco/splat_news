@@ -119,8 +119,10 @@ class SplatoonTrois {
 
   void dataSet() {
     // Check if there is no splatfest
-    if (data['data']['currentFest'] == null ||
-        data['data']['currentFest']['state'] == 'SCHEDULED') {
+    if (dataFest['US']['data']['festRecords']['nodes'][0]['state'] ==
+            'CLOSED' ||
+        dataFest['US']['data']['festRecords']['nodes'][0]['state'] ==
+            'SCHEDULED') {
       //No splatfest
       for (int x = 0; x < 12; x++) {
         mapChange[x][0] = DateTime.parse(
@@ -138,10 +140,9 @@ class SplatoonTrois {
       xrankMult = data['data']['xSchedules'];
 
       // Is true when a fest is scheduled
-      if (data['data']['currentFest'] != null) {
-        if (data['data']['currentFest']['state'] == 'SCHEDULED') {
-          festScheduled = true;
-        }
+      if (dataFest['US']['data']['festRecords']['nodes'][0]['state'] ==
+          'SCHEDULED') {
+        festScheduled = true;
       }
     } else {
       //There is a splatfest
@@ -254,11 +255,6 @@ class SplatoonTrois {
                 width: 280,
                 height: 150,
               ),
-              if (festScheduled)
-                Text(
-                  "Splat fest inkoming!",
-                  style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
-                ),
               if (festScheduled) festBanner(),
               actual(
                   context,
@@ -302,7 +298,7 @@ class SplatoonTrois {
             ),
             festBanner(),
             actual(context, festMult, 'festMatchSetting', mapChange, true,
-                Colors.grey.shade800, 'assets/logo/S3/Tricolor.png'),
+                Colors.black, 'assets/logo/S3/Tricolor.png'),
             if (data['data']['currentFest']['state'] == "SECOND_HALF")
               Card(
                   elevation: 10,
@@ -406,6 +402,28 @@ class SplatoonTrois {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const Image(
+                image: AssetImage('assets/logo/S3/Tricolor.png'),
+                width: 50,
+                height: 50,
+              ),
+              Text(
+                "Splat fest inkoming!",
+                style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
+              ),
+              const Image(
+                  image: AssetImage('assets/logo/S3/Tricolor.png'),
+                  width: 50,
+                  height: 50)
+            ],
+          ),
+          Text(
+            'From ${dateFormat(DateTime.parse(dataFest['US']['data']['festRecords']['nodes'][0]['startTime']).toLocal().toString())} to ${dateFormat(DateTime.parse(dataFest['US']['data']['festRecords']['nodes'][0]['endTime']).toLocal().toString())}',
+            style: TextStyle(color: Colors.grey.shade200, fontSize: 14),
+          ),
           Text(
             dataFest['US']['data']['festRecords']['nodes'][0]['title'],
             style: TextStyle(color: Colors.grey.shade200, fontSize: 25),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:splat_news/splaThree/functions/functions.dart';
 
 class SchedulesRank extends StatefulWidget {
   final String type;
@@ -79,7 +80,7 @@ class SchedulesRankState extends State<SchedulesRank> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               const Text("         "),
-                              if (position == 0)
+                              if (position < 3)
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
@@ -91,7 +92,7 @@ class SchedulesRankState extends State<SchedulesRank> {
                                       height: 50,
                                     ),
                                     Text(
-                                      "Actual",
+                                      occurence(position),
                                       style: TextStyle(
                                           color: Colors.grey.shade200,
                                           fontSize: 30),
@@ -102,55 +103,6 @@ class SchedulesRankState extends State<SchedulesRank> {
                                       width: 50,
                                       height: 50,
                                     ),
-                                  ],
-                                ),
-                              if (position == 1)
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    const Image(
-                                      image:
-                                          AssetImage('assets/logo/Ranked.png'),
-                                      width: 50,
-                                      height: 50,
-                                    ),
-                                    Text(
-                                      "Next",
-                                      style: TextStyle(
-                                          color: Colors.grey.shade200,
-                                          fontSize: 30),
-                                    ),
-                                    const Image(
-                                      image:
-                                          AssetImage('assets/logo/Ranked.png'),
-                                      width: 50,
-                                      height: 50,
-                                    ),
-                                  ],
-                                ),
-                              if (position == 2)
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    const Image(
-                                      image:
-                                          AssetImage('assets/logo/Ranked.png'),
-                                      width: 50,
-                                      height: 50,
-                                    ),
-                                    Text(
-                                      'Future',
-                                      style: TextStyle(
-                                          color: Colors.grey.shade200,
-                                          fontSize: 30),
-                                    ),
-                                    const Image(
-                                        image: AssetImage(
-                                            'assets/logo/Ranked.png'),
-                                        width: 50,
-                                        height: 50)
                                   ],
                                 ),
                               Row(
@@ -162,10 +114,10 @@ class SchedulesRankState extends State<SchedulesRank> {
                                     height: 50,
                                   ),
                                   Text(
-                                    "(${battle['bankaraMatchSettings'][rankType]['vsRule']['name'].toString()})",
+                                    "${battle['bankaraMatchSettings'][rankType]['vsRule']['name']}",
                                     style: TextStyle(
                                         color: Colors.grey.shade800,
-                                        fontSize: 20),
+                                        fontSize: 22),
                                   ),
                                   Image.asset(
                                     'assets/logo/S3/${battle['bankaraMatchSettings'][rankType]['vsRule']['rule']}.png',
@@ -174,11 +126,8 @@ class SchedulesRankState extends State<SchedulesRank> {
                                   ),
                                 ],
                               ),
-                              Text("${timeConvertLoop(
-                                      mapChange[position][0].substring(11, 13),
-                                      false)} to ${timeConvertLoop(
-                                      mapChange[position][1].substring(11, 13),
-                                      true)}"),
+                              Text(
+                                  "${timeConvertLoop(mapChange[position][0].substring(11, 13), false)} to ${timeConvertLoop(mapChange[position][1].substring(11, 13), true)}"),
                               Text("Map:",
                                   style: TextStyle(
                                       color: Colors.grey.shade800,

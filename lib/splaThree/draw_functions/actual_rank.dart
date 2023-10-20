@@ -40,8 +40,8 @@ Widget actualRank(BuildContext context, Map<String, dynamic> data, int position,
                   height: 50,
                 ),
                 Text(
-                  "(${data['nodes'][0]['bankaraMatchSettings'][position]['vsRule']['name'].toString()})",
-                  style: TextStyle(color: Colors.grey.shade800, fontSize: 20),
+                  "${data['nodes'][0]['bankaraMatchSettings'][position]['vsRule']['name']}",
+                  style: TextStyle(color: Colors.grey.shade800, fontSize: 22),
                 ),
                 Image.asset(
                   'assets/logo/S3/${data['nodes'][0]['bankaraMatchSettings'][position]['vsRule']['rule']}.png',
