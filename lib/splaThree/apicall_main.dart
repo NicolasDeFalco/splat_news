@@ -92,8 +92,8 @@ class SplatoonTrois {
                   .millisecondsSinceEpoch);
           await prefs.setString('dataS3', convert.jsonEncode(data));
           await prefs.setString('dataFestS3', convert.jsonEncode(dataFest));
-          return response.statusCode;
         }
+        return response.statusCode;
       } catch (e) {
         debugPrint(e.toString());
         return 2000;
