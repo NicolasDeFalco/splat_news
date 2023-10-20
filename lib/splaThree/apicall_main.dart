@@ -2,8 +2,8 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:splat_news/splaThree/draw_functions/actual.dart';
+import 'package:splat_news/splaThree/draw_functions/actual_coop.dart';
 import 'package:splat_news/splaThree/draw_functions/actual_rank.dart';
-import 'package:splat_news/splaThree/schedules/schedule_grizz.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:splat_news/splaThree/functions/functions.dart';
@@ -24,12 +24,6 @@ class SplatoonTrois {
 
   // Dedicated to Challenges
   Map<String, dynamic> challenges = new Map();
-
-  // Dedicated to Salmon Run
-  Map<String, dynamic> grizz = new Map();
-  Map<String, dynamic> grizzEggstra = new Map();
-  Map<String, dynamic> grizzBig = new Map();
-  Map<String, dynamic> grizzMult = new Map();
 
   // Dedicated to the splatfest matches
   Map<String, dynamic> fest = new Map();
@@ -164,9 +158,7 @@ class SplatoonTrois {
       fest = data['data']['festSchedules']['nodes'][0]['festMatchSetting'];
       festMult = data['data']['festSchedules'];
     }
-    grizz =
-        data['data']['coopGroupingSchedule']['regularSchedules']['nodes'][0];
-    grizzMult = data['data']['coopGroupingSchedule']['regularSchedules'];
+
     int x = 0;
     for (var changes in data['data']['coopGroupingSchedule']['regularSchedules']
         ['nodes']) {
@@ -180,8 +172,6 @@ class SplatoonTrois {
     if (data['data']['coopGroupingSchedule']['teamContestSchedules']['nodes']
             .toString() !=
         '[]') {
-      grizzEggstra = data['data']['coopGroupingSchedule']
-          ['teamContestSchedules']['nodes'][0];
       eggstraCheck = true;
       grizzEggstraChange[0][0] = DateTime.parse(data['data']
                   ['coopGroupingSchedule']['teamContestSchedules']['nodes'][0]
@@ -194,15 +184,15 @@ class SplatoonTrois {
           .toLocal()
           .toString();
       if (DateTime.now().millisecondsSinceEpoch <
-          DateTime.parse(grizzEggstra['startTime']).millisecondsSinceEpoch) {
+          DateTime.parse(data['data']['coopGroupingSchedule']
+                  ['teamContestSchedules']['nodes'][0]['startTime'])
+              .millisecondsSinceEpoch) {
         eggstraSoon = true;
       }
     }
     if (data['data']['coopGroupingSchedule']['bigRunSchedules']['nodes']
             .toString() !=
         '[]') {
-      grizzBig =
-          data['data']['coopGroupingSchedule']['bigRunSchedules']['nodes'][0];
       bigCheck = true;
       grizzBigChange[0][0] = DateTime.parse(data['data']['coopGroupingSchedule']
               ['bigRunSchedules']['nodes'][0]['startTime'])
@@ -213,13 +203,19 @@ class SplatoonTrois {
           .toLocal()
           .toString();
       if (DateTime.now().millisecondsSinceEpoch <
-          DateTime.parse(grizzBig['startTime']).millisecondsSinceEpoch) {
+          DateTime.parse(data['data']['coopGroupingSchedule']['bigRunSchedules']
+                  ['nodes'][0]['startTime'])
+              .millisecondsSinceEpoch) {
         bigSoon = true;
       }
       if (DateTime.now().millisecondsSinceEpoch >
-              DateTime.parse(grizzBig['startTime']).millisecondsSinceEpoch &&
+              DateTime.parse(data['data']['coopGroupingSchedule']
+                      ['bigRunSchedules']['nodes'][0]['startTime'])
+                  .millisecondsSinceEpoch &&
           DateTime.now().millisecondsSinceEpoch <
-              DateTime.parse(grizzBig['endTime']).millisecondsSinceEpoch) {
+              DateTime.parse(data['data']['coopGroupingSchedule']
+                      ['bigRunSchedules']['nodes'][0]['endTime'])
+                  .millisecondsSinceEpoch) {
         bigNow = true;
       }
     }
@@ -255,7 +251,7 @@ class SplatoonTrois {
                 width: 280,
                 height: 150,
               ),
-              if (festScheduled) festBanner(),
+              if (festScheduled) festBanner('Splat fest inkoming!'),
               actual(
                   context,
                   turfMult,
@@ -292,11 +288,7 @@ class SplatoonTrois {
               width: 280,
               height: 150,
             ),
-            Text(
-              "SPLAT FEST !",
-              style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
-            ),
-            festBanner(),
+            festBanner('SPLAT FEST !'),
             actual(context, festMult, 'festMatchSetting', mapChange, true,
                 Colors.black, 'assets/logo/S3/Tricolor.png'),
             if (data['data']['currentFest']['state'] == "SECOND_HALF")
@@ -395,7 +387,7 @@ class SplatoonTrois {
         ));
   }
 
-  Widget festBanner() {
+  Widget festBanner(String text) {
     return Card(
       elevation: 10,
       color: Colors.black,
@@ -411,7 +403,7 @@ class SplatoonTrois {
                 height: 50,
               ),
               Text(
-                "Splat fest inkoming!",
+                text,
                 style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
               ),
               const Image(
@@ -448,7 +440,6 @@ class SplatoonTrois {
     );
   }
 
-  //FIXME: This needs to be more compact.
   Container grizzRoll(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -463,298 +454,31 @@ class SplatoonTrois {
               height: 150,
             ),
             if (eggstraCheck)
-              Card(
-                  elevation: 10,
-                  color: const Color(0xFFCA9215),
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const Text(
-                          "",
-                          style: TextStyle(fontSize: 5),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Image(
-                                image:
-                                    AssetImage('assets/logo/EggstraWork.png'),
-                                width: 50,
-                                height: 50),
-                            if (eggstraSoon)
-                              Text(
-                                "Eggstra Work Inkoming",
-                                style: TextStyle(
-                                    color: Colors.grey.shade200, fontSize: 30),
-                              )
-                            else
-                              Text(
-                                "Eggstra Work",
-                                style: TextStyle(
-                                    color: Colors.grey.shade200, fontSize: 35),
-                              ),
-                            const Image(
-                                image:
-                                    AssetImage('assets/logo/EggstraWork.png'),
-                                width: 50,
-                                height: 50)
-                          ],
-                        ),
-                        Text(
-                          "Actual map:",
-                          style: TextStyle(
-                              color: Colors.grey.shade200, fontSize: 25),
-                        ),
-                        Text(
-                          grizzEggstra['setting']['coopStage']['name'],
-                          style: TextStyle(
-                              color: Colors.grey.shade200, fontSize: 22),
-                        ),
-                        Text(
-                          'From ${dateFormat(grizzEggstraChange[0][0])} to ${dateFormat(grizzEggstraChange[0][1])}',
-                          style: TextStyle(
-                              color: Colors.grey.shade200, fontSize: 14),
-                        ),
-                        CachedNetworkImage(
-                          imageUrl: grizzEggstra['setting']['coopStage']
-                              ['image']['url'],
-                          width: 360,
-                          height: 210,
-                        ),
-                        Card(
-                          elevation: 10,
-                          color: Colors.grey.shade800,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                "Supplied weapons:",
-                                style: TextStyle(
-                                    color: Colors.grey.shade400, fontSize: 20),
-                              ),
-                              for (var elements in grizzEggstra['setting']
-                                  ['weapons'])
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(" ${elements['name']}",
-                                        style: TextStyle(
-                                            color: Colors.grey.shade200,
-                                            fontSize: 20)),
-                                    const Text("                   "),
-                                    CachedNetworkImage(
-                                      imageUrl: elements['image']['url'],
-                                      width: 90,
-                                      height: 90,
-                                    ),
-                                  ],
-                                )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  )),
+              actualGrizz(
+                  context,
+                  data['data']['coopGroupingSchedule']['teamContestSchedules'],
+                  1,
+                  const Color(0xFFCA9215),
+                  eggstraSoon,
+                  grizzEggstraChange,
+                  'assets/logo/EggstraWork.png'),
             if (bigCheck)
-              Card(
-                  elevation: 10,
-                  color: const Color.fromARGB(255, 165, 53, 128),
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const Text(
-                          "",
-                          style: TextStyle(fontSize: 5),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Image(
-                                image: AssetImage('assets/logo/S3/BigRun.png'),
-                                width: 50,
-                                height: 50),
-                            if (bigSoon)
-                              Text(
-                                "Big Run Inkoming!",
-                                style: TextStyle(
-                                    color: Colors.grey.shade200, fontSize: 35),
-                              )
-                            else
-                              Text(
-                                "Big Run!",
-                                style: TextStyle(
-                                    color: Colors.grey.shade200, fontSize: 35),
-                              ),
-                            const Image(
-                                image: AssetImage('assets/logo/S3/BigRun.png'),
-                                width: 50,
-                                height: 50)
-                          ],
-                        ),
-                        Text(
-                          "Big Run map:",
-                          style: TextStyle(
-                              color: Colors.grey.shade200, fontSize: 25),
-                        ),
-                        Text(
-                          grizzBig['setting']['coopStage']['name'],
-                          style: TextStyle(
-                              color: Colors.grey.shade200, fontSize: 22),
-                        ),
-                        Text(
-                          'From ${dateFormat(grizzBigChange[0][0])} to ${dateFormat(grizzBigChange[0][1])}',
-                          style: TextStyle(
-                              color: Colors.grey.shade200, fontSize: 14),
-                        ),
-                        CachedNetworkImage(
-                          imageUrl: grizzBig['setting']['coopStage']['image']
-                              ['url'],
-                          width: 360,
-                          height: 210,
-                        ),
-                        Card(
-                          elevation: 10,
-                          color: Colors.grey.shade800,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                "Supplied weapons:",
-                                style: TextStyle(
-                                    color: Colors.grey.shade400, fontSize: 20),
-                              ),
-                              for (var elements in grizzBig['setting']
-                                  ['weapons'])
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(" ${elements['name']}",
-                                        style: TextStyle(
-                                            color: Colors.grey.shade200,
-                                            fontSize: 20)),
-                                    const Text("                   "),
-                                    CachedNetworkImage(
-                                      imageUrl: elements['image']['url'],
-                                      width: 90,
-                                      height: 90,
-                                    ),
-                                  ],
-                                )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  )),
-            Card(
-                elevation: 10,
-                color: const Color.fromARGB(255, 225, 65, 10),
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const Text('', style: TextStyle(fontSize: 5)),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          const Image(
-                              image: AssetImage('assets/logo/SalmonRun.png'),
-                              width: 50,
-                              height: 50),
-                          Text(
-                            "Salmon run",
-                            style: TextStyle(
-                                color: Colors.grey.shade200, fontSize: 35),
-                          ),
-                          const Image(
-                              image: AssetImage('assets/logo/SalmonRun.png'),
-                              width: 50,
-                              height: 50)
-                        ],
-                      ),
-                      if (bigNow)
-                        Text(
-                          "Coming soon:",
-                          style: TextStyle(
-                              color: Colors.grey.shade200, fontSize: 25),
-                        )
-                      else
-                        Text(
-                          "Actual map:",
-                          style: TextStyle(
-                              color: Colors.grey.shade200, fontSize: 25),
-                        ),
-                      Text(
-                        grizz['setting']['coopStage']['name'],
-                        style: TextStyle(
-                            color: Colors.grey.shade200, fontSize: 22),
-                      ),
-                      Text(
-                        'From ${dateFormat(grizzChange[0][0])} to ${dateFormat(grizzChange[0][1])}',
-                        style: TextStyle(
-                            color: Colors.grey.shade200, fontSize: 14),
-                      ),
-                      CachedNetworkImage(
-                        imageUrl: grizz['setting']['coopStage']['image']['url'],
-                        width: 360,
-                        height: 210,
-                      ),
-                      Card(
-                        elevation: 10,
-                        color: Colors.grey.shade800,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              "Supplied weapons:",
-                              style: TextStyle(
-                                  color: Colors.grey.shade400, fontSize: 20),
-                            ),
-                            for (var elements in grizz['setting']['weapons'])
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(" ${elements['name']}",
-                                      style: TextStyle(
-                                          color: Colors.grey.shade200,
-                                          fontSize: 20)),
-                                  const Text("                   "),
-                                  CachedNetworkImage(
-                                    imageUrl: elements['image']['url'],
-                                    width: 90,
-                                    height: 90,
-                                  ),
-                                ],
-                              )
-                          ],
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SchedulesGrizz(
-                                        content: grizzMult,
-                                        change: grizzChange,
-                                        bigrun: bigNow,
-                                      )));
-                        },
-                        child: Card(
-                          color: Colors.grey.shade800,
-                          child: Text('  See what\'s next  ',
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 20)),
-                        ),
-                      )
-                    ],
-                  ),
-                )),
+              actualGrizz(
+                  context,
+                  data['data']['coopGroupingSchedule']['bigRunSchedules'],
+                  1,
+                  const Color.fromARGB(255, 165, 53, 128),
+                  bigSoon,
+                  grizzBigChange,
+                  'assets/logo/S3/BigRun.png'),
+            actualGrizz(
+                context,
+                data['data']['coopGroupingSchedule']['regularSchedules'],
+                0,
+                const Color.fromARGB(255, 225, 65, 10),
+                bigNow,
+                grizzChange,
+                'assets/logo/SalmonRun.png'),
             Text(
               "Source: splatoon3.ink",
               style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
