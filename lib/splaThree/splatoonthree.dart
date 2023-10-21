@@ -36,18 +36,6 @@ class _SplatoonThreeState extends State<SplatoonThree> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("${widget.title} - Splatoon 3"),
-          backgroundColor: Colors.grey.shade900,
-          /*flexibleSpace: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: <Color>[Color.fromARGB(255, 229, 255, 0), Color.fromARGB(255, 100, 48, 254)]),
-            ),
-          ),*/
-        ),
         body: FutureBuilder(
           future: codeRetreive(),
           builder: (context, snapshot) {

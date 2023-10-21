@@ -260,7 +260,7 @@ class SplatoonDeux {
         int.parse(time) > grizz['details'][0]['end_time']) timeCheck = true;
     switch (position) {
       case 0:
-        if (timeCheck) return 'Coming soon...';
+        if (timeCheck) return 'Coming soon';
         return 'Actual map';
       default:
         if (timeCheck) return 'Future map';
