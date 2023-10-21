@@ -11,12 +11,16 @@ class SplatoonThree extends StatefulWidget {
   State<SplatoonThree> createState() => _SplatoonThreeState();
 }
 
-class _SplatoonThreeState extends State<SplatoonThree> {
+class _SplatoonThreeState extends State<SplatoonThree>
+    with AutomaticKeepAliveClientMixin {
   SplatoonTrois test = SplatoonTrois();
   int code = 0;
   Container page = Container();
   int pageCount = 1;
   bool received = false;
+
+  @override
+  bool get wantKeepAlive => true;
 
   Future<void> codeRetreive() async {
     if (!received) {
@@ -35,6 +39,7 @@ class _SplatoonThreeState extends State<SplatoonThree> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
         body: FutureBuilder(
           future: codeRetreive(),

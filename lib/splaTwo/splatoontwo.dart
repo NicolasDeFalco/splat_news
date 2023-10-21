@@ -11,12 +11,16 @@ class SplatoonTwo extends StatefulWidget {
   State<SplatoonTwo> createState() => _SplatoonTwoState();
 }
 
-class _SplatoonTwoState extends State<SplatoonTwo> {
+class _SplatoonTwoState extends State<SplatoonTwo>
+    with AutomaticKeepAliveClientMixin {
   SplatoonDeux test = SplatoonDeux();
   int code = 0;
   Container page = Container();
   int pageCount = 1;
   bool received = false;
+
+  @override
+  bool get wantKeepAlive => true;
 
   Future<void> codeRetreive() async {
     if (!received) {
@@ -34,7 +38,14 @@ class _SplatoonTwoState extends State<SplatoonTwo> {
   }
 
   @override
+  void initState() {
+    super.initState;
+    debugPrint('Passed');
+  }
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
         body: FutureBuilder(
           future: codeRetreive(),
