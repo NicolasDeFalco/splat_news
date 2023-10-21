@@ -38,12 +38,6 @@ class _SplatoonTwoState extends State<SplatoonTwo>
   }
 
   @override
-  void initState() {
-    super.initState;
-    debugPrint('Passed');
-  }
-
-  @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
