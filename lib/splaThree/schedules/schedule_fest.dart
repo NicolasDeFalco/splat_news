@@ -2,40 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:splat_news/functions/functions.dart';
 
-class Schedules extends StatefulWidget {
-  final String type;
-  final Color background;
+class SchedulesFest extends StatefulWidget {
   final Map<String, dynamic> content;
   final String picLink;
   final List<List<String>> mapChange;
-  final String typeCode;
 
-  const Schedules({
+  const SchedulesFest({
     super.key,
-    required this.type,
-    required this.background,
     required this.content,
     required this.picLink,
     required this.mapChange,
-    required this.typeCode,
   });
 
   @override
-  State<Schedules> createState() =>
-      SchedulesState(type, background, content, picLink, mapChange, typeCode);
+  State<SchedulesFest> createState() =>
+      SchedulesFestState(content, picLink, mapChange);
 }
 
-class SchedulesState extends State<Schedules> {
-  String type;
-  String typeCode;
-  Color background;
+class SchedulesFestState extends State<SchedulesFest> {
   Map<String, dynamic> content;
   String picLink;
   List<List<String>> mapChange;
   int position = 0;
 
-  SchedulesState(this.type, this.background, this.content, this.picLink,
-      this.mapChange, this.typeCode);
+  SchedulesFestState(this.content, this.picLink, this.mapChange);
 
   String timeConvertLoop(
     String value,
@@ -64,7 +54,7 @@ class SchedulesState extends State<Schedules> {
     position = 0;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Splatoon 3 - $type"),
+        title: Text("Splatoon 3 - Fest Battle"),
         backgroundColor: Colors.grey.shade900,
       ),
       body: Container(
@@ -75,22 +65,23 @@ class SchedulesState extends State<Schedules> {
           child: Column(
             children: [
               for (var battle in content['nodes'])
-                if (position <= 11 && battle['festMatchSettings'] == null)
+                if (battle['festMatchSettings'] != null)
                   Card(
                       elevation: 10,
-                      color: background,
+                      color: Colors.black,
                       child: Container(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            const Text(""),
+                            const Text('', style: TextStyle(fontSize: 5)),
                             if (position < 3)
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Image(
-                                    image: AssetImage(picLink),
+                                  const Image(
+                                    image: AssetImage(
+                                        'assets/logo/S3/Tricolor.png'),
                                     width: 50,
                                     height: 50,
                                   ),
@@ -100,8 +91,9 @@ class SchedulesState extends State<Schedules> {
                                         color: Colors.grey.shade200,
                                         fontSize: 30),
                                   ),
-                                  Image(
-                                      image: AssetImage(picLink),
+                                  const Image(
+                                      image: AssetImage(
+                                          'assets/logo/S3/Tricolor.png'),
                                       width: 50,
                                       height: 50)
                                 ],
@@ -110,30 +102,35 @@ class SchedulesState extends State<Schedules> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
-                                  'assets/logo/S3/${battle[typeCode]['vsRule']['rule']}.png',
+                                  'assets/logo/S3/Tricolor.png',
                                   width: 50,
                                   height: 50,
                                 ),
                                 Text(
-                                  "${battle[typeCode]['vsRule']['name']}",
+                                  "Turf War",
                                   style: TextStyle(
-                                      color: Colors.grey.shade800,
-                                      fontSize: 22),
+                                      color: Colors.grey.shade400,
+                                      fontSize: 20),
                                 ),
                                 Image.asset(
-                                  'assets/logo/S3/${battle[typeCode]['vsRule']['rule']}.png',
+                                  'assets/logo/S3/Tricolor.png',
                                   width: 50,
                                   height: 50,
                                 ),
                               ],
                             ),
-                            Text("${timeConvertLoop(
-                              mapChange[position][0].substring(11, 13),
-                              false,
-                            )} to ${timeConvertLoop(mapChange[position][1].substring(11, 13), true)}"),
+                            /*Text(
+                        "(${turf['vsRule']['name'].toString()})",
+                        style: TextStyle(
+                            color: Colors.grey.shade800, fontSize: 20),
+                      ),*/
+
+                            Text(
+                                "${timeConvertLoop(mapChange[position][0].substring(11, 13), false)} to ${timeConvertLoop(mapChange[position][1].substring(11, 13), true)}",
+                                style: TextStyle(color: Colors.grey.shade200)),
                             Text("Map:",
                                 style: TextStyle(
-                                    color: Colors.grey.shade800, fontSize: 16)),
+                                    color: Colors.grey.shade200, fontSize: 16)),
                             Card(
                               elevation: 10,
                               color: Colors.grey.shade800,
@@ -141,8 +138,8 @@ class SchedulesState extends State<Schedules> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  for (var elements in battle[typeCode]
-                                      ['vsStages'])
+                                  for (var elements
+                                      in battle['festMatchSetting']['vsStages'])
                                     Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:splat_news/splaThree/schedules/schedule_fest.dart';
 import 'package:splat_news/splaThree/schedules/schedules.dart';
 import 'package:splat_news/functions/functions.dart';
 
@@ -47,12 +48,6 @@ Widget actual(BuildContext context, Map<String, dynamic> data, String name,
                 ),
               ],
             ),
-            /*Text(
-                        "(${turf['vsRule']['name'].toString()})",
-                        style: TextStyle(
-                            color: Colors.grey.shade800, fontSize: 20),
-                      ),*/
-
             Text(
                 "${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
             Text("Actual rotation:",
@@ -82,18 +77,28 @@ Widget actual(BuildContext context, Map<String, dynamic> data, String name,
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Schedules(
-                              background: bgColor,
-                              content: data,
-                              mapChange: mapChange,
-                              type: typeName(name),
-                              picLink: iconLink,
-                              typeCode: name,
-                              fest: fest,
-                            )));
+                if (!fest) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Schedules(
+                                background: bgColor,
+                                content: data,
+                                mapChange: mapChange,
+                                type: typeName(name),
+                                picLink: iconLink,
+                                typeCode: name,
+                              )));
+                } else {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SchedulesFest(
+                                content: data,
+                                mapChange: mapChange,
+                                picLink: iconLink,
+                              )));
+                }
               },
               child: Card(
                 color: Colors.grey.shade800,
@@ -112,7 +117,7 @@ String typeName(String type) {
     case 'regularMatchSetting':
       return 'Regular Battle';
     case 'xMatchSetting':
-      return 'X Battle';
+      return 'X Rank Battle';
     default:
       return 'Fest Battle';
   }
