@@ -18,9 +18,14 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => MyHomePageState();
 }
 
-class MyHomePageState extends State<HomePage> {
+class MyHomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return DefaultTabController(
       initialIndex: 0,
       length: 2,
@@ -36,6 +41,7 @@ class MyHomePageState extends State<HomePage> {
           ]),
           backgroundColor: Colors.grey.shade900,
           bottom: const TabBar(
+            indicatorColor: Colors.grey,
             dividerColor: Colors.transparent,
             tabs: <Widget>[
               Tab(
