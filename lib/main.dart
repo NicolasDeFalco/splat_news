@@ -20,6 +20,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         fontFamily: 'Splatfont',
+        colorScheme: ColorScheme.fromSwatch(
+          accentColor: Colors.grey,
+        ),
       ),
       home: const MyHomePage(title: 'Squid info'),
       debugShowCheckedModeBanner: false,
