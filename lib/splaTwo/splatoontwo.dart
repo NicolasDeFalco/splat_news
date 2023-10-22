@@ -37,6 +37,34 @@ class _SplatoonTwoState extends State<SplatoonTwo>
     }
   }
 
+  Widget retry() {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          code = 0;
+          received = false;
+        });
+      },
+      child: Card(
+        color: Colors.grey.shade800,
+        child: Text('   Retry   ',
+            style: TextStyle(color: Colors.grey.shade200, fontSize: 20)),
+      ),
+    );
+  }
+
+  Widget message(Widget message) {
+    return Container(
+        decoration: BoxDecoration(color: Colors.grey.shade900),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            message,
+            retry(),
+          ],
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -52,11 +80,12 @@ class _SplatoonTwoState extends State<SplatoonTwo>
               }
               return page;
             } else if (code == 2000) {
-              return notConnected();
+              return message(notConnected());
             } else if (code == 0) {
               return loading();
             }
-            return error(code);
+
+            return message(error(code));
           },
         ),
         bottomNavigationBar: BottomAppBar(
