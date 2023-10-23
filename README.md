@@ -32,9 +32,9 @@ When it's done, you are ready to run the project.
     - ✔ Show League battle schedules
     - ✖ Show past splatfest results
 
- - ➖ Salmon run 
+ - ✔ Salmon run 
     - ✔ Show current schedules
-    - ✖ Show current Salmon Run gear
+    - ✔ Show current Salmon Run gear
 
  - ✖ Gear
     - ✖ Show current gear on sale
@@ -52,11 +52,11 @@ When it's done, you are ready to run the project.
         - ✔ Show incoming splatfest
         - ✖ Show result of past splatfest
 
-- ➖ Salmon Run 
+- ✔ Salmon Run 
     - ✔ Show Salmon Run schedules 
     - ✔ Show schedules of Eggstra Work event 
     - ✔ Show schedules of Big Run event 
-    - ✖ Show current Salmon Run gear
+    - ✔ Show current Salmon Run gear
 
 - ✔ Challenges
 
