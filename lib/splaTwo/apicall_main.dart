@@ -3,11 +3,13 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:splat_news/splaTwo/draw_functions/actual_grizzgear_two.dart';
 import 'package:splat_news/splaTwo/draw_functions/actual_two.dart';
 
 class SplatoonDeux {
   Map<String, dynamic> data = new Map();
   Map<String, dynamic> grizz = new Map();
+  Map<String, dynamic> grizzGear = new Map();
 
   List<List<String>> mapChange =
       List.generate(12, (i) => List.generate(2, (j) => ''));
@@ -24,6 +26,7 @@ class SplatoonDeux {
     if (actualTime > nextUpdate) {
       const String urlBattle = "https://splatoon2.ink/data/schedules.json";
       const String urlGrizz = "https://splatoon2.ink/data/coop-schedules.json";
+      const String urlGrizzGear = "https://splatoon2.ink/data/timeline.json";
       try {
         final responseBattle = await http.get(Uri.parse(urlBattle), headers: {
           'Content-Type': 'application/json',
@@ -35,10 +38,17 @@ class SplatoonDeux {
           'Accept-Charset': 'utf-8',
           'User-Agent': 'SplatNews/dev (nicolasdefalco.9@gmail.com)'
         });
+        final responseGrizzGear =
+            await http.get(Uri.parse(urlGrizzGear), headers: {
+          'Content-Type': 'application/json',
+          'Accept-Charset': 'utf-8',
+          'User-Agent': 'SplatNews/dev (nicolasdefalco.9@gmail.com)'
+        });
         if (responseBattle.statusCode == 200 &&
             responseGrizz.statusCode == 200) {
           data = convert.jsonDecode(responseBattle.body);
           grizz = convert.jsonDecode(responseGrizz.body);
+          grizzGear = convert.jsonDecode(responseGrizzGear.body);
 
           for (int x = 0; x < 2; x++) {
             mapChangeGrizz[x][0] = DateTime.fromMillisecondsSinceEpoch(
@@ -62,6 +72,7 @@ class SplatoonDeux {
         await prefs.setInt('nextUpdateS2', data['regular'][0]['end_time']);
         await prefs.setString('dataS2', convert.jsonEncode(data));
         await prefs.setString('grizzS2', convert.jsonEncode(grizz));
+        await prefs.setString('grizzGearS2', convert.jsonEncode(grizzGear));
         return responseGrizz.statusCode;
       } catch (e) {
         debugPrint(e.toString());
@@ -70,9 +81,12 @@ class SplatoonDeux {
     } else {
       var dataReco = prefs.getString('dataS2');
       var grizzReco = prefs.getString('grizzS2');
+      var grizzGearReco = prefs.getString('grizzGearS2');
 
       data = convert.jsonDecode(dataReco.toString()) as Map<String, dynamic>;
       grizz = convert.jsonDecode(grizzReco.toString()) as Map<String, dynamic>;
+      grizzGear =
+          convert.jsonDecode(grizzGearReco.toString()) as Map<String, dynamic>;
 
       for (int x = 0; x < 2; x++) {
         mapChangeGrizz[x][0] = DateTime.fromMillisecondsSinceEpoch(
@@ -135,10 +149,12 @@ class SplatoonDeux {
               width: 280,
               height: 150,
             ),
+            if (occurence(position) == 'Actual map')
+              actualGrizzGear(grizzGear['coop']['reward_gear']['gear']),
             for (var salmon in grizz['details'])
               Card(
                   elevation: 10,
-                  color: const Color.fromARGB(255, 232, 78, 3),
+                  color: const Color.fromARGB(255, 201, 77, 15),
                   child: Container(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

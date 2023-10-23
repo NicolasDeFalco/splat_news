@@ -1,6 +1,7 @@
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:splat_news/splaThree/draw_functions/actual_grizzgear_three.dart';
 import 'package:splat_news/splaThree/draw_functions/actual_three.dart';
 import 'package:splat_news/splaThree/draw_functions/actual_coop_three.dart';
 import 'package:splat_news/splaThree/draw_functions/actual_rank_three.dart';
@@ -12,6 +13,7 @@ class SplatoonTrois {
   // The data we receive from the API
   Map<String, dynamic> data = new Map();
   Map<String, dynamic> dataFest = new Map();
+  Map<String, dynamic> dataGear = new Map();
 
   // Dedicated to the turf war match
   Map<String, dynamic> turfMult = new Map();
@@ -68,6 +70,7 @@ class SplatoonTrois {
     if (actualTime > nextUpdate) {
       String url = "https://splatoon3.ink/data/schedules.json";
       String urlFest = "https://splatoon3.ink/data/festivals.json";
+      String urlGear = "https://splatoon3.ink/data/coop.json";
 
       // We use a try in case there is no internet connectivity
       try {
@@ -81,9 +84,15 @@ class SplatoonTrois {
           'Accept-Charset': 'utf-8',
           'User-Agent': 'SplatNews/dev (nicolasdefalco.9@gmail.com)'
         });
+        var responseGear = await http.get(Uri.parse(urlGear), headers: {
+          'Content-Type': 'application/json',
+          'Accept-Charset': 'utf-8',
+          'User-Agent': 'SplatNews/dev (nicolasdefalco.9@gmail.com)'
+        });
         if (response.statusCode == 200) {
           data = convert.jsonDecode(response.body);
           dataFest = convert.jsonDecode(responseFest.body);
+          dataGear = convert.jsonDecode(responseGear.body);
           dataSet();
           await prefs.setInt(
               'nextUpdateS3',
@@ -92,6 +101,7 @@ class SplatoonTrois {
                   .millisecondsSinceEpoch);
           await prefs.setString('dataS3', convert.jsonEncode(data));
           await prefs.setString('dataFestS3', convert.jsonEncode(dataFest));
+          await prefs.setString('dataGearS3', convert.jsonEncode(dataGear));
         }
         return response.statusCode;
       } catch (e) {
@@ -101,10 +111,13 @@ class SplatoonTrois {
     } else {
       var dataReco = prefs.getString('dataS3');
       var festReco = prefs.getString('dataFestS3');
+      var gearReco = prefs.getString('dataGearS3');
 
       data = convert.jsonDecode(dataReco.toString()) as Map<String, dynamic>;
       dataFest =
           convert.jsonDecode(festReco.toString()) as Map<String, dynamic>;
+      dataGear =
+          convert.jsonDecode(gearReco.toString()) as Map<String, dynamic>;
 
       dataSet();
     }
@@ -453,6 +466,7 @@ class SplatoonTrois {
               width: 280,
               height: 150,
             ),
+            actualGrizzGear(dataGear['data']['coopResult']['monthlyGear']),
             if (eggstraCheck)
               actualGrizz(
                   context,
@@ -475,7 +489,7 @@ class SplatoonTrois {
                 context,
                 data['data']['coopGroupingSchedule']['regularSchedules'],
                 0,
-                const Color.fromARGB(255, 225, 65, 10),
+                const Color.fromARGB(255, 201, 77, 15),
                 bigNow,
                 grizzChange,
                 'assets/logo/SalmonRun.png'),

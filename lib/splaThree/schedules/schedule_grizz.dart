@@ -69,7 +69,7 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                 if (position <= 5)
                   Card(
                       elevation: 10,
-                      color: const Color.fromARGB(255, 225, 65, 10),
+                      color: const Color.fromARGB(255, 201, 77, 15),
                       child: Container(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
