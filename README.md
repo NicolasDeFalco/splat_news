@@ -60,9 +60,9 @@ When it's done, you are ready to run the project.
 
 - ✔ Challenges
 
-- ✖ Gear
+- ➖ Gear
     - ✖ Show current gear on sale
-    - ✖ Show daily drop
+    - ✔ Show daily drop
 
 ### **🐙Other**
 

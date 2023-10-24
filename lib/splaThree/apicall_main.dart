@@ -1,6 +1,7 @@
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:splat_news/splaThree/draw_functions/actual_gear_three.dart';
 import 'package:splat_news/splaThree/draw_functions/actual_grizzgear_three.dart';
 import 'package:splat_news/splaThree/draw_functions/actual_three.dart';
 import 'package:splat_news/splaThree/draw_functions/actual_coop_three.dart';
@@ -14,6 +15,7 @@ class SplatoonTrois {
   Map<String, dynamic> data = new Map();
   Map<String, dynamic> dataFest = new Map();
   Map<String, dynamic> dataGear = new Map();
+  Map<String, dynamic> dailyGearData = new Map();
 
   // Dedicated to the turf war match
   Map<String, dynamic> turfMult = new Map();
@@ -71,6 +73,7 @@ class SplatoonTrois {
       String url = "https://splatoon3.ink/data/schedules.json";
       String urlFest = "https://splatoon3.ink/data/festivals.json";
       String urlGear = "https://splatoon3.ink/data/coop.json";
+      String urlDailyGear = "https://splatoon3.ink/data/gear.json";
 
       // We use a try in case there is no internet connectivity
       try {
@@ -89,10 +92,17 @@ class SplatoonTrois {
           'Accept-Charset': 'utf-8',
           'User-Agent': 'SplatNews/dev (nicolasdefalco.9@gmail.com)'
         });
+        var responseDailyGear =
+            await http.get(Uri.parse(urlDailyGear), headers: {
+          'Content-Type': 'application/json',
+          'Accept-Charset': 'utf-8',
+          'User-Agent': 'SplatNews/dev (nicolasdefalco.9@gmail.com)'
+        });
         if (response.statusCode == 200) {
           data = convert.jsonDecode(response.body);
           dataFest = convert.jsonDecode(responseFest.body);
           dataGear = convert.jsonDecode(responseGear.body);
+          dailyGearData = convert.jsonDecode(responseDailyGear.body);
           dataSet();
           await prefs.setInt(
               'nextUpdateS3',
@@ -102,6 +112,8 @@ class SplatoonTrois {
           await prefs.setString('dataS3', convert.jsonEncode(data));
           await prefs.setString('dataFestS3', convert.jsonEncode(dataFest));
           await prefs.setString('dataGearS3', convert.jsonEncode(dataGear));
+          await prefs.setString(
+              'dataDailyGearS3', convert.jsonEncode(dailyGearData));
         }
         return response.statusCode;
       } catch (e) {
@@ -112,12 +124,15 @@ class SplatoonTrois {
       var dataReco = prefs.getString('dataS3');
       var festReco = prefs.getString('dataFestS3');
       var gearReco = prefs.getString('dataGearS3');
+      var dailyGearReco = prefs.getString('dataDailyGearS3');
 
       data = convert.jsonDecode(dataReco.toString()) as Map<String, dynamic>;
       dataFest =
           convert.jsonDecode(festReco.toString()) as Map<String, dynamic>;
       dataGear =
           convert.jsonDecode(gearReco.toString()) as Map<String, dynamic>;
+      dailyGearData =
+          convert.jsonDecode(dailyGearReco.toString()) as Map<String, dynamic>;
 
       dataSet();
     }
@@ -704,5 +719,63 @@ class SplatoonTrois {
           ),
           disclaimer()
         ])));
+  }
+
+  Container gearRoll(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey.shade800,
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.asset(
+              'assets/logo/S3.png',
+              width: 280,
+              height: 150,
+            ),
+            Card(
+              color: Colors.blueAccent.shade700,
+              child: Column(
+                children: [
+                  Text('Daily Drop',
+                      style:
+                          TextStyle(color: Colors.grey.shade200, fontSize: 30)),
+                  Card(
+                      elevation: 10,
+                      color: Colors.grey.shade800,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            dailyGearData['data']['gesotown']['pickupBrand']
+                                ['brand']['name'],
+                            style: TextStyle(
+                                color: Colors.grey.shade200, fontSize: 22),
+                          ),
+                          CachedNetworkImage(
+                            imageUrl: dailyGearData['data']['gesotown']
+                                ['pickupBrand']['image']['url'],
+                          ),
+                        ],
+                      )),
+                  Text('Today\'s gear:',
+                      style:
+                          TextStyle(color: Colors.grey.shade200, fontSize: 25)),
+                  for (var gear in dailyGearData['data']['gesotown']
+                      ['pickupBrand']['brandGears'])
+                    actualGear(gear)
+                ],
+              ),
+            ),
+            Text(
+              "Source: splatoon3.ink",
+              style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
+            ),
+            disclaimer()
+          ],
+        ),
+      ),
+    );
   }
 }

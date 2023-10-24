@@ -77,6 +77,8 @@ class _SplatoonThreeState extends State<SplatoonThree>
                 page = test.actualRoll(context);
               } else if (pageCount == 2) {
                 page = test.challengesRoll(context);
+              } else if (pageCount == 3) {
+                page = test.gearRoll(context);
               } else {
                 page = test.grizzRoll(context);
               }
@@ -90,14 +92,17 @@ class _SplatoonThreeState extends State<SplatoonThree>
           },
         ),
         bottomNavigationBar: BottomAppBar(
-          color: Colors.grey.shade900,
-          child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Expanded(
-                  child: SizedBox(
+            color: Colors.grey.shade900,
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 60,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                children: [
+                  SizedBox(
                     height: 60,
+                    width: 110,
                     child: Material(
                       type: MaterialType.transparency,
                       child: InkWell(
@@ -118,10 +123,9 @@ class _SplatoonThreeState extends State<SplatoonThree>
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: SizedBox(
+                  SizedBox(
                     height: 60,
+                    width: 110,
                     child: Material(
                       type: MaterialType.transparency,
                       child: InkWell(
@@ -142,10 +146,9 @@ class _SplatoonThreeState extends State<SplatoonThree>
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: SizedBox(
+                  SizedBox(
                     height: 60,
+                    width: 110,
                     child: Material(
                       type: MaterialType.transparency,
                       child: InkWell(
@@ -166,8 +169,54 @@ class _SplatoonThreeState extends State<SplatoonThree>
                       ),
                     ),
                   ),
-                ),
-              ]),
-        ));
+                  SizedBox(
+                    height: 60,
+                    width: 110,
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            pageCount = 3;
+                          });
+                        },
+                        child: const Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text("Gears",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15))
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  /*SizedBox(
+                  height: 60,
+                  width: 110,
+                  child: Material(
+                    type: MaterialType.transparency,
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          pageCount = 4;
+                        });
+                      },
+                      child: const Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Splat Fest",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 15))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),*/
+                ],
+              ),
+            )));
   }
 }
