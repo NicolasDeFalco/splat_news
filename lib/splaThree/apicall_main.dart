@@ -768,6 +768,19 @@ class SplatoonTrois {
                 ],
               ),
             ),
+            Card(
+              color: Colors.grey.shade600,
+              child: Column(
+                children: [
+                  Text('Gear on sale',
+                      style:
+                          TextStyle(color: Colors.grey.shade200, fontSize: 30)),
+                  for (var gear in dailyGearData['data']['gesotown']
+                      ['limitedGears'])
+                    actualGear(gear)
+                ],
+              ),
+            ),
             Text(
               "Source: splatoon3.ink",
               style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
