@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:splat_news/functions/functions.dart';
 
 class SchedulesTwo extends StatefulWidget {
   final Color background;
@@ -171,11 +172,8 @@ class SchedulesStateTwo extends State<SchedulesTwo> {
                               ),
                             ],
                           ),
-                          Text("${timeConvertLoop(
-                                  mapChange[position][0].substring(11, 13),
-                                  false)} to ${timeConvertLoop(
-                                  mapChange[position][1].substring(11, 13),
-                                  true)}"),
+                          Text(
+                              "${timeConvertLoop(mapChange[position][0].substring(11, 13), false)} to ${timeConvertLoop(mapChange[position][1].substring(11, 13), true)}"),
                           const Text("Actual rotation:"),
                           Card(
                             elevation: 10,
@@ -219,6 +217,7 @@ class SchedulesStateTwo extends State<SchedulesTwo> {
                 "Source: splatoon2.ink",
                 style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
               ),
+              disclaimer()
             ]))));
   }
 }

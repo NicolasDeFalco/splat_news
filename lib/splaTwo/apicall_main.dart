@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:splat_news/functions/functions.dart';
 import 'package:splat_news/splaTwo/draw_functions/actual_grizzgear_two.dart';
 import 'package:splat_news/splaTwo/draw_functions/actual_two.dart';
 
@@ -131,6 +132,7 @@ class SplatoonDeux {
               "Source: splatoon2.ink",
               style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
             ),
+            disclaimer()
           ]),
         ));
   }
@@ -262,6 +264,7 @@ class SplatoonDeux {
               "Source: splatoon2.ink",
               style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
             ),
+            disclaimer()
           ],
         ),
       ),

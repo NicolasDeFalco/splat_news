@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 String timeConvert(String value) {
   int time = int.parse(value) % 12;
   String tz = 'AM';
@@ -30,4 +32,25 @@ String occurence(int index, bool grizz) {
     default:
       return 'Future';
   }
+}
+
+Widget disclaimer() {
+  return Card(
+      color: Colors.black,
+      child: Column(
+        children: [
+          Text(
+            "Splat News is not affiliated with Nintendo.",
+            style: TextStyle(color: Colors.grey.shade200, fontSize: 14),
+          ),
+          Text(
+            "All product names, logos, and brands are property of their",
+            style: TextStyle(color: Colors.grey.shade200, fontSize: 14),
+          ),
+          Text(
+            "respective owners.",
+            style: TextStyle(color: Colors.grey.shade200, fontSize: 14),
+          ),
+        ],
+      ));
 }

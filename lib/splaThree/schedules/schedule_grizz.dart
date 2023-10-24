@@ -171,6 +171,7 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                 "Source: splatoon3.ink",
                 style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
               ),
+              disclaimer()
             ],
           ),
         ),
