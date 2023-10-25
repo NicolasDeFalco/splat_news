@@ -10,7 +10,8 @@ Widget actualGear(Map<String, dynamic> data) {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CachedNetworkImage(
-                imageUrl: data['gear']['image']['url'],
+                imageUrl:
+                    "https://splatoon2.ink/assets/splatnet${data['gear']['image']}",
                 width: 90,
                 height: 90,
               ),
@@ -29,7 +30,8 @@ Widget actualGear(Map<String, dynamic> data) {
                         ],
                       ),
                       CachedNetworkImage(
-                        imageUrl: data['gear']['brand']['image']['url'],
+                        imageUrl:
+                            "https://splatoon2.ink/assets/splatnet${data['gear']['brand']['image']}",
                         width: 30,
                         height: 30,
                       ),
@@ -42,11 +44,11 @@ Widget actualGear(Map<String, dynamic> data) {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                  'Main gear power: ${data['gear']['primaryGearPower']['name']}',
+              Text('Main gear power: ${data['skill']['name']}',
                   style: TextStyle(color: Colors.grey.shade200, fontSize: 18)),
               CachedNetworkImage(
-                imageUrl: data['gear']['primaryGearPower']['image']['url'],
+                imageUrl:
+                    "https://splatoon2.ink/assets/splatnet${data['skill']['image']}",
                 width: 30,
                 height: 30,
               )
@@ -69,19 +71,19 @@ Widget actualGear(Map<String, dynamic> data) {
                               child: Material(
                             color: Colors.black,
                             child: CachedNetworkImage(
-                              imageUrl: data['gear']['primaryGearPower']
-                                  ['image']['url'],
+                              imageUrl:
+                                  "https://splatoon2.ink/assets/splatnet${data['skill']['image']}",
                             ),
                           )),
                         ),
-                        for (var power in data['gear']['additionalGearPowers'])
+                        for (int i = 0; i < data['gear']['rarity'] + 1; i++)
                           SizedBox.fromSize(
                             size: const Size(30, 30),
                             child: ClipOval(
                                 child: Material(
                               color: Colors.black,
-                              child: CachedNetworkImage(
-                                imageUrl: power['image']['url'],
+                              child: Image.asset(
+                                'assets/logo/S2/Unknown.png',
                               ),
                             )),
                           ),

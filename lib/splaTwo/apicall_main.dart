@@ -6,11 +6,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:splat_news/functions/functions.dart';
 import 'package:splat_news/splaTwo/draw_functions/actual_grizzgear_two.dart';
 import 'package:splat_news/splaTwo/draw_functions/actual_two.dart';
+import 'package:splat_news/splaTwo/draw_functions/actual_gear_two.dart';
 
 class SplatoonDeux {
   Map<String, dynamic> data = new Map();
   Map<String, dynamic> grizz = new Map();
   Map<String, dynamic> grizzGear = new Map();
+  Map<String, dynamic> gears = new Map();
 
   List<List<String>> mapChange =
       List.generate(12, (i) => List.generate(2, (j) => ''));
@@ -28,6 +30,7 @@ class SplatoonDeux {
       const String urlBattle = "https://splatoon2.ink/data/schedules.json";
       const String urlGrizz = "https://splatoon2.ink/data/coop-schedules.json";
       const String urlGrizzGear = "https://splatoon2.ink/data/timeline.json";
+      const String urlGear = "https://splatoon2.ink/data/merchandises.json";
       try {
         final responseBattle = await http.get(Uri.parse(urlBattle), headers: {
           'Content-Type': 'application/json',
@@ -45,11 +48,17 @@ class SplatoonDeux {
           'Accept-Charset': 'utf-8',
           'User-Agent': 'SplatNews/dev (nicolasdefalco.9@gmail.com)'
         });
+        final responseGear = await http.get(Uri.parse(urlGear), headers: {
+          'Content-Type': 'application/json',
+          'Accept-Charset': 'utf-8',
+          'User-Agent': 'SplatNews/dev (nicolasdefalco.9@gmail.com)'
+        });
         if (responseBattle.statusCode == 200 &&
             responseGrizz.statusCode == 200) {
           data = convert.jsonDecode(responseBattle.body);
           grizz = convert.jsonDecode(responseGrizz.body);
           grizzGear = convert.jsonDecode(responseGrizzGear.body);
+          gears = convert.jsonDecode(responseGear.body);
 
           for (int x = 0; x < 2; x++) {
             mapChangeGrizz[x][0] = DateTime.fromMillisecondsSinceEpoch(
@@ -74,6 +83,7 @@ class SplatoonDeux {
         await prefs.setString('dataS2', convert.jsonEncode(data));
         await prefs.setString('grizzS2', convert.jsonEncode(grizz));
         await prefs.setString('grizzGearS2', convert.jsonEncode(grizzGear));
+        await prefs.setString('gearS2', convert.jsonEncode(gears));
         return responseGrizz.statusCode;
       } catch (e) {
         debugPrint(e.toString());
@@ -83,11 +93,13 @@ class SplatoonDeux {
       var dataReco = prefs.getString('dataS2');
       var grizzReco = prefs.getString('grizzS2');
       var grizzGearReco = prefs.getString('grizzGearS2');
+      var gearReco = prefs.getString('gearS2');
 
       data = convert.jsonDecode(dataReco.toString()) as Map<String, dynamic>;
       grizz = convert.jsonDecode(grizzReco.toString()) as Map<String, dynamic>;
       grizzGear =
           convert.jsonDecode(grizzGearReco.toString()) as Map<String, dynamic>;
+      gears = convert.jsonDecode(gearReco.toString()) as Map<String, dynamic>;
 
       for (int x = 0; x < 2; x++) {
         mapChangeGrizz[x][0] = DateTime.fromMillisecondsSinceEpoch(
@@ -262,6 +274,41 @@ class SplatoonDeux {
                   )),
             Text(
               "Source: splatoon2.ink",
+              style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
+            ),
+            disclaimer()
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container gearRoll(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey.shade800,
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.asset(
+              'assets/logo/S2.png',
+              width: 280,
+              height: 150,
+            ),
+            Card(
+              color: Colors.grey.shade600,
+              child: Column(
+                children: [
+                  Text('Gear on sale',
+                      style:
+                          TextStyle(color: Colors.grey.shade200, fontSize: 30)),
+                  for (var gear in gears['merchandises']) actualGear(gear)
+                ],
+              ),
+            ),
+            Text(
+              "Source: splatoon3.ink",
               style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
             ),
             disclaimer()

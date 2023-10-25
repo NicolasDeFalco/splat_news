@@ -36,8 +36,8 @@ When it's done, you are ready to run the project.
     - ✔ Show current schedules
     - ✔ Show current Salmon Run gear
 
- - ✖ Gear
-    - ✖ Show current gear on sale
+ - ✔ Gear
+    - ✔ Show current gear on sale
     
 
 ### **🐙Splatoon 3**
@@ -68,6 +68,6 @@ When it's done, you are ready to run the project.
 
 - ✖ Notifications
 
-## Data
+## **Data**
 
 This project use data provided by the websites [splatoon2.ink](https://splatoon2.ink "splatoon2.ink") and [splatoon3.ink](splatoon3.ink "splatoon3.ink"). 

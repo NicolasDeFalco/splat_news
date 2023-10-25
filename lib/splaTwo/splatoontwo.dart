@@ -75,8 +75,10 @@ class _SplatoonTwoState extends State<SplatoonTwo>
             if (code == 200) {
               if (pageCount == 1) {
                 page = test.actualRoll(context);
-              } else {
+              } else if (pageCount == 2) {
                 page = test.grizzRoll(context);
+              } else {
+                page = test.gearRoll(context);
               }
               return page;
             } else if (code == 2000) {
@@ -134,6 +136,30 @@ class _SplatoonTwoState extends State<SplatoonTwo>
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text("Salmon Run",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15))
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: SizedBox(
+                    height: 60,
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            pageCount = 3;
+                          });
+                        },
+                        child: const Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text("Gear",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 15))
                           ],
