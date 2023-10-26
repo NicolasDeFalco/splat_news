@@ -65,6 +65,17 @@ class _SplatoonTwoState extends State<SplatoonTwo>
         ));
   }
 
+  Widget pages(pageNumber) {
+    switch (pageNumber) {
+      case 1:
+        return test.actualRoll(context);
+      case 2:
+        return test.grizzRoll(context);
+      default:
+        return test.gearRoll(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -72,22 +83,16 @@ class _SplatoonTwoState extends State<SplatoonTwo>
         body: FutureBuilder(
           future: codeRetreive(),
           builder: (context, snapshot) {
-            if (code == 200) {
-              if (pageCount == 1) {
-                page = test.actualRoll(context);
-              } else if (pageCount == 2) {
-                page = test.grizzRoll(context);
-              } else {
-                page = test.gearRoll(context);
-              }
-              return page;
-            } else if (code == 2000) {
-              return message(notConnected());
-            } else if (code == 0) {
-              return loading();
+            switch (code) {
+              case 200:
+                return pages(pageCount);
+              case 2000:
+                return message(notConnected());
+              case 0:
+                return loading();
+              default:
+                return message(error(code));
             }
-
-            return message(error(code));
           },
         ),
         bottomNavigationBar: BottomAppBar(
