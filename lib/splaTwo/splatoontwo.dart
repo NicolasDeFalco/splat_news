@@ -15,7 +15,6 @@ class _SplatoonTwoState extends State<SplatoonTwo>
     with AutomaticKeepAliveClientMixin {
   SplatoonDeux test = SplatoonDeux();
   int code = 0;
-  Container page = Container();
   int pageCount = 1;
   bool received = false;
 

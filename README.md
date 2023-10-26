@@ -42,15 +42,15 @@ When it's done, you are ready to run the project.
 
 ### **🐙Splatoon 3**
 
-- ➖ Battle
+- ✔ Battle
     - ✔ Show Regular battle schedules  
     - ✔ Show Ranked battle schedules 
     - ✔ Show League battle schedules
     - ✔ Show X-Rank battle schedules
-    - ➖ Splatfest
+    - ✔ Splatfest
         - ✔ Show current splatfest 
         - ✔ Show incoming splatfest
-        - ✖ Show result of past splatfest
+        - ✔ Show result of past splatfest
 
 - ✔ Salmon Run 
     - ✔ Show Salmon Run schedules 

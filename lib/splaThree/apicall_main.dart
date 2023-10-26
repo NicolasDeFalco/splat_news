@@ -9,6 +9,7 @@ import 'package:splat_news/splaThree/draw_functions/actual_rank_three.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:splat_news/functions/functions.dart';
+import 'package:splat_news/splaThree/draw_functions/draw_splatfest_three.dart';
 
 class SplatoonTrois {
   // The data we receive from the API
@@ -446,25 +447,31 @@ class SplatoonTrois {
             'From ${dateFormat(DateTime.parse(dataFest['US']['data']['festRecords']['nodes'][0]['startTime']).toLocal().toString())} to ${dateFormat(DateTime.parse(dataFest['US']['data']['festRecords']['nodes'][0]['endTime']).toLocal().toString())}',
             style: TextStyle(color: Colors.grey.shade200, fontSize: 14),
           ),
-          Text(
-            dataFest['US']['data']['festRecords']['nodes'][0]['title'],
-            style: TextStyle(color: Colors.grey.shade200, fontSize: 25),
+          Card(
+            color: Colors.grey.shade800,
+            child: Column(children: [
+              Text(
+                dataFest['US']['data']['festRecords']['nodes'][0]['title'],
+                style: TextStyle(color: Colors.grey.shade200, fontSize: 20),
+              ),
+              Container(
+                child: CachedNetworkImage(
+                  imageUrl: dataFest['US']['data']['festRecords']['nodes'][0]
+                      ['image']['url'],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  for (var team in dataFest['US']['data']['festRecords']
+                      ['nodes'][0]['teams'])
+                    Text(team['teamName'],
+                        style: TextStyle(
+                            color: Colors.grey.shade200, fontSize: 18))
+                ],
+              )
+            ]),
           ),
-          Container(
-            child: CachedNetworkImage(
-              imageUrl: dataFest['US']['data']['festRecords']['nodes'][0]
-                  ['image']['url'],
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              for (var team in dataFest['US']['data']['festRecords']['nodes'][0]
-                  ['teams'])
-                Text(team['teamName'],
-                    style: TextStyle(color: Colors.grey.shade200, fontSize: 25))
-            ],
-          )
         ],
       ),
     );
@@ -781,6 +788,32 @@ class SplatoonTrois {
                 ],
               ),
             ),
+            Text(
+              "Source: splatoon3.ink",
+              style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
+            ),
+            disclaimer()
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container splatfestResult(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey.shade800,
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.asset(
+              'assets/logo/S3.png',
+              width: 280,
+              height: 150,
+            ),
+            for (var team in dataFest['US']['data']['festRecords']['nodes'])
+              if (team['state'] == 'CLOSED') splatfestResultCard(context, team),
             Text(
               "Source: splatoon3.ink",
               style: TextStyle(color: Colors.grey.shade200, fontSize: 16),

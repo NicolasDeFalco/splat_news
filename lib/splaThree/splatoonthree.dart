@@ -15,7 +15,6 @@ class _SplatoonThreeState extends State<SplatoonThree>
     with AutomaticKeepAliveClientMixin {
   SplatoonTrois test = SplatoonTrois();
   int code = 0;
-  Container page = Container();
   int pageCount = 1;
   bool received = false;
 
@@ -73,8 +72,10 @@ class _SplatoonThreeState extends State<SplatoonThree>
         return test.challengesRoll(context);
       case 3:
         return test.grizzRoll(context);
-      default:
+      case 4:
         return test.gearRoll(context);
+      default:
+        return test.splatfestResult(context);
     }
   }
 
@@ -198,29 +199,29 @@ class _SplatoonThreeState extends State<SplatoonThree>
                       ),
                     ),
                   ),
-                  /*SizedBox(
-                  height: 60,
-                  width: 110,
-                  child: Material(
-                    type: MaterialType.transparency,
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          pageCount = 4;
-                        });
-                      },
-                      child: const Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text("Splat Fest",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 15))
-                        ],
+                  SizedBox(
+                    height: 60,
+                    width: 110,
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            pageCount = 5;
+                          });
+                        },
+                        child: const Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text("Splat Fest",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15))
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),*/
                 ],
               ),
             )));
