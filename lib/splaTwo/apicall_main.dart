@@ -1,9 +1,11 @@
 import 'dart:convert' as convert;
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:splat_news/functions/functions.dart';
+import 'package:splat_news/splaTwo/draw_functions/draw_splatfest_two.dart';
 import 'package:splat_news/splaTwo/draw_functions/actual_grizzgear_two.dart';
 import 'package:splat_news/splaTwo/draw_functions/actual_two.dart';
 import 'package:splat_news/splaTwo/draw_functions/actual_gear_two.dart';
@@ -13,6 +15,7 @@ class SplatoonDeux {
   Map<String, dynamic> grizz = new Map();
   Map<String, dynamic> grizzGear = new Map();
   Map<String, dynamic> gears = new Map();
+  Map<String, dynamic> fest = new Map();
 
   List<List<String>> mapChange =
       List.generate(12, (i) => List.generate(2, (j) => ''));
@@ -23,6 +26,8 @@ class SplatoonDeux {
   int position = 0;
 
   Future<int> test() async {
+    final recoFest = await rootBundle.loadString('assets/data/festivals.json');
+    fest = convert.jsonDecode(recoFest);
     final prefs = await SharedPreferences.getInstance();
     final nextUpdate = prefs.getInt('nextUpdateS2') ?? 0;
     final double actualTime = DateTime.now().millisecondsSinceEpoch / 1000;
@@ -332,6 +337,31 @@ class SplatoonDeux {
         if (timeCheck) return 'Future map';
         return 'Next map';
     }
+  }
+
+  Container splatfestResult(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey.shade800,
+      ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.asset(
+              'assets/logo/S3.png',
+              width: 280,
+              height: 150,
+            ),
+            for (var team in fest['na']['festivals']) splatfestResultCard(team),
+            Text(
+              "Source: splatoon3.ink",
+              style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
+            ),
+            disclaimer()
+          ],
+        ),
+      ),
+    );
   }
 
   String dateFormatLoop(String value, bool loop) {

@@ -70,8 +70,10 @@ class _SplatoonTwoState extends State<SplatoonTwo>
         return test.actualRoll(context);
       case 2:
         return test.grizzRoll(context);
-      default:
+      case 3:
         return test.gearRoll(context);
+      default:
+        return test.splatfestResult(context);
     }
   }
 
@@ -164,6 +166,30 @@ class _SplatoonTwoState extends State<SplatoonTwo>
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text("Gear",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 15))
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: SizedBox(
+                    height: 60,
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            pageCount = 4;
+                          });
+                        },
+                        child: const Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text("Splatfest",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 15))
                           ],

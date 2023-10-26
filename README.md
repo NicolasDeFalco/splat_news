@@ -26,11 +26,11 @@ When it's done, you are ready to run the project.
 
 ### **🐙Splatoon 2**
 
- - ➖ Battle
+ - ✔ Battle
     - ✔ Show Regular battle schedules  
     - ✔ Show Ranked battle schedules 
     - ✔ Show League battle schedules
-    - ✖ Show past splatfest results
+    - ✔ Show past splatfest results
 
  - ✔ Salmon run 
     - ✔ Show current schedules

@@ -1,0 +1,880 @@
+{
+    "na": {
+        "festivals": [
+            {
+
+                "images": {
+                    "panel": "/images/festival/15195d4abf17afbc6bc1c22cbff56012.png",
+                    "bravo": "/images/festival/47eda55efc2e1c581e18c67c6e794feb.png",
+                    "alpha": "/images/festival/f9bca24258d2afdf92dbb64af51c32b3.png"
+                },
+                "names": {
+                    "alpha": "Super Mushroom",
+                    "bravo": "Super Star"
+                },
+                "festival_id": 4064,
+                "rates": {
+                    "challenge": {
+                        "alpha": 5412,
+                        "bravo": 4588
+                    },
+                    "solo": {
+                        "alpha": 5341,
+                        "bravo": 4659
+                    },
+                    "vote": {
+                        "alpha": 3180,
+                        "bravo": 6820
+                    }
+                },
+                "alphaWin": true,
+                "bravoWin": false
+            },
+            {
+                "festival_id": 4063,
+                "names": {
+                    "alpha": "Trick",
+                    "bravo": "Treat"
+                },
+                "images": {
+                    "alpha": "/images/festival/0957e57c58c75b6897b8cff48017464b.png",
+                    "panel": "/images/festival/ae3bbc0b7ccfb6f686938a14ce7a725b.png",
+                    "bravo": "/images/festival/6bf7d31afbd3c9d9605036a4086352a0.png"
+                },
+                "rates": {
+                    "challenge": {
+                        "bravo": 5280,
+                        "alpha": 4720
+                    },
+                    "vote": {
+                        "alpha": 5836,
+                        "bravo": 4164
+                    },
+                    "solo": {
+                        "alpha": 4943,
+                        "bravo": 5057
+                    }
+                },
+                "alphaWin": false,
+                "bravoWin": true
+            },
+            {
+
+                "names": {
+                    "bravo": "Egg",
+                    "alpha": "Chicken"
+                },
+                "festival_id": 4062,
+                "images": {
+                    "alpha": "/images/festival/79dec466d07e84349d12fb3e4e2119bf.png",
+                    "panel": "/images/festival/b454ef12822e676b2747682be5d3ee11.png",
+                    "bravo": "/images/festival/03e6fc67603a9115d379b3751b810f2e.png"
+                },
+                "rates": {
+                    "solo": {
+                        "alpha": 5246,
+                        "bravo": 4754
+                    },
+                    "vote": {
+                        "alpha": 4192,
+                        "bravo": 5808
+                    },
+                    "challenge": {
+                        "bravo": 4735,
+                        "alpha": 5265
+                    }
+                },
+                "alphaWin": true,
+                "bravoWin": false
+            },
+            {
+                "names": {
+                    "bravo": "Ketchup",
+                    "alpha": "Mayo"
+                },
+                "festival_id": 4061,
+                "images": {
+                    "bravo": "/images/festival/273866ecd34058df6bf54e79b18df3ec.png",
+                    "panel": "/images/festival/941d35ffa3742692c62965cc87876a30.png",
+                    "alpha": "/images/festival/8d3bacc0ef3479c1bfa5f111cf35f6c5.png"
+                },
+                "rates": {
+                    "vote": {
+                        "alpha": 4475,
+                        "bravo": 5525
+                    },
+                    "solo": {
+                        "bravo": 4829,
+                        "alpha": 5171
+                    },
+                    "challenge": {
+                        "bravo": 5038,
+                        "alpha": 4962
+                    }
+                },
+                "alphaWin": false,
+                "bravoWin": true
+
+            },
+            {
+                "names": {
+                    "alpha": "Chaos",
+                    "bravo": "Order"
+                },
+                "festival_id": 4058,
+                "images": {
+                    "panel": "/images/festival/e82a1714c7195898b0ee418642339da7.png",
+                    "alpha": "/images/festival/bcff7915c5c2a281a6b54a0fcd904abf.png",
+                    "bravo": "/images/festival/494b9443b6600e2307ccb4da85d8afba.png"
+                },
+                "rates": {
+                    "challenge": {
+                        "alpha": 5034,
+                        "bravo": 4966
+                    },
+                    "vote": {
+                        "alpha": 5805,
+                        "bravo": 4195
+                    },
+                    "solo": {
+                        "bravo": 4861,
+                        "alpha": 5139
+                    }
+                },
+                "alphaWin": true,
+                "bravoWin": false
+            },
+            {
+                "names": {
+                    "alpha": "Unicorn",
+                    "bravo": "Narwhal"
+                },
+                "festival_id": 2058,
+                "images": {
+                    "panel": "/images/festival/bfc6c7507995082893b10bba1db02515.png",
+                    "bravo": "/images/festival/e7421732a24724d9e0e37f69da828967.png",
+                    "alpha": "/images/festival/bdef870f0f3565277b646cdb47c088a5.png"
+                },
+                "rates": {
+                    "challenge": {
+                        "bravo": 5111,
+                        "alpha": 4889
+                    },
+                    "vote": {
+                        "bravo": 6099,
+                        "alpha": 3901
+                    },
+                    "solo": {
+                        "bravo": 5011,
+                        "alpha": 4989
+                    }
+                },
+                "alphaWin": false,
+                "bravoWin": true
+
+                
+            },
+            {
+                "festival_id": 5062,
+                "names": {
+                    "alpha": "Time Travel",
+                    "bravo": "Teleportation"
+                },
+                "images": {
+                    "alpha": "/images/festival/0ba413680cfbfea793958f780a0fa4c6.png",
+                    "panel": "/images/festival/2a13fe0c64c963b99199e4d5ce2c6afc.png",
+                    "bravo": "/images/festival/5dd303b56edf737176077ab0759dfe12.png"
+                },
+                "rates": {
+                    "challenge": {
+                        "alpha": 4947,
+                        "bravo": 5053
+                    },
+                    "vote": {
+                        "bravo": 5866,
+                        "alpha": 4134
+                    },
+                    "solo": {
+                        "alpha": 4942,
+                        "bravo": 5058
+                    }
+                },
+                "alphaWin": false,
+                "bravoWin": true
+
+                
+            },
+            {
+                "festival_id": 4057,
+                "names": {
+                    "alpha": "Hare",
+                    "bravo": "Tortoise"
+                },
+                "images": {
+                    "bravo": "/images/festival/25b2f0f54ab695af7501796a84dcd23e.png",
+                    "panel": "/images/festival/636ecf532b58e1f99310d3a60e2eb3ae.png",
+                    "alpha": "/images/festival/64bf92868ec61febf48914368a341694.png"
+                },
+                "rates": {
+                    "challenge": {
+                        "bravo": 4939,
+                        "alpha": 5061
+                    },
+                    "solo": {
+                        "bravo": 4789,
+                        "alpha": 5211
+                    },
+                    "vote": {
+                        "alpha": 4379,
+                        "bravo": 5621
+                    }
+                },
+                "alphaWin": true,
+                "bravoWin": false
+            },
+            {
+                "festival_id": 4056,
+                "names": {
+                    "bravo": "Wizard",
+                    "alpha": "Knight"
+                },               
+                "images": {
+                    "bravo": "/images/festival/337a817b2c1588c6dddecda6c1c1a0b0.png",
+                    "panel": "/images/festival/6d5d3a80a3f442adca813f14657b1d30.png",
+                    "alpha": "/images/festival/0eebbd0cc324ba479b112f88293cefd4.png"
+                },
+                "rates": {
+                    "solo": {
+                        "alpha": 4973,
+                        "bravo": 5027
+                    },
+                    "vote": {
+                        "alpha": 3732,
+                        "bravo": 6268
+                    },
+                    "challenge": {
+                        "bravo": 4970,
+                        "alpha": 5030
+                    }
+                },
+                "alphaWin": false,
+                "bravoWin": true
+
+            },
+            {
+                "images": {
+                    "panel": "/images/festival/4c5df669eb782f9bbad81f7e52252398.png",
+                    "alpha": "/images/festival/7c90e6226e62e705319e5683c0c84f00.png",
+                    "bravo": "/images/festival/dd8c383fdff05b52d21dac6a16385912.png"
+                },
+                "festival_id": 5061,
+                "names": {
+                    "bravo": "Waffle",
+                    "alpha": "Pancake"
+                },
+                "rates": {
+                    "challenge": {
+                        "bravo": 5141,
+                        "alpha": 4859
+                    },
+                    "solo": {
+                        "bravo": 5134,
+                        "alpha": 4866
+                    },
+                    "vote": {
+                        "alpha": 4869,
+                        "bravo": 5131
+                    }
+                },
+                "alphaWin": false,
+                "bravoWin": true
+
+                
+            },
+            {
+                "images": {
+                    "panel": "/images/festival/87049765012ba33c5566e53e2ee23acc.png",
+                    "bravo": "/images/festival/9a6de731cff750fe27dc9badc4685cb2.png",
+                    "alpha": "/images/festival/7a5af2320b5b1c9e66fac2fde60cbfbe.png"
+                },
+                "names": {
+                    "bravo": "Friend",
+                    "alpha": "Familly"
+                },
+                "festival_id": 4055,
+                "rates": {
+                    "challenge": {
+                        "bravo": 5283,
+                        "alpha": 4717
+                    },
+                    "vote": {
+                        "bravo": 3773,
+                        "alpha": 6227
+                    },
+                    "solo": {
+                        "alpha": 4801,
+                        "bravo": 5199
+                    }
+                },
+                "alphaWin": false,
+                "bravoWin": true
+
+                
+            },
+            {
+                "images": {
+                    "panel": "/images/festival/d60f05b972835085c1dd65645377e496.png",
+                    "alpha": "/images/festival/f29f516d41a0eadab392a1025a0d82a8.png",
+                    "bravo": "/images/festival/4dcd1203ab683be2f811c4b6cfbe6ef3.png"
+                },
+                "names": {
+                    "alpha": "Hero",
+                    "bravo": "Villain"
+                },
+                "festival_id": 4054,
+                "rates": {
+                    "challenge": {
+                        "alpha": 4649,
+                        "bravo": 5351
+                    },
+                    "solo": {
+                        "alpha": 4779,
+                        "bravo": 5221
+                    },
+                    "vote": {
+                        "bravo": 3711,
+                        "alpha": 6289
+                    }
+                },
+                "alphaWin": false,
+                "bravoWin": true
+
+            },
+            {
+                "images": {
+                    "panel": "/images/festival/3a94b9a7aabc5fe004e2ca1cec21b3ea.png",
+                    "bravo": "/images/festival/4a4c328f3a01c53904c1de0db254a010.png",
+                    "alpha": "/images/festival/09b89bd0d196a850375a35df06a80e3f.png"
+                },
+                "names": {
+                    "alpha": "Salsa",
+                    "bravo": "Guacamole"
+                },
+                "festival_id": 2057,
+                "rates": {
+                    "vote": {
+                        "alpha": 5712,
+                        "bravo": 4288
+                    },
+                    "solo": {
+                        "bravo": 4753,
+                        "alpha": 5247
+                    },
+                    "challenge": {
+                        "bravo": 4600,
+                        "alpha": 5400
+                    }
+                },
+                "alphaWin": true,
+                "bravoWin": false
+            },
+            {
+                "special_stage": {
+                    "image": "/images/stage/77f1b9058f27c0215effd00feb5c6b6623b8d5b1.png",
+                    "name": "Shifty Station",
+                    "id": "9999"
+                },
+                "names": {
+                    "alpha": "Trick",
+                    "bravo": "Treat"
+                },
+                "festival_id": 4053,
+                "images": {
+                    "bravo": "/images/festival/6bf7d31afbd3c9d9605036a4086352a0.png",
+                    "panel": "/images/festival/ae3bbc0b7ccfb6f686938a14ce7a725b.png",
+                    "alpha": "/images/festival/0957e57c58c75b6897b8cff48017464b.png"
+                },
+                "rates": {
+                    "challenge": {
+                        "alpha": 4755,
+                        "bravo": 5245
+                    },
+                    "solo": {
+                        "bravo": 5011,
+                        "alpha": 4989
+                    },
+                    "vote": {
+                        "bravo": 4315,
+                        "alpha": 5685
+                    }
+                },
+                "alphaWin": false,
+                "bravoWin": true
+
+
+            },
+            {
+                "names": {
+                    "bravo": "Modern style",
+                    "alpha": "Retro style"
+                },
+                "festival_id": 5060,
+                "images": {
+                    "bravo": "/images/festival/56b6a031734728de15b4241337e4e6ae.png",
+                    "panel": "/images/festival/1addfc2fd590191b32130e1d7d06b99e.png",
+                    "alpha": "/images/festival/2f0dad013ee736a585c8c6b1d50cf580.png"
+                },
+                "rates": {
+                    "vote": {
+                        "alpha": 3117,
+                        "bravo": 6883
+                    },
+                    "solo": {
+                        "bravo": 5123,
+                        "alpha": 4877
+                    },
+                    "challenge": {
+                        "bravo": 5179,
+                        "alpha": 4821
+                    }
+                },
+                "alphaWin": false,
+                "bravoWin": true
+
+
+            },
+            {
+                "festival_id": 2056,
+                "names": {
+                    "alpha": "Fork",
+                    "bravo": "Spoon"
+                },
+                "images": {
+                    "bravo": "/images/festival/47b34946976311e6410983133e19364c.png",
+                    "panel": "/images/festival/36863b3199e0b89356bb4f611264cb69.png",
+                    "alpha": "/images/festival/a656296219071de542dc1dda8c30a774.png"
+                },
+                "rates": {
+                    "challenge": {
+                        "bravo": 4969,
+                        "alpha": 5031
+                    },
+                    "solo": {
+                        "bravo": 4838,
+                        "alpha": 5162
+                    },
+                    "vote": {
+                        "alpha": 4680,
+                        "bravo": 5320
+                    }
+                },
+                "alphaWin": true,
+                "bravoWin": false
+            },
+            {  
+                "names": {
+                    "alpha": "Squid",
+                    "bravo": "Octopus"
+                },
+                "festival_id": 4052,
+                "images": {
+                    "panel": "/images/festival/816e592b8b504c8a9a3abbcb295a7d98.png",
+                    "bravo": "/images/festival/4f1310bc2f08932e2206af62e78d4c86.png",
+                    "alpha": "/images/festival/ab723b3031a07ffe63c66d0081092f15.png"
+                },
+                "rates": {
+                    "challenge": {
+                        "alpha": 5294,
+                        "bravo": 4706
+                    },
+                    "solo": {
+                        "alpha": 5166,
+                        "bravo": 4834
+                    },
+                    "vote": {
+                        "alpha": 4404,
+                        "bravo": 5596
+                    }
+                },
+                "alphaWin": true,
+                "bravoWin": false
+            },
+            {
+                "images": {
+                    "bravo": "/images/festival/8ee76925c3d9713f74e18db1906ab31d.png",
+                    "panel": "/images/festival/16d799e667b6a984ed1597e9e909c9d3.png",
+                    "alpha": "/images/festival/1825bbd6b89dbee4072ee33e50512f25.png"
+                },
+                "names": {
+                    "alpha": "Pulp",
+                    "bravo": "No Pulp"
+
+                },
+                "festival_id": 5059,
+                "rates": {
+                    "vote": {
+                        "bravo": 6735,
+                        "alpha": 3265
+                    },
+                    "challenge": {
+                        "alpha": 5261,
+                        "bravo": 4739
+                    },
+                    "solo": {
+                        "bravo": 4938,
+                        "alpha": 5062
+                    }
+                },
+                "alphaWin": true,
+                "bravoWin": false
+
+            },
+            {
+                "images": {
+                    "panel": "/images/festival/ac4461bcca1750bba6ff0187c226936a.png",
+                    "alpha": "/images/festival/4946ff2b7397cba5a5cfedbfda2019aa.png",
+                    "bravo": "/images/festival/1a4adf454f3f8d2c06be827d6d0ae0d5.png"
+                },
+                "names": {
+                    "bravo": "Donnie",
+                    "alpha": "Raph"
+                },
+                "festival_id": 5056,
+                "rates": {
+                    "challenge": {
+                        "alpha": 4902,
+                        "bravo": 5098
+                    },
+                    "solo": {
+                        "bravo": 5189,
+                        "alpha": 4811
+                    },
+                    "vote": {
+                        "bravo": 4698,
+                        "alpha": 5302
+                    }
+                },
+                "alphaWin": false,
+                "bravoWin": true
+                
+            },
+            {
+                "festival_id": 5054,
+                "names": {
+                    "alpha": "Mikey",
+                    "bravo": "Donnie"
+                },
+                "images": {
+                    "alpha": "/images/festival/363411617f79e244f24eceb4b378b0d6.png",
+                    "panel": "/images/festival/3c0c84f2a612f654cf4f3712530c8cbb.png",
+                    "bravo": "/images/festival/0f69ce03fa59ee785c9b2b66b25274d5.png"
+                },
+                "rates": {
+                    "solo": {
+                        "bravo": 5236,
+                        "alpha": 4764
+                    },
+                    "challenge": {
+                        "bravo": 5482,
+                        "alpha": 4518
+                    },
+                    "vote": {
+                        "alpha": 5585,
+                        "bravo": 4415
+                    }
+                },
+                "alphaWin": false,
+                "bravoWin": true
+            },
+            {
+                "images": {
+                    "panel": "/images/festival/c191f55f6f7eaa1224c3ffc2238e5e2d.png",
+                    "bravo": "/images/festival/3ecf2600d781959fb4f1fea328418190.png",
+                    "alpha": "/images/festival/ee6ceb4854c6916594a713b1eca042b3.png"
+                },
+                "festival_id": 5053,
+                "names": {
+                    "alpha": "Raph",
+                    "bravo": "Leo"
+                },
+                "rates": {
+                    "challenge": {
+                        "bravo": 4414,
+                        "alpha": 5586
+                    },
+                    "solo": {
+                        "bravo": 4818,
+                        "alpha": 5182
+                    },
+                    "vote": {
+                        "bravo": 5777,
+                        "alpha": 4223
+                    }
+                },
+                "alphaWin": true,
+                "bravoWin": false
+                
+            },
+            {
+                "images": {
+                    "bravo": "/images/festival/828d1a2e65e27eeda2b626c4c6b227a5.png",
+                    "panel": "/images/festival/027fc01e0ec475872977753664e7cebc.png",
+                    "alpha": "/images/festival/3fad03c6eb123a2059beb18242ea49ba.png"
+                },
+                "names": {
+                    "bravo": "Soccer",
+                    "alpha": "Baseball"
+                },
+                "festival_id": 2055,
+                "rates": {
+                    "solo": {
+                        "alpha": 5081,
+                        "bravo": 4919
+                    },
+                    "challenge": {
+                        "alpha": 5095,
+                        "bravo": 4905
+                    },
+                    "vote": {
+                        "alpha": 4001,
+                        "bravo": 5999
+                    }
+                },
+                "alphaWin": true,
+                "bravoWin": false
+                
+
+            },
+            {
+                "festival_id": 5052,
+                "names": {
+                    "bravo": "Egg",
+                    "alpha": "Chicken"
+                },
+                "images": {
+                    "alpha": "/images/festival/06b3b0b7773d9e6c4ac0a5cc5371fc32.png",
+                    "panel": "/images/festival/9f1730d002628e22c74f52f6dbd8622a.png",
+                    "bravo": "/images/festival/d93df77468714c6211e9377f39a559f4.png"
+                },
+                "rates": {
+                    "solo": {
+                        "bravo": 4734,
+                        "alpha": 5266
+                    },
+                    "challenge": {
+                        "bravo": 4370,
+                        "alpha": 5630
+                    },
+                    "vote": {
+                        "alpha": 4130,
+                        "bravo": 5870
+                    }
+                },
+                "alphaWin": true,
+                "bravoWin": false
+            },
+            {
+                "names": {
+                    "alpha": "Money",
+                    "bravo": "Love"
+                },
+                "festival_id": 2054,
+                "images": {
+                    "alpha": "/images/festival/b90d85a5cb1a8682b5a50eb61c13959d.png",
+                    "panel": "/images/festival/64cb995153229865fb6897708b3d54eb.png",
+                    "bravo": "/images/festival/744828fd21f3e7187697fac2ea13cd6c.png"
+                },
+                "rates": {
+                    "solo": {
+                        "bravo": 5064,
+                        "alpha": 4936
+                    },
+                    "challenge": {
+                        "bravo": 4872,
+                        "alpha": 5128
+                    },
+                    "vote": {
+                        "alpha": 3213,
+                        "bravo": 6787
+                    }
+                },
+                "alphaWin": false,
+                "bravoWin": true
+
+            },
+            {
+                "festival_id": 4051,
+                "names": {
+                    "bravo": "Comedy",
+                    "alpha": "Action"
+                },
+                "images": {
+                    "panel": "/images/festival/c8e8fde799fd509053aa694e0673f27a.png",
+                    "bravo": "/images/festival/bb601dcb90c305e1c93a0b8e67913651.png",
+                    "alpha": "/images/festival/76bc31861473c25500fd67cfef258710.png"
+                },
+                "rates": {
+                    "vote": {
+                        "alpha": 5782,
+                        "bravo": 4218
+                    },
+                    "challenge": {
+                        "alpha": 4866,
+                        "bravo": 5134
+                    },
+                    "solo": {
+                        "bravo": 5133,
+                        "alpha": 4867
+                    }
+                },
+                "alphaWin": false,
+                "bravoWin": true
+
+
+            },
+            {
+                "festival_id": 2053,
+                "names": {
+                    "alpha": "Sweater",
+                    "bravo": "Sock"
+                },
+                "images": {
+                    "alpha": "/images/festival/5deb566aed4f1bf8ab97b19527a52ff2.png",
+                    "panel": "/images/festival/f9ee1526ac5c37cd3d87da5107b2aa9a.png",
+                    "bravo": "/images/festival/6048d7aa5039ddfcad8d3d22d1afdd27.png"
+                },
+                "rates": {
+                    "vote": {
+                        "bravo": 4573,
+                        "alpha": 5427
+                    },
+                    "solo": {
+                        "alpha": 5094,
+                        "bravo": 4906
+                    },
+                    "challenge": {
+                        "alpha": 5222,
+                        "bravo": 4778
+                    }
+                },
+                "alphaWin": true,
+                "bravoWin": false
+            },
+            {
+                "images": {
+                    "alpha": "/images/festival/5998b875be76e8cb27081a800bd54c00.png",
+                    "panel": "/images/festival/75652feea7076d4c57eeffc2ccc787e7.png",
+                    "bravo": "/images/festival/31d1cde8e1f5629d39f36c93b7eafc23.png"
+                },
+                "festival_id": 2052,
+                "names": {
+                    "bravo": "Fantasy",
+                    "alpha": "Sci-Fi"
+                },
+                "rates": {
+                    "vote": {
+                        "bravo": 5722,
+                        "alpha": 4278
+                    },
+                    "challenge": {
+                        "alpha": 5020,
+                        "bravo": 4980
+                    },
+                    "solo": {
+                        "bravo": 5031,
+                        "alpha": 4969
+                    }
+                },
+                "alphaWin": false,
+                "bravoWin": true
+
+            },
+            {
+                "images": {
+                    "bravo": "/images/festival/e12abbae931d7a0a3e44acfddadfe894.png",
+                    "panel": "/images/festival/3aa4fbf7562d762c1d336c4fdbce8dfa.png",
+                    "alpha": "/images/festival/a50696bb2e868b76e0bdc5d4b0d8b862.png"
+                },
+                "names": {
+                    "alpha": "Vampire",
+                    "bravo": "Werewolf"
+                },
+                "festival_id": 2051,
+                "rates": {
+                    "solo": {
+                        "bravo": 4909,
+                        "alpha": 5091
+                    },
+                    "challenge": {
+                        "alpha": 5237,
+                        "bravo": 4763
+                    },
+                    "vote": {
+                        "bravo": 4644,
+                        "alpha": 5356
+                    }
+                },
+                "alphaWin": true,
+                "bravoWin": false
+            },
+            {
+                "festival_id": 5051,
+                "names": {
+                    "bravo": "Invisibility",
+                    "alpha": "Flight"
+                },
+                
+                "images": {
+                    "alpha": "/images/festival/040068b6fbdb4ed7e0200e1025616171.png",
+                    "panel": "/images/festival/640c5aa1d2f83c3b9b7a0a06fd3585a8.png",
+                    "bravo": "/images/festival/554d96de9077e6851bf65a8a205af527.png"
+                },
+                "rates": {
+                    "challenge": {
+                        "alpha": 5224,
+                        "bravo": 4776
+                    },
+                    "solo": {
+                        "alpha": 5531,
+                        "bravo": 4469
+                    },
+                    "vote": {
+                        "alpha": 4926,
+                        "bravo": 5074
+                    }
+                },
+                "alphaWin": true,
+                "bravoWin": false
+            },
+            {
+                "images": {
+                    "bravo": "/images/festival/273866ecd34058df6bf54e79b18df3ec.png",
+                    "panel": "/images/festival/941d35ffa3742692c62965cc87876a30.png",
+                    "alpha": "/images/festival/8d3bacc0ef3479c1bfa5f111cf35f6c5.png"
+                },
+                "names": {
+                    "bravo": "Ketchup",
+                    "alpha": "Mayo"
+                },
+                "festival_id": 2050,
+                "rates": {
+                    "challenge": {
+                        "alpha": 5139,
+                        "bravo": 4861
+                    },
+                    "solo": {
+                        "alpha": 5183,
+                        "bravo": 4817
+                    },
+                    "vote": {
+                        "alpha": 2685,
+                        "bravo": 7315
+                    }
+                },
+                "alphaWin": true,
+                "bravoWin": false
+                
+            }
+        ]
+    }
+}
