@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:splat_news/splaThree/schedules/schedules.dart';
+import 'package:splat_news/splaThree/schedules/schedule_fest.dart';
 import 'package:splat_news/functions/functions.dart';
 
-Widget actual(BuildContext context, Map<String, dynamic> data, String name,
-    List<List<String>> mapChange, Color bgColor, String iconLink) {
+Widget actualFest(BuildContext context, Map<String, dynamic> data, String name,
+    List<List<String>> mapChange, int index) {
   return Card(
       elevation: 10,
-      color: bgColor,
+      color: Colors.black,
       child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -16,48 +16,53 @@ Widget actual(BuildContext context, Map<String, dynamic> data, String name,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Image(
-                  image: AssetImage(iconLink),
+                const Image(
+                  image: AssetImage('assets/logo/S3/Tricolor.png'),
                   width: 50,
                   height: 50,
                 ),
                 Text(
-                  typeName(name),
-                  style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
+                  name,
+                  style: TextStyle(color: Colors.grey.shade200, fontSize: 25),
                 ),
-                Image(image: AssetImage(iconLink), width: 50, height: 50)
+                const Image(
+                    image: AssetImage('assets/logo/S3/Tricolor.png'),
+                    width: 50,
+                    height: 50)
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/logo/S3/${data['nodes'][0][name]['vsRule']['rule']}.png',
+                  'assets/logo/S3/${data['nodes'][0]['festMatchSettings'][index]['vsRule']['rule']}.png',
                   width: 50,
                   height: 50,
                 ),
                 Text(
-                  "${data['nodes'][0][name]['vsRule']['name']}",
-                  style: TextStyle(color: Colors.grey.shade800, fontSize: 22),
+                  "${data['nodes'][0]['festMatchSettings'][index]['vsRule']['name']}",
+                  style: TextStyle(color: Colors.grey.shade200, fontSize: 22),
                 ),
                 Image.asset(
-                  'assets/logo/S3/${data['nodes'][0][name]['vsRule']['rule']}.png',
+                  'assets/logo/S3/${data['nodes'][0]['festMatchSettings'][index]['vsRule']['rule']}.png',
                   width: 50,
                   height: 50,
                 ),
               ],
             ),
             Text(
-                "${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}"),
+                "${timeConvert(mapChange[0][0].substring(11, 13))} to ${timeConvert(mapChange[0][1].substring(11, 13))}",
+                style: TextStyle(color: Colors.grey.shade200, fontSize: 16)),
             Text("Actual rotation:",
-                style: TextStyle(color: Colors.grey.shade800, fontSize: 16)),
+                style: TextStyle(color: Colors.grey.shade200, fontSize: 16)),
             Card(
               elevation: 10,
               color: Colors.grey.shade800,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  for (var elements in data['nodes'][0][name]['vsStages'])
+                  for (var elements in data['nodes'][0]['festMatchSettings']
+                      [index]['vsStages'])
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -79,13 +84,11 @@ Widget actual(BuildContext context, Map<String, dynamic> data, String name,
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Schedules(
-                              background: bgColor,
+                        builder: (context) => SchedulesFest(
                               content: data,
                               mapChange: mapChange,
-                              type: typeName(name),
-                              picLink: iconLink,
-                              typeCode: name,
+                              picLink: 'assets/logo/S3/Tricolor.png',
+                              index: index,
                             )));
               },
               child: Card(
@@ -98,15 +101,4 @@ Widget actual(BuildContext context, Map<String, dynamic> data, String name,
           ],
         ),
       ));
-}
-
-String typeName(String type) {
-  switch (type) {
-    case 'regularMatchSetting':
-      return 'Regular Battle';
-    case 'xMatchSetting':
-      return 'X Rank Battle';
-    default:
-      return 'Fest Battle';
-  }
 }

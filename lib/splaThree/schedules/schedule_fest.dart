@@ -6,17 +6,18 @@ class SchedulesFest extends StatefulWidget {
   final Map<String, dynamic> content;
   final String picLink;
   final List<List<String>> mapChange;
+  final int index;
 
-  const SchedulesFest({
-    super.key,
-    required this.content,
-    required this.picLink,
-    required this.mapChange,
-  });
+  const SchedulesFest(
+      {super.key,
+      required this.content,
+      required this.picLink,
+      required this.mapChange,
+      required this.index});
 
   @override
   State<SchedulesFest> createState() =>
-      SchedulesFestState(content, picLink, mapChange);
+      SchedulesFestState(content, picLink, mapChange, index);
 }
 
 class SchedulesFestState extends State<SchedulesFest> {
@@ -24,8 +25,9 @@ class SchedulesFestState extends State<SchedulesFest> {
   String picLink;
   List<List<String>> mapChange;
   int position = 0;
+  int index;
 
-  SchedulesFestState(this.content, this.picLink, this.mapChange);
+  SchedulesFestState(this.content, this.picLink, this.mapChange, this.index);
 
   String timeConvertLoop(
     String value,
@@ -54,7 +56,7 @@ class SchedulesFestState extends State<SchedulesFest> {
     position = 0;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Splatoon 3 - Fest Battle"),
+        title: Text("Splatoon 3 - Fest Battle ${type(index)}"),
         backgroundColor: Colors.grey.shade900,
       ),
       body: Container(
@@ -139,7 +141,8 @@ class SchedulesFestState extends State<SchedulesFest> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   for (var elements
-                                      in battle['festMatchSetting']['vsStages'])
+                                      in battle['festMatchSettings'][index]
+                                          ['vsStages'])
                                     Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -171,5 +174,10 @@ class SchedulesFestState extends State<SchedulesFest> {
         ),
       ),
     );
+  }
+
+  String type(int index) {
+    if (index == 1) return "(Open)";
+    return "(Pro)";
   }
 }

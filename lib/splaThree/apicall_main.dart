@@ -1,6 +1,7 @@
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:splat_news/splaThree/draw_functions/actual_fest_three.dart';
 import 'package:splat_news/splaThree/draw_functions/actual_gear_three.dart';
 import 'package:splat_news/splaThree/draw_functions/actual_grizzgear_three.dart';
 import 'package:splat_news/splaThree/draw_functions/actual_three.dart';
@@ -171,20 +172,15 @@ class SplatoonTrois {
       //There is a splatfest
       festCheck = true;
       for (int x = 0; x < 12; x++) {
-        if (data['data']['festSchedules']['nodes'][x]['festMatchSetting'] !=
-            null) {
-          mapChange[x][0] = DateTime.parse(
-                  data['data']['festSchedules']['nodes'][x]['startTime'])
-              .toLocal()
-              .toString();
-          mapChange[x][1] = DateTime.parse(
-                  data['data']['festSchedules']['nodes'][x]['endTime'])
-              .toLocal()
-              .toString();
-        }
+        mapChange[x][0] = DateTime.parse(
+                data['data']['regularSchedules']['nodes'][x]['startTime'])
+            .toLocal()
+            .toString();
+        mapChange[x][1] = DateTime.parse(
+                data['data']['regularSchedules']['nodes'][x]['endTime'])
+            .toLocal()
+            .toString();
       }
-
-      fest = data['data']['festSchedules']['nodes'][0]['festMatchSetting'];
       festMult = data['data']['festSchedules'];
     }
 
@@ -286,7 +282,6 @@ class SplatoonTrois {
                   turfMult,
                   'regularMatchSetting',
                   mapChange,
-                  false,
                   const Color.fromARGB(255, 23, 200, 26),
                   'assets/logo/Regular.png'),
               actualRank(context, rankMult, 0, mapChange),
@@ -296,7 +291,6 @@ class SplatoonTrois {
                   xrankMult,
                   'xMatchSetting',
                   mapChange,
-                  false,
                   const Color.fromARGB(255, 14, 199, 144),
                   'assets/logo/XBattle.png'),
               Text(
@@ -319,8 +313,10 @@ class SplatoonTrois {
               height: 150,
             ),
             festBanner('SPLAT FEST !'),
-            actual(context, festMult, 'festMatchSetting', mapChange, true,
-                Colors.black, 'assets/logo/S3/Tricolor.png'),
+            actualFest(
+                context, festMult, 'Splatfest Battle (Open)', mapChange, 1),
+            actualFest(
+                context, festMult, 'Splatfest Battle (Pro)', mapChange, 0),
             if (data['data']['currentFest']['state'] == "SECOND_HALF")
               Card(
                   elevation: 10,
