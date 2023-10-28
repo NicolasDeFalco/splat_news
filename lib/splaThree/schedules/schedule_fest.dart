@@ -67,7 +67,7 @@ class SchedulesFestState extends State<SchedulesFest> {
           child: Column(
             children: [
               for (var battle in content['nodes'])
-                if (battle['festMatchSettings'] != null)
+                if (battle['festMatchSettings'] != null && position < 12)
                   Card(
                       elevation: 10,
                       color: Colors.black,
