@@ -104,18 +104,19 @@ class SchedulesFestState extends State<SchedulesFest> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
-                                  'assets/logo/S3/Tricolor.png',
+                                  'assets/logo/S3/${battle['festMatchSettings'][index]['vsRule']['rule']}.png',
                                   width: 50,
                                   height: 50,
                                 ),
                                 Text(
-                                  "Turf War",
+                                  battle['festMatchSettings'][index]['vsRule']
+                                      ['name'],
                                   style: TextStyle(
                                       color: Colors.grey.shade400,
                                       fontSize: 20),
                                 ),
                                 Image.asset(
-                                  'assets/logo/S3/Tricolor.png',
+                                  'assets/logo/S3/${battle['festMatchSettings'][index]['vsRule']['rule']}.png',
                                   width: 50,
                                   height: 50,
                                 ),
