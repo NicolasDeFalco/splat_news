@@ -313,7 +313,7 @@ class SplatoonDeux {
               ),
             ),
             Text(
-              "Source: splatoon3.ink",
+              "Source: splatoon2.ink",
               style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
             ),
             disclaimer()
@@ -354,7 +354,7 @@ class SplatoonDeux {
             ),
             for (var team in fest['na']['festivals']) splatfestResultCard(team),
             Text(
-              "Source: splatoon3.ink",
+              "Source: splatoon2.ink",
               style: TextStyle(color: Colors.grey.shade200, fontSize: 16),
             ),
             disclaimer()
