@@ -22,7 +22,7 @@ Widget actualGrizz(BuildContext context, Map<String, dynamic> data, int type,
                 Image(image: AssetImage(iconLink), width: 50, height: 50),
                 Text(
                   textType(type, soon),
-                  style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
+                  style: TextStyle(color: Colors.grey.shade200, fontSize: 26),
                 ),
                 Image(image: AssetImage(iconLink), width: 50, height: 50)
               ],
