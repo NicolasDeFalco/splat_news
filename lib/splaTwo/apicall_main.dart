@@ -243,26 +243,28 @@ class SplatoonDeux {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    if (elements['id'] != '-1')
+                                    if (elements['id'] != '-1' &&
+                                        elements['id'] != '-2')
                                       Text(" ${elements['weapon']['name']}",
                                           style: TextStyle(
                                               color: Colors.grey.shade400,
-                                              fontSize: 20)),
-                                    if (elements['id'] == '-1')
+                                              fontSize: 20))
+                                    else
                                       Text(
                                           " ${elements['coop_special_weapon']['name']}",
                                           style: TextStyle(
                                               color: Colors.grey.shade400,
                                               fontSize: 20)),
                                     const Text("                          "),
-                                    if (elements['id'] != '-1')
+                                    if (elements['id'] != '-1' &&
+                                        elements['id'] != '-2')
                                       CachedNetworkImage(
                                         imageUrl:
                                             "https://splatoon2.ink/assets/splatnet${elements['weapon']['image']}",
                                         width: 90,
                                         height: 90,
-                                      ),
-                                    if (elements['id'] == '-1')
+                                      )
+                                    else
                                       CachedNetworkImage(
                                         imageUrl:
                                             "https://splatoon2.ink/assets/splatnet${elements['coop_special_weapon']['image']}",
