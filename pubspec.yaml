@@ -100,6 +100,9 @@ flutter:
     - assets/logo/S3/BigRun.png
     - assets/logo/S3/grizzco.png
     - assets/data/festivals.json
+    - assets/logo/S3/salmoboss/Cohozuna.png
+    - assets/logo/S3/salmoboss/Horrorboros.png
+    - assets/logo/S3/salmoboss/Megalodontia.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

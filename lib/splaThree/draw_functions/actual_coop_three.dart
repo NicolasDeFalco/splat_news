@@ -3,8 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:splat_news/splaThree/schedules/schedule_grizz.dart';
 import 'package:splat_news/functions/functions.dart';
 
-Widget actualGrizz(BuildContext context, Map<String, dynamic> data, int type,
-    Color bg, bool soon, List<List<String>> changes, String iconLink) {
+Widget actualGrizz(
+  BuildContext context,
+  Map<String, dynamic> data,
+  int type,
+  Color bg,
+  bool soon,
+  List<List<String>> changes,
+  String iconLink,
+) {
   return Card(
       elevation: 10,
       color: bg,
@@ -27,13 +34,23 @@ Widget actualGrizz(BuildContext context, Map<String, dynamic> data, int type,
                 Image(image: AssetImage(iconLink), width: 50, height: 50)
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'King Salmonid: ${data['nodes'][0]['setting']['boss']['name']}',
+                  style: TextStyle(color: Colors.grey.shade200, fontSize: 20),
+                ),
+                Image(
+                    image: AssetImage(
+                        'assets/logo/S3/salmoboss/${data['nodes'][0]['setting']['boss']['name']}.png'),
+                    width: 50,
+                    height: 50),
+              ],
+            ),
             Text(
               textOccurence(type, soon),
               style: TextStyle(color: Colors.grey.shade200, fontSize: 25),
-            ),
-            Text(
-              'From ${dateFormat(changes[0][0])} to ${dateFormat(changes[0][1])}',
-              style: TextStyle(color: Colors.grey.shade200, fontSize: 14),
             ),
             Card(
                 elevation: 10,
@@ -45,6 +62,11 @@ Widget actualGrizz(BuildContext context, Map<String, dynamic> data, int type,
                       data['nodes'][0]['setting']['coopStage']['name'],
                       style:
                           TextStyle(color: Colors.grey.shade200, fontSize: 22),
+                    ),
+                    Text(
+                      'From ${dateFormat(changes[0][0])} to ${dateFormat(changes[0][1])}',
+                      style:
+                          TextStyle(color: Colors.grey.shade200, fontSize: 14),
                     ),
                     CachedNetworkImage(
                       imageUrl: data['nodes'][0]['setting']['coopStage']

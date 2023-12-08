@@ -106,10 +106,21 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                                       height: 50)
                                 ],
                               ),
-                            Text(
-                              'From ${dateFormat(change[position][0], false)} to ${dateFormat(change[position][1], true)}',
-                              style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 14),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'King Salmonid: ${salmon['setting']['boss']['name']}',
+                                  style: TextStyle(
+                                      color: Colors.grey.shade200,
+                                      fontSize: 20),
+                                ),
+                                Image(
+                                    image: AssetImage(
+                                        'assets/logo/S3/salmoboss/${salmon['setting']['boss']['name']}.png'),
+                                    width: 50,
+                                    height: 50),
+                              ],
                             ),
                             Card(
                                 elevation: 10,
@@ -123,6 +134,12 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                                       style: TextStyle(
                                           color: Colors.grey.shade200,
                                           fontSize: 22),
+                                    ),
+                                    Text(
+                                      'From ${dateFormat(change[position][0], false)} to ${dateFormat(change[position][1], true)}',
+                                      style: TextStyle(
+                                          color: Colors.grey.shade200,
+                                          fontSize: 14),
                                     ),
                                     CachedNetworkImage(
                                       imageUrl: salmon['setting']['coopStage']
