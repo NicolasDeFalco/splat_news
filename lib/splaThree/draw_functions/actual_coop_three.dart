@@ -34,20 +34,21 @@ Widget actualGrizz(
                 Image(image: AssetImage(iconLink), width: 50, height: 50)
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'King Salmonid: ${data['nodes'][0]['setting']['boss']['name']}',
-                  style: TextStyle(color: Colors.grey.shade200, fontSize: 20),
-                ),
-                Image(
-                    image: AssetImage(
-                        'assets/logo/S3/salmoboss/${data['nodes'][0]['setting']['boss']['name']}.png'),
-                    width: 50,
-                    height: 50),
-              ],
-            ),
+            if (type != 1)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'King Salmonid: ${data['nodes'][0]['setting']['boss']['name']}',
+                    style: TextStyle(color: Colors.grey.shade200, fontSize: 20),
+                  ),
+                  Image(
+                      image: AssetImage(
+                          'assets/logo/S3/salmoboss/${data['nodes'][0]['setting']['boss']['name']}.png'),
+                      width: 50,
+                      height: 50),
+                ],
+              ),
             Text(
               textOccurence(type, soon),
               style: TextStyle(color: Colors.grey.shade200, fontSize: 25),
