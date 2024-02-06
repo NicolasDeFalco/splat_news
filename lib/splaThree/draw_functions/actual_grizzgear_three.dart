@@ -23,14 +23,14 @@ Widget actualGrizzGear(Map<String, dynamic> gear) {
                 children: [
                   Text('${gear['name']}  ',
                       style:
-                          TextStyle(color: Colors.grey.shade200, fontSize: 18)),
+                          TextStyle(color: Colors.grey.shade200, fontSize: 15)),
                   Row(
                     children: [
                       Column(
                         children: [
                           Text('(Grizzco)  ',
                               style: TextStyle(
-                                  color: Colors.grey.shade200, fontSize: 15)),
+                                  color: Colors.grey.shade200, fontSize: 14)),
                         ],
                       ),
                       Image.asset(
