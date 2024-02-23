@@ -563,26 +563,33 @@ class SplatoonTrois {
                             height: 60)
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/logo/S3/${elements['leagueMatchSetting']['vsRule']['rule']}.png',
-                          width: 50,
-                          height: 50,
-                        ),
-                        Text(
-                          "(${elements['leagueMatchSetting']['vsRule']['name'].toString()})",
-                          style: TextStyle(
-                              color: Colors.grey.shade800, fontSize: 20),
-                        ),
-                        Image.asset(
-                          'assets/logo/S3/${elements['leagueMatchSetting']['vsRule']['rule']}.png',
-                          width: 50,
-                          height: 50,
-                        ),
-                      ],
-                    ),
+                    if (elements['leagueMatchSetting']['vsRule'] != null)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/logo/S3/${elements['leagueMatchSetting']['vsRule']['rule'].toString()}.png',
+                            width: 50,
+                            height: 50,
+                          ),
+                          Text(
+                            "(${elements['leagueMatchSetting']['vsRule']['name'].toString()})",
+                            style: TextStyle(
+                                color: Colors.grey.shade800, fontSize: 20),
+                          ),
+                          Image.asset(
+                            'assets/logo/S3/${elements['leagueMatchSetting']['vsRule']['rule']}.png',
+                            width: 50,
+                            height: 50,
+                          ),
+                        ],
+                      )
+                    else
+                      Text(
+                        "???",
+                        style: TextStyle(
+                            color: Colors.grey.shade800, fontSize: 20),
+                      ),
                     Card(
                       elevation: 10,
                       color: Colors.grey.shade800,
@@ -593,14 +600,16 @@ class SplatoonTrois {
                             children: [
                               Text(
                                 elements['leagueMatchSetting']
-                                    ['leagueMatchEvent']['name'],
+                                        ['leagueMatchEvent']['name']
+                                    .replaceAll(RegExp('ï¼'), '?'),
                                 style: TextStyle(
                                     color: Colors.grey.shade200, fontSize: 22),
                               ),
                               Text(
                                 elements['leagueMatchSetting']
                                         ['leagueMatchEvent']['desc']
-                                    .replaceAll(RegExp('<br />ã|<br />'), '\n'),
+                                    .replaceAll(RegExp('<br />ã|<br />'), '\n')
+                                    .replaceAll(RegExp('ï¼'), '?'),
                                 style: TextStyle(
                                     color: Colors.grey.shade200, fontSize: 20),
                               ),
@@ -616,8 +625,10 @@ class SplatoonTrois {
                                                   Colors.grey.shade800,
                                               title: Text(
                                                 elements['leagueMatchSetting']
-                                                        ['leagueMatchEvent']
-                                                    ['name'],
+                                                            ['leagueMatchEvent']
+                                                        ['name']
+                                                    .replaceAll(
+                                                        RegExp('ï¼'), '?'),
                                                 style: TextStyle(
                                                     color: Colors.grey.shade200,
                                                     fontSize: 25),
@@ -631,7 +642,9 @@ class SplatoonTrois {
                                                             '<br />ã|<br />'),
                                                         '\n')
                                                     .replaceAll(
-                                                        RegExp('»'), '-'),
+                                                        RegExp('»'), '-')
+                                                    .replaceAll(
+                                                        RegExp('ï¼'), '?'),
                                                 style: TextStyle(
                                                     color: Colors.grey.shade200,
                                                     fontSize: 15),
@@ -664,30 +677,44 @@ class SplatoonTrois {
                       style:
                           TextStyle(color: Colors.grey.shade200, fontSize: 25),
                     ),
-                    Card(
-                      elevation: 10,
-                      color: Colors.grey.shade800,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            children: [
-                              for (var date in elements['timePeriods'])
-                                Text(
-                                    "${dateFormat(DateTime.parse(date['startTime']).toLocal().toString())} to ${dateFormat(DateTime.parse(date['endTime']).toLocal().toString())}",
+                    if (elements['timePeriods'].toString() != '[]')
+                      Card(
+                        elevation: 10,
+                        color: Colors.grey.shade800,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column(
+                              children: [
+                                for (var date in elements['timePeriods'])
+                                  Text(
+                                      "${dateFormat(DateTime.parse(date['startTime']).toLocal().toString())} to ${dateFormat(DateTime.parse(date['endTime']).toLocal().toString())}",
+                                      style: TextStyle(
+                                          color: Colors.grey.shade200,
+                                          fontSize: 15)),
+                              ],
+                            )
+                          ],
+                        ),
+                      )
+                    else
+                      Card(
+                        elevation: 10,
+                        color: Colors.grey.shade800,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column(
+                              children: [
+                                Text("???",
                                     style: TextStyle(
                                         color: Colors.grey.shade200,
                                         fontSize: 15)),
-                            ],
-                          )
-                        ],
+                              ],
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    Text(
-                      "Challenge's maps:",
-                      style:
-                          TextStyle(color: Colors.grey.shade200, fontSize: 25),
-                    ),
                     Card(
                       elevation: 10,
                       color: Colors.grey.shade800,
