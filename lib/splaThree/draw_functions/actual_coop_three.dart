@@ -42,11 +42,12 @@ Widget actualGrizz(
                     'King Salmonid: ${data['nodes'][0]['setting']['boss']['name']}',
                     style: TextStyle(color: Colors.grey.shade200, fontSize: 20),
                   ),
-                  Image(
-                      image: AssetImage(
-                          'assets/logo/S3/salmoboss/${data['nodes'][0]['setting']['boss']['name']}.png'),
-                      width: 50,
-                      height: 50),
+                  if (data['nodes'][0]['setting']['boss']['name'] != 'Random')
+                    Image(
+                        image: AssetImage(
+                            'assets/logo/S3/salmoboss/${data['nodes'][0]['setting']['boss']['name']}.png'),
+                        width: 50,
+                        height: 50),
                 ],
               ),
             Text(

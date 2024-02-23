@@ -115,11 +115,13 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
                                       color: Colors.grey.shade200,
                                       fontSize: 20),
                                 ),
-                                Image(
-                                    image: AssetImage(
-                                        'assets/logo/S3/salmoboss/${salmon['setting']['boss']['name']}.png'),
-                                    width: 50,
-                                    height: 50),
+                                if (salmon['setting']['boss']['name'] !=
+                                    'Random')
+                                  Image(
+                                      image: AssetImage(
+                                          'assets/logo/S3/salmoboss/${salmon['setting']['boss']['name']}.png'),
+                                      width: 50,
+                                      height: 50),
                               ],
                             ),
                             Card(
