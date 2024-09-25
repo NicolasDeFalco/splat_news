@@ -350,7 +350,7 @@ class SplatoonDeux {
         child: Column(
           children: [
             Image.asset(
-              'assets/logo/S3.png',
+              'assets/logo/S2.png',
               width: 280,
               height: 150,
             ),
