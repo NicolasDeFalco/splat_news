@@ -63,7 +63,7 @@ Widget actual(BuildContext context, Map<String, dynamic> data, Color bgColor,
                               color: Colors.grey.shade200, fontSize: 15)),
                       CachedNetworkImage(
                         imageUrl:
-                            "https://splatoon2.ink/assets/splatnet/${data[type][0]['stage_a']['image']}",
+                            "https://splatoon2.ink/assets/splatnet${data[type][0]['stage_a']['image']}",
                         width: 180,
                         height: 110,
                       ),
@@ -76,7 +76,7 @@ Widget actual(BuildContext context, Map<String, dynamic> data, Color bgColor,
                               color: Colors.grey.shade200, fontSize: 15)),
                       CachedNetworkImage(
                         imageUrl:
-                            "https://splatoon2.ink/assets/splatnet/${data[type][0]['stage_b']['image']}",
+                            "https://splatoon2.ink/assets/splatnet${data[type][0]['stage_b']['image']}",
                         width: 180,
                         height: 110,
                       ),
