@@ -248,7 +248,7 @@ class SplatoonDeux {
                                       Text(" ${elements['weapon']['name']}",
                                           style: TextStyle(
                                               color: Colors.grey.shade400,
-                                              fontSize: 20))
+                                              fontSize: 18))
                                     else
                                       Text(
                                           " ${elements['coop_special_weapon']['name']}",

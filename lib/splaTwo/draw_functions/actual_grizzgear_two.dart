@@ -22,9 +22,9 @@ Widget actualGrizzGear(Map<String, dynamic> gear) {
               ),
               Column(
                 children: [
-                  Text('${gear['name']}  ',
+                  Text(' ${gear['name']}  ',
                       style:
-                          TextStyle(color: Colors.grey.shade200, fontSize: 18)),
+                          TextStyle(color: Colors.grey.shade200, fontSize: 16)),
                   Row(
                     children: [
                       Column(

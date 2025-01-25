@@ -23,7 +23,7 @@ Widget actualRank(BuildContext context, Map<String, dynamic> data, int position,
                 ),
                 Text(
                   typeName(position),
-                  style: TextStyle(color: Colors.grey.shade200, fontSize: 30),
+                  style: TextStyle(color: Colors.grey.shade200, fontSize: 25),
                 ),
                 const Image(
                     image: AssetImage('assets/logo/Ranked.png'),

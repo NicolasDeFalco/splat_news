@@ -18,7 +18,7 @@ Widget actualGear(Map<String, dynamic> data) {
                 children: [
                   Text('${data['gear']['name']}  ',
                       style:
-                          TextStyle(color: Colors.grey.shade200, fontSize: 25)),
+                          TextStyle(color: Colors.grey.shade200, fontSize: 22)),
                   Row(
                     children: [
                       Column(

@@ -52,7 +52,8 @@ class SchedulesRankState extends State<SchedulesRank> {
     position = 0;
     return Scaffold(
         appBar: AppBar(
-          title: Text("Splatoon 3 - $type"),
+          title: Text("Splatoon 3 - $type",
+              style: TextStyle(color: Colors.grey.shade200, fontSize: 20)),
           backgroundColor: Colors.grey.shade900,
           /*flexibleSpace: Container(
             decoration: const BoxDecoration(

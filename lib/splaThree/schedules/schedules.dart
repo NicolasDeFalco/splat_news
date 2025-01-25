@@ -64,7 +64,8 @@ class SchedulesState extends State<Schedules> {
     position = 0;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Splatoon 3 - $type"),
+        title: Text("Splatoon 3 - $type",
+            style: TextStyle(color: Colors.grey.shade200, fontSize: 20)),
         backgroundColor: Colors.grey.shade900,
       ),
       body: Container(

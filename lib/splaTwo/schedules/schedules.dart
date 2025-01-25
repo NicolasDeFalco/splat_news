@@ -60,7 +60,8 @@ class SchedulesStateTwo extends State<SchedulesTwo> {
     position = 0;
     return Scaffold(
         appBar: AppBar(
-          title: Text("Splatoon 2 - $type"),
+          title: Text("Splatoon 2 - $type",
+              style: TextStyle(color: Colors.grey.shade200, fontSize: 20)),
           backgroundColor: Colors.grey.shade900,
           /*flexibleSpace: Container(
             decoration: const BoxDecoration(
@@ -189,7 +190,7 @@ class SchedulesStateTwo extends State<SchedulesTwo> {
                                             fontSize: 15)),
                                     CachedNetworkImage(
                                       imageUrl:
-                                          "https://splatoon2.ink/assets/splatnet/${battle['stage_a']['image']}",
+                                          "https://splatoon2.ink/assets/splatnet${battle['stage_a']['image']}",
                                       width: 180,
                                       height: 110,
                                     ),
@@ -203,7 +204,7 @@ class SchedulesStateTwo extends State<SchedulesTwo> {
                                             fontSize: 15)),
                                     CachedNetworkImage(
                                       imageUrl:
-                                          "https://splatoon2.ink/assets/splatnet/${battle['stage_b']['image']}",
+                                          "https://splatoon2.ink/assets/splatnet${battle['stage_b']['image']}",
                                       width: 180,
                                       height: 110,
                                     ),

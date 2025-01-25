@@ -37,12 +37,14 @@ class MyHomePageState extends State<HomePage>
               fit: BoxFit.contain,
               height: 42,
             ),
-            const Text(" Splat news")
+            const Text(" Splat news", style: TextStyle(color: Colors.white))
           ]),
           backgroundColor: Colors.grey.shade900,
           bottom: const TabBar(
             indicatorColor: Colors.grey,
+            labelColor: Colors.white,
             dividerColor: Colors.transparent,
+            unselectedLabelColor: Colors.grey,
             tabs: <Widget>[
               Tab(
                 text: 'Splatoon 3',

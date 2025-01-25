@@ -615,7 +615,7 @@ class SplatoonTrois {
                               ),
                               ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary: Colors.grey.shade700),
+                                      backgroundColor: Colors.grey.shade700),
                                   onPressed: () {
                                     showDialog(
                                         context: context,

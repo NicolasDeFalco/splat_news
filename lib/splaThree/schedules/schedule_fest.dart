@@ -56,7 +56,8 @@ class SchedulesFestState extends State<SchedulesFest> {
     position = 0;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Splatoon 3 - Fest Battle ${type(index)}"),
+        title: Text("Splatoon 3 - Fest Battle ${type(index)}",
+            style: TextStyle(color: Colors.grey.shade200, fontSize: 20)),
         backgroundColor: Colors.grey.shade900,
       ),
       body: Container(

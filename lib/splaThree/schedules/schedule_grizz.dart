@@ -55,7 +55,8 @@ class SchedulesGrizzState extends State<SchedulesGrizz> {
     position = 0;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Splatoon 3 - Salmon Run"),
+        title: Text("Splatoon 3 - Salmon Run",
+            style: TextStyle(color: Colors.grey.shade200, fontSize: 20)),
         backgroundColor: Colors.grey.shade900,
       ),
       body: Container(
